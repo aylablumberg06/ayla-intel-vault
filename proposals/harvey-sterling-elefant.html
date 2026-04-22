@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elefant International × Ayla Intelligence · Ayla Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #1a3d6b;
+  --accent-dark: #0f2648;
+  --paper: #f5efe4;
+  --ivory: #fffcf5;
+  --ink: #0a0a0a;
+  --ink-soft: #5a4a3a;
+  --ink-mute: #8a7a6a;
+  --line: rgba(0,0,0,0.08);
+  --rule: rgba(0,0,0,0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+.serif { font-family: 'Playfair Display', Georgia, serif; }
+.mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 48px; }
+@media (max-width: 640px) { .wrap { padding: 0 24px; } }
+
+/* ── COVER ── */
+.cover {
+  min-height: 94vh;
+  padding: 80px 48px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--ivory) 100%);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 650px; height: 650px;
+  background: radial-gradient(circle, #1a3d6b18 0%, transparent 60%);
+  pointer-events: none;
+}
+.cover-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; position: relative; z-index: 2; }
+.brand { display: flex; align-items: baseline; gap: 2px; }
+.brand-a { font-family: 'Playfair Display', serif; font-weight: 900; color: var(--accent); font-size: 18px; }
+.brand-base { font-family: 'Playfair Display', serif; font-weight: 500; color: var(--ink); font-size: 18px; }
+.brand-sep { width: 4px; display: inline-block; }
+.doc-ref { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
+
+.cover-body { max-width: 720px; position: relative; z-index: 2; }
+.cover-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 14px;
+}
+.cover-eyebrow::before { content: ''; width: 42px; height: 1px; background: var(--accent); }
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6.5vw, 76px);
+  font-weight: 700;
+  line-height: 1.02;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.cover-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+.cover-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 400;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+.cover-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px 40px;
+  max-width: 600px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+}
+.meta-item .mono { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 6px; }
+.meta-item p { font-weight: 500; color: var(--ink); font-size: 14px; }
+
+/* ── SECTIONS ── */
+.section { padding: 96px 48px; border-bottom: 1px solid var(--line); position: relative; }
+@media (max-width: 640px) { .section { padding: 64px 24px; } }
+.section-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 10px; }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin-bottom: 20px;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  max-width: 720px;
+  margin-bottom: 48px;
+}
+.section-lead em { color: var(--accent); font-style: italic; font-weight: 500; }
+
+/* ── PAIN POINTS ── */
+.pain-list { display: grid; gap: 20px; margin-top: 40px; }
+.pain-item {
+  border-left: 2px solid var(--accent);
+  padding: 20px 28px;
+  background: var(--ivory);
+  border-radius: 0 12px 12px 0;
+  transition: transform 0.25s ease;
+}
+.pain-item:hover { transform: translateX(3px); }
+.pain-item h4 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; margin-bottom: 8px; color: var(--ink); }
+.pain-item p { color: var(--ink-soft); font-size: 14.5px; line-height: 1.65; }
+
+/* ── AGENTS ── */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+.agent-card {
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px 24px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.agent-card:hover {
+  box-shadow: 0 10px 28px rgba(0,0,0,0.05);
+  border-color: #1a3d6b40;
+  transform: translateY(-2px);
+}
+.agent-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+.agent-emoji { font-size: 28px; line-height: 1; flex-shrink: 0; }
+.agent-meta { flex: 1; min-width: 0; }
+.agent-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.15; }
+.agent-role { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+.agent-desc { font-size: 14px; line-height: 1.65; color: var(--ink-soft); }
+.agent-badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #2d7a56;
+  background: rgba(45,122,86,0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* ── PIPELINE ── */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2px;
+  background: var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 48px 0;
+  border: 1px solid var(--line);
+}
+.pipeline-step {
+  background: var(--ivory);
+  padding: 24px 20px;
+  text-align: center;
+}
+.pipeline-step .step-num { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 8px; }
+.pipeline-step .step-label { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.pipeline-step .step-desc { font-size: 12px; line-height: 1.5; color: var(--ink-mute); }
+
+/* ── TIERS ── */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 40px;
+}
+.tier {
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px 28px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+.tier.featured {
+  background: var(--ink);
+  color: var(--ivory);
+  border-color: var(--ink);
+  transform: translateY(-8px);
+}
+.tier.featured .tier-name { color: var(--ivory); }
+.tier.featured .tier-price { color: #1a3d6b; }
+.tier.featured .tier-tag { background: #1a3d6b; color: var(--ink); }
+.tier.featured .tier-includes li { color: rgba(255,255,255,0.7); }
+.tier.featured .tier-includes li::before { color: #1a3d6b; }
+.tier:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); }
+.tier.featured:hover { transform: translateY(-12px); }
+.tier-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: #1a3d6b15;
+  padding: 5px 12px;
+  border-radius: 100px;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.tier-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+.tier-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.tier-unit { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-mute); margin-bottom: 22px; }
+.tier.featured .tier-unit { color: rgba(255,255,255,0.5); }
+.tier-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.55; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--rule); }
+.tier.featured .tier-desc { color: rgba(255,255,255,0.7); border-bottom-color: rgba(255,255,255,0.15); }
+.tier-includes { list-style: none; }
+.tier-includes li {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.tier-includes li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── STATS ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.stat { text-align: center; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+.stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); }
+
+/* ── CTA ── */
+.cta {
+  padding: 120px 48px;
+  background: var(--ink);
+  color: var(--ivory);
+  text-align: center;
+}
+@media (max-width: 640px) { .cta { padding: 80px 24px; } }
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.cta-title em { font-style: italic; color: #1a3d6b; }
+.cta-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: rgba(255,255,255,0.6);
+  max-width: 560px;
+  margin: 0 auto 48px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: #1a3d6b;
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px #1a3d6b50; background: #0f2648; color: white; }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 56px 48px 48px;
+  background: var(--ink);
+  color: rgba(255,255,255,0.4);
+  font-size: 12px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+@media (max-width: 640px) { .footer { padding: 40px 24px; } }
+.footer-brand { font-family: 'Playfair Display', serif; font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+.footer-brand .brand-a { color: #1a3d6b; }
+.footer-meta { font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.15em; font-size: 10px; text-transform: uppercase; }
+
+/* animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cover-eyebrow, .cover-title, .cover-sub, .cover-meta { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both; }
+.cover-title { animation-delay: 0.1s; }
+.cover-sub { animation-delay: 0.2s; }
+.cover-meta { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="brand">
+      <span class="brand-a">A</span><span class="brand-base">yla</span>
+      <span class="brand-sep"> </span>
+      <span class="brand-a">I</span><span class="brand-base">ntelligence</span>
+    </div>
+    <div class="doc-ref">Ref · AI-HARVEYS · April 2026</div>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">Proposal for Harvey</p>
+    <h1 class="cover-title">Elefant International,<br><em>on autopilot.</em></h1>
+    <p class="cover-sub">A six-agent AI team — named after the Roy family — that finds, qualifies, and warm-outreaches your ideal clients around the clock. Built for how you actually work.</p>
+
+    <div class="cover-meta">
+      <div class="meta-item"><div class="mono">Prepared For</div><p>Harvey Sterling</p></div>
+      <div class="meta-item"><div class="mono">Business</div><p>Elefant International</p></div>
+      <div class="meta-item"><div class="mono">Theme</div><p>Succession</p></div>
+      <div class="meta-item"><div class="mono">Prepared By</div><p>Ayla Blumberg</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- OPPORTUNITY -->
+<div class="section wrap">
+  <div class="section-num">01 · The Opportunity</div>
+  <h2 class="section-title">The pipeline <em>you wish existed.</em></h2>
+  <p class="section-lead">International partnership work rewards one thing above all else: <em>being in the right room before the other guy.</em> You can't be in every room. These six agents can. They do what a good second-lieutenant does — the reading, the filtering, the first drafts — so your time only goes to decisions that actually move the number.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">AI agents, in parallel</div></div>
+    <div class="stat"><div class="stat-num">10–15</div><div class="stat-label">Warm outreach per week</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Pipeline never sleeps</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">BDR hires required</div></div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<div class="section wrap">
+  <div class="section-num">02 · Where It Breaks</div>
+  <h2 class="section-title">The <em>real</em> bottlenecks.</h2>
+  <p class="section-lead">Every business in your shape hits the same four walls. They're the problems worth solving because solving them moves the number — not the vanity metrics.</p>
+
+  <div class="pain-list">
+    <div class="pain-item"><h4>Finding the right cross-border partner is slow and expensive</h4><p>Every market has maybe 30 real targets. Finding them manually — and separating the signal companies from the noise — burns weeks. And then you still have to get a meeting.</p></div>
+    <div class="pain-item"><h4>Research depth vs. speed is an impossible trade-off</h4><p>You can do shallow research on 20 companies or deep research on 3. The deal you need is hidden in company #14. Humans can't win this math.</p></div>
+    <div class="pain-item"><h4>Strategic framing changes per region</h4><p>The pitch that works in Dubai doesn't land in Singapore. Every deck needs to be written from scratch — which is why most BD shops send the same one to everyone.</p></div>
+    <div class="pain-item"><h4>Follow-through dies in the gap between first meeting and deal close</h4><p>The second, third, and fourth touches are where deals actually happen — and they're exactly the touches that slip when you're on a plane.</p></div>
+  </div>
+</div>
+
+<!-- AGENTS -->
+<div class="section wrap">
+  <div class="section-num">03 · Your Team</div>
+  <h2 class="section-title">Six agents.<br><em>One thesis.</em></h2>
+  <p class="section-lead">Each agent is a specialist. Each has a defined brief, a set of tools, and a chain of command. Together they run the end-to-end pipeline you'd otherwise have to hire four people to staff. Named from <strong>Succession</strong> because you picked it — and because personalities make pipelines stick.</p>
+
+  <div class="agents-grid">
+    <div class="agent-card">
+      <div class="agent-head">
+        <span class="agent-emoji">🎯</span>
+        <div class="agent-meta">
+          <div class="agent-name">Tom Wambsgans</div>
+          <div class="agent-role">Lead Generation Specialist</div>
+        </div>
+      </div>
+      <p class="agent-desc">Hunts qualified partners across target markets — screens by revenue range, decision-maker access, regulatory fit, current partner portfolio. Hungry to move up, relentless on the hunt. Feeds a tight list to Greg daily.</p>
+    </div>
+    <div class="agent-card">
+      <div class="agent-head">
+        <span class="agent-emoji">🔍</span>
+        <div class="agent-meta">
+          <div class="agent-name">Greg Hirsch</div>
+          <div class="agent-role">Client Research Analyst</div>
+        </div>
+      </div>
+      <p class="agent-desc">Digs into every lead — business model, ownership structure, recent filings, partnership history, decision-maker bios. Greg assembles the full dossier before Logan reads a single name.</p>
+    </div>
+    <div class="agent-card">
+      <div class="agent-head">
+        <span class="agent-emoji">♟️</span>
+        <div class="agent-meta">
+          <div class="agent-name">Logan Roy</div>
+          <div class="agent-role">Strategic Advisor</div>
+        </div>
+      </div>
+      <p class="agent-desc">Sets the approach. Who do we go in through — the CEO or the COO? What's the leverage? What's the opening line? Logan's read determines everything downstream. Nothing ships without his sign-off.</p>
+    </div>
+    <div class="agent-card">
+      <div class="agent-head">
+        <span class="agent-emoji">✨</span>
+        <div class="agent-meta">
+          <div class="agent-name">Kendall Roy</div>
+          <div class="agent-role">Content Creator</div>
+        </div>
+      </div>
+      <p class="agent-desc">Writes the proposal, the deck, the email. Kendall's rule: every asset is bespoke to this specific target in this specific market. No templates. No 'Dear [First Name].' Ambitious, sometimes unhinged — but always original.</p>
+    </div>
+    <div class="agent-card">
+      <div class="agent-head">
+        <span class="agent-emoji">✅</span>
+        <div class="agent-meta">
+          <div class="agent-name">Siobhan Roy</div>
+          <div class="agent-role">Quality Assurance Manager</div>
+        </div>
+      </div>
+      <p class="agent-desc">Pressure-tests every deliverable before it leaves the building. Is the financial framing defensible? Is the tone right for the region? Is there anything here that'll embarrass Elefant? Shiv kills it or ships it.</p>
+    </div>
+    <div class="agent-card">
+      <div class="agent-head">
+        <span class="agent-emoji">📞</span>
+        <div class="agent-meta">
+          <div class="agent-name">Roman Roy</div>
+          <div class="agent-role">Communications Director</div>
+        </div>
+      </div>
+      <p class="agent-desc">Runs the outreach sequence — day-of, day-3, day-7, day-14. Pauses the instant anyone replies and hands the thread to you with full context. Witty when wit helps, sharp when sharp does.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PIPELINE -->
+<div class="section wrap">
+  <div class="section-num">04 · How It Runs</div>
+  <h2 class="section-title">The pipeline, end-to-end.</h2>
+  <p class="section-lead">Every lead moves through the same six stages. Each agent owns their stage. You review, approve, and close — nothing drops in between.</p>
+
+  <div class="pipeline">
+    <div class="pipeline-step"><div class="step-num">01</div><div class="step-label">Find</div><div class="step-desc">Qualified prospects surfaced weekly</div></div>
+    <div class="pipeline-step"><div class="step-num">02</div><div class="step-label">Research</div><div class="step-desc">Full dossier per lead, context + signals</div></div>
+    <div class="pipeline-step"><div class="step-num">03</div><div class="step-label">Strategize</div><div class="step-desc">Custom approach per prospect, never templated</div></div>
+    <div class="pipeline-step"><div class="step-num">04</div><div class="step-label">Create</div><div class="step-desc">Personalized outbound, written in your voice</div></div>
+    <div class="pipeline-step"><div class="step-num">05</div><div class="step-label">QA</div><div class="step-desc">Every deliverable reviewed before it ships</div></div>
+    <div class="pipeline-step"><div class="step-num">06</div><div class="step-label">Reach out</div><div class="step-desc">3-touch cadence, auto-paused on reply</div></div>
+  </div>
+
+  <p class="section-lead" style="margin-top: 40px;">International BD is a low-volume, high-leverage game. Every email is a weapon. This team makes sure every weapon is forged specifically for the person receiving it.</p>
+</div>
+
+<!-- TIERS -->
+<div class="section wrap">
+  <div class="section-num">05 · Investment</div>
+  <h2 class="section-title">Three ways <em>in.</em></h2>
+  <p class="section-lead">Pick the level of involvement that makes sense for Harvey. Same six agents, same pipeline — the difference is how much we build + run for you.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-tag">Option A</div>
+      <div class="tier-name">Starter</div>
+      <div class="tier-price">$2,500</div>
+      <div class="tier-unit">one-time setup · $400/mo ongoing</div>
+      <div class="tier-desc">Five agents deployed. You manage the day-to-day. Best if you have someone technical in-house.</div>
+      <ul class="tier-includes">
+        <li>5 of 6 agents deployed</li>
+        <li>ICP definition + voice training</li>
+        <li>Google Sheets pipeline tracker</li>
+        <li>Telegram hot-lead alerts</li>
+        <li>3-touch email sequences</li>
+        <li>~15 outreach/week</li>
+        <li>Monthly optimization call</li>
+      </ul>
+    </div>
+
+    <div class="tier featured">
+      <div class="tier-tag">Option B · Recommended</div>
+      <div class="tier-name">Full Build</div>
+      <div class="tier-price">$4,500</div>
+      <div class="tier-unit">one-time setup · $800/mo ongoing</div>
+      <div class="tier-desc">All six agents, fully deployed, managed by me. Plug-and-play. Most clients choose this.</div>
+      <ul class="tier-includes">
+        <li>All 6 agents fully deployed</li>
+        <li>ICP definition + voice training</li>
+        <li>CRM sync (HubSpot or whatever you use)</li>
+        <li>Google Sheets + Telegram + full dashboard</li>
+        <li>3-touch follow-up sequences</li>
+        <li>10–15 (partnership-level, deep research each) outreach/week at steady state</li>
+        <li>Domain warmup included</li>
+        <li>Weekly performance report</li>
+        <li>Bi-weekly strategy call</li>
+      </ul>
+    </div>
+
+    <div class="tier">
+      <div class="tier-tag">Option C</div>
+      <div class="tier-name">Managed + Commission</div>
+      <div class="tier-price">$3,000</div>
+      <div class="tier-unit">one-time setup · $400/mo · $500/closed deal</div>
+      <div class="tier-desc">Lower retainer, aligned incentives. I win when you win. Best for high-ticket deal flow.</div>
+      <ul class="tier-includes">
+        <li>All 6 agents fully deployed</li>
+        <li>Pipeline fully managed by me</li>
+        <li>Full CRM integration</li>
+        <li>10–15 (partnership-level, deep research each) outreach/week</li>
+        <li>Weekly performance report</li>
+        <li>$500 commission per closed client I source</li>
+        <li>Aligned incentives</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2 class="cta-title">Let's put <em>your pipeline</em> on autopilot.</h2>
+  <p class="cta-sub">30-minute discovery call. I'll walk through the full architecture and answer every technical question before you commit to a single dollar.</p>
+  <a href="mailto:aylablumberg06@gmail.com?subject=Re: AI Agent Proposal — Harvey&body=Hi Ayla, I'd like to book a call about the agent team proposal." class="cta-btn">Book the call →</a>
+</div>
+
+<div class="footer">
+  <div class="footer-brand">
+    <span class="brand-a">A</span>yla <span class="brand-a">I</span>ntelligence
+  </div>
+  <div class="footer-meta">Prepared April 2026 · Confidential · For Harvey only</div>
+</div>
+
+</body>
+</html>

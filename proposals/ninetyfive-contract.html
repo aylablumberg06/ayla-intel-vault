@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Agreement — Ayla Blumberg × Ninety Five Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --passion: #C4848A;
+  --passion-light: #F2E0E2;
+  --passion-deep: #9E5A60;
+  --smoke: #6B6158;
+  --smoke-light: #B5ADA6;
+  --cream: #FAF7F4;
+  --linen: #F3EDE7;
+  --white: #FFFFFF;
+  --dark: #2E2A27;
+  --charcoal: #3D3632;
+  --gold: #C9A96E;
+  --gold-light: #F5EFE2;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Montserrat',sans-serif; background:var(--cream); color:var(--dark); -webkit-font-smoothing:antialiased; }
+.page { max-width:720px; margin:0 auto; padding:52px 48px 60px; }
+
+/* Header */
+.header { text-align:center; margin-bottom:44px; }
+.header-name { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--smoke); }
+.header-div { width:50px; height:1px; background:var(--passion); margin:14px auto; }
+.header-sub { font-family:'Cormorant Garamond',serif; font-size:14px; font-style:italic; color:var(--passion); }
+
+/* Title */
+.title-block { text-align:center; margin-bottom:40px; }
+.title { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:400; color:var(--dark); margin-bottom:10px; }
+.title em { font-style:italic; color:var(--passion-deep); }
+.effective-date { display:inline-flex; align-items:center; gap:10px; background:var(--white); border:1px solid var(--passion-light); padding:10px 24px; margin-top:16px; }
+.effective-date span { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--smoke-light); }
+.effective-date .date-line { width:140px; border-bottom:1px solid var(--passion); }
+
+/* Parties banner */
+.parties-banner { background:var(--charcoal); padding:22px 28px; margin-bottom:36px; display:flex; justify-content:space-between; align-items:center; }
+.party { text-align:center; }
+.party-role { font-size:8px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--passion-light); opacity:0.7; margin-bottom:4px; }
+.party-name { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--white); }
+.party-sub { font-size:10px; color:var(--smoke-light); margin-top:2px; }
+.parties-x { font-family:'Cormorant Garamond',serif; font-size:28px; font-style:italic; color:var(--passion); opacity:0.6; }
+
+/* Marquee */
+.marquee-wrap { overflow:hidden; margin:0 -48px 36px; padding:12px 0; background:var(--passion-light); }
+.marquee-track { display:flex; width:max-content; animation:scroll 20s linear infinite; }
+.marquee-track span { font-size:8px; font-weight:500; letter-spacing:3px; text-transform:uppercase; color:var(--passion-deep); white-space:nowrap; padding:0 20px; opacity:0.7; }
+@keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* Sections */
+.section { margin-bottom:28px; }
+.section-header { display:flex; align-items:center; gap:14px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--passion-light); }
+.section-num { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:var(--passion); width:28px; flex-shrink:0; }
+.section-title { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--dark); }
+.section-body { font-size:12px; color:var(--smoke); line-height:1.8; padding-left:42px; }
+.section-body p { margin-bottom:10px; }
+.section-body p:last-child { margin-bottom:0; }
+.section-body strong { color:var(--dark); font-weight:600; }
+
+/* Bullet list */
+.bullet-list { list-style:none; margin:10px 0; }
+.bullet-list li { font-size:12px; color:var(--smoke); line-height:1.7; padding:4px 0 4px 18px; position:relative; }
+.bullet-list li::before { content:'—'; position:absolute; left:0; color:var(--passion); font-weight:600; }
+
+/* Compensation cards */
+.comp-cards { display:flex; flex-direction:column; gap:10px; margin-top:12px; }
+.comp-card { background:var(--white); border:1px solid var(--passion-light); border-radius:2px; padding:14px 18px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+.comp-card.highlight { border-color:var(--passion); background:linear-gradient(135deg, var(--white) 0%, var(--passion-light) 100%); }
+.comp-label { font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--smoke-light); margin-bottom:4px; }
+.comp-desc { font-size:11.5px; color:var(--smoke); line-height:1.6; max-width:380px; }
+.comp-desc strong { color:var(--dark); }
+.comp-amount { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:700; color:var(--dark); white-space:nowrap; text-align:right; }
+.comp-amount-sub { font-size:9px; color:var(--smoke-light); text-align:right; margin-top:2px; }
+
+/* Divider */
+.divider { display:flex; align-items:center; gap:12px; margin:32px 0; }
+.divider-line { flex:1; height:1px; background:var(--passion-light); }
+.divider-dot { width:5px; height:5px; background:var(--passion); border-radius:50%; }
+
+/* Signature block */
+.sig-section { margin-top:40px; }
+.sig-label { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--smoke-light); text-align:center; margin-bottom:24px; }
+.sig-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.sig-block { background:var(--white); border:1px solid var(--passion-light); border-radius:2px; padding:22px 20px; position:relative; }
+.sig-block::before, .sig-block::after { content:''; position:absolute; width:16px; height:16px; border-color:var(--passion); border-style:solid; }
+.sig-block::before { top:-1px; left:-1px; border-width:1px 0 0 1px; }
+.sig-block::after { bottom:-1px; right:-1px; border-width:0 1px 1px 0; }
+.sig-role { font-size:8px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--smoke-light); margin-bottom:6px; }
+.sig-name { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--dark); margin-bottom:2px; }
+.sig-title { font-size:10px; color:var(--smoke-light); font-style:italic; margin-bottom:20px; }
+.sig-line-wrap { display:flex; justify-content:space-between; gap:16px; margin-top:16px; }
+.sig-line-block { flex:2; }
+.sig-line-block.date { flex:1; }
+.sig-line-label { font-size:8px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--smoke-light); margin-bottom:6px; }
+.sig-line { border-bottom:1px solid var(--passion); height:24px; }
+
+/* Footer */
+.footer { text-align:center; margin-top:44px; }
+.footer-name { font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:600; color:var(--dark); }
+.footer-tagline { font-family:'Cormorant Garamond',serif; font-size:12px; font-style:italic; color:var(--passion); margin-top:6px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-name">Ayla Blumberg</div>
+    <div class="header-div"></div>
+    <div class="header-sub">AI-Powered Marketing System</div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <div class="title">Service <em>Agreement</em></div>
+    <div class="effective-date">
+      <span>Effective Date</span>
+      <div class="date-line"></div>
+    </div>
+  </div>
+
+  <!-- Parties -->
+  <div class="parties-banner">
+    <div class="party">
+      <div class="party-role">Contractor</div>
+      <div class="party-name">Ayla Blumberg</div>
+      <div class="party-sub">Dallas, TX</div>
+    </div>
+    <div class="parties-x">×</div>
+    <div class="party">
+      <div class="party-role">Client</div>
+      <div class="party-name">Ninety Five Media</div>
+      <div class="party-sub">Emma Tessler, CEO</div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Lead Generation</span><span>·</span>
+      <span>Instagram Auditing</span><span>·</span>
+      <span>Content Previews</span><span>·</span>
+      <span>Outreach Automation</span><span>·</span>
+      <span>AI Agent System</span><span>·</span>
+      <span>Lead Generation</span><span>·</span>
+      <span>Instagram Auditing</span><span>·</span>
+      <span>Content Previews</span><span>·</span>
+      <span>Outreach Automation</span><span>·</span>
+      <span>AI Agent System</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Parties</div>
+    </div>
+    <div class="section-body">
+      <p>This Agreement is entered into between <strong>Ayla Blumberg</strong> ("Contractor") and <strong>Ninety Five Media</strong>, represented by Emma Tessler ("Client").</p>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Scope of Work</div>
+    </div>
+    <div class="section-body">
+      <p>Contractor will design, build, and deploy an AI-powered lead generation system (the "System") consisting of the following components:</p>
+      <ul class="bullet-list">
+        <li>Four primary AI agents: Lead Research Agent, Content Preview Agent, Outreach Agent, and Orchestrator Agent</li>
+        <li>Instagram profile scraping via Apify for lead discovery and qualification</li>
+        <li>Canva-generated content previews included in outbound emails</li>
+        <li>Automated Gmail draft placement with voice and tone learning based on Client's style</li>
+        <li>Lead scoring dashboard for pipeline tracking and reporting</li>
+        <li>Deployment to a dedicated cloud server owned and controlled by Client</li>
+        <li>Creation of a dedicated email account by Contractor for all third-party service setups</li>
+      </ul>
+      <p style="margin-top:12px;">Scope is limited to the components listed above. Any additional features or work outside this scope require a separate written agreement. Outbound emails will include both Canva-based visuals and initial strategic messaging developed collaboratively with Client.</p>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">Third-Party Costs</div>
+    </div>
+    <div class="section-body">
+      <p>Client is responsible for all third-party service costs required to operate the System, including but not limited to: API usage fees, cloud server hosting, Instagram scraping credits (Apify), and any other platform or token costs. These costs are to be billed directly to Client's payment method and are separate from and in addition to Contractor's fees under this Agreement.</p>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Compensation</div>
+    </div>
+    <div class="section-body">
+      <div class="comp-cards">
+        <div class="comp-card highlight">
+          <div>
+            <div class="comp-label">4.1 — Build Fee</div>
+            <div class="comp-desc">Payable in two installments: <strong>$1,500 (50%) due upon signing</strong> this Agreement, and <strong>$1,500 (50%) due upon completion and delivery</strong> of the System.</div>
+          </div>
+          <div>
+            <div class="comp-amount">$3,000</div>
+            <div class="comp-amount-sub">one-time</div>
+          </div>
+        </div>
+        <div class="comp-card">
+          <div>
+            <div class="comp-label">4.2 — Closed Client Commission</div>
+            <div class="comp-desc">Per client closed through use of the System. A "closed client" is defined as any individual or organization that (a) appeared in the lead pipeline dashboard during the active retainer period and (b) subsequently signed a client agreement with Ninety Five Media. <strong>Due within 7 days</strong> of the closed client's contract being signed.</div>
+          </div>
+          <div>
+            <div class="comp-amount">$500</div>
+            <div class="comp-amount-sub">per close</div>
+          </div>
+        </div>
+        <div class="comp-card">
+          <div>
+            <div class="comp-label">4.3 — Monthly Retainer</div>
+            <div class="comp-desc">Minimum <strong>3-month commitment</strong> (total minimum: $1,200). Retainer period begins upon delivery of the System and is billed monthly thereafter.</div>
+          </div>
+          <div>
+            <div class="comp-amount">$400</div>
+            <div class="comp-amount-sub">per month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Ownership & Access</div>
+    </div>
+    <div class="section-body">
+      <p>Upon receipt of full payment of the Build Fee, Client owns all code, assets, and infrastructure related to the System. Contractor retains remote access to the System for the purpose of maintenance, monitoring, and updates for the duration of the active retainer period. Upon termination of the retainer, Contractor's remote access will be revoked at Client's discretion.</p>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">Post-Termination Commission</div>
+    </div>
+    <div class="section-body">
+      <p>Commission obligations survive termination of this Agreement. Client shall owe the $500 commission for any lead that: (a) appeared in the pipeline dashboard during the active retainer period, and (b) signs a client agreement with Ninety Five Media within <strong>12 months</strong> following the termination date.</p>
+    </div>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Term & Termination</div>
+    </div>
+    <div class="section-body">
+      <p>This Agreement begins on the Effective Date. After the 3-month retainer minimum is fulfilled, either party may terminate the retainer with <strong>30 days' written notice</strong>. Termination of the retainer does not affect commission obligations as described in Section 6.</p>
+    </div>
+  </div>
+
+  <!-- Section 8 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">Confidentiality</div>
+    </div>
+    <div class="section-body">
+      <p>Both parties agree to keep the terms of this Agreement and all related business information confidential, except as required by law.</p>
+    </div>
+  </div>
+
+  <!-- Section 9 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title">Governing Law</div>
+    </div>
+    <div class="section-body">
+      <p>This Agreement is governed by the laws of the State of Texas. Both parties are encouraged to seek independent legal counsel prior to signing.</p>
+    </div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+  <!-- Signatures -->
+  <div class="sig-section">
+    <div class="sig-label">Signatures — By signing below, both parties agree to the terms set forth in this Agreement</div>
+    <div class="sig-grid">
+      <div class="sig-block">
+        <div class="sig-role">Contractor</div>
+        <div class="sig-name">Ayla Blumberg</div>
+        <div class="sig-title">AI Systems Builder · Dallas, TX</div>
+        <div class="sig-line-wrap">
+          <div class="sig-line-block">
+            <div class="sig-line-label">Signature</div>
+            <div class="sig-line"></div>
+          </div>
+          <div class="sig-line-block date">
+            <div class="sig-line-label">Date</div>
+            <div class="sig-line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-role">Client</div>
+        <div class="sig-name">Emma Tessler</div>
+        <div class="sig-title">CEO · Ninety Five Media</div>
+        <div class="sig-line-wrap">
+          <div class="sig-line-block">
+            <div class="sig-line-label">Signature</div>
+            <div class="sig-line"></div>
+          </div>
+          <div class="sig-line-block date">
+            <div class="sig-line-label">Date</div>
+            <div class="sig-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-name">Ayla Blumberg × Ninety Five Media</div>
+    <div class="footer-tagline">Built with AI. Designed for growth.</div>
+  </div>
+
+</div>
+</body>
+</html>

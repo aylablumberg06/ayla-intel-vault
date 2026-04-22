@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Worship Wawa × The Ayla Edit | AI Ideas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --passion: #8B2252;
+    --passion-light: #A33068;
+    --cream: #FDF6EE;
+    --cream-dark: #F5EBD8;
+    --charcoal: #2C2C2C;
+    --charcoal-light: #4A4A4A;
+    --gold: #C9A84C;
+    --gold-light: #D4B86A;
+    --white: #FFFFFF;
+    --soft-gray: #E8E0D4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    background: linear-gradient(165deg, var(--cream) 0%, var(--cream-dark) 40%, #EDE3D3 100%);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,34,82,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--passion);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--passion);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--charcoal-light);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-meta {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--charcoal-light);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--passion);
+    margin: 32px auto;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 80px 24px;
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--passion);
+    margin-bottom: 16px;
+  }
+
+  .section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.25;
+    margin-bottom: 24px;
+    color: var(--charcoal);
+  }
+
+  .section p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--charcoal-light);
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .divider-line {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--soft-gray), transparent);
+  }
+
+  /* ── IDEA CARDS ── */
+  .ideas-grid {
+    display: grid;
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  .idea-card {
+    background: var(--white);
+    border: 1px solid var(--soft-gray);
+    border-radius: 2px;
+    padding: 40px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .idea-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(139,34,82,0.06);
+  }
+
+  .idea-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 48px;
+    color: var(--cream-dark);
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    line-height: 1;
+  }
+
+  .idea-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--passion);
+    background: rgba(139,34,82,0.06);
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .idea-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 26px;
+    margin-bottom: 16px;
+    color: var(--charcoal);
+    line-height: 1.3;
+  }
+
+  .idea-card p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--charcoal-light);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .idea-detail {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--cream-dark);
+  }
+
+  .idea-detail-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--charcoal-light);
+    margin-bottom: 10px;
+  }
+
+  .detail-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .detail-item {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--charcoal);
+    background: var(--cream);
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+
+  /* ── WHAT THIS ISN'T ── */
+  .not-section {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 64px 24px;
+  }
+
+  .not-section .section {
+    padding: 0;
+  }
+
+  .not-section .section-label {
+    color: var(--gold);
+  }
+
+  .not-section h2 {
+    color: var(--cream);
+  }
+
+  .not-section p {
+    color: rgba(253,246,238,0.7);
+  }
+
+  /* ── NEXT STEPS ── */
+  .steps-list {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 32px;
+    color: var(--passion);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px;
+  }
+
+  .step-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--charcoal-light);
+    margin: 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 60px 24px;
+    background: var(--cream-dark);
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--charcoal-light);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .idea-card { padding: 28px; }
+    .idea-number { font-size: 36px; top: 16px; right: 20px; }
+    .section { padding: 56px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Prepared for</div>
+  <h1>The Worship Wawa<br>× <em>AI Possibilities</em></h1>
+  <div class="hero-sub">Ideas for streamlining & growth through intelligent automation</div>
+  <div class="hero-divider"></div>
+  <div class="hero-meta">Discovery Conversation · April 2026</div>
+</section>
+
+<!-- CONTEXT -->
+<section class="section">
+  <div class="section-label">What I See</div>
+  <h2>You've Already Built Something Beautiful</h2>
+  <p>Your website, booking flow, partner program, referral system, and resource hub are all in place — that's rare for a pre-launch business. The foundation is strong.</p>
+  <p>Where AI agents come in isn't about replacing what you've built. It's about making the machine run while you're focused on the ministry — automating the repetitive grind so you can spend your time on the rides, the community, and the vision.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- IDEAS -->
+<section class="section">
+  <div class="section-label">Opportunities</div>
+  <h2>Where AI Agents Could Help</h2>
+  <p>These are initial ideas based on your business model. Everything is flexible — we'd shape the final scope together based on what matters most to you.</p>
+
+  <div class="ideas-grid">
+
+    <!-- IDEA 1 -->
+    <div class="idea-card">
+      <div class="idea-number">01</div>
+      <div class="idea-tag">Outreach</div>
+      <h3>Church & Ministry Outreach Agent</h3>
+      <p>An agent that researches churches, youth groups, and ministries across South Florida and sends personalized outreach on your behalf — introducing The Worship Wawa and offering group booking packages.</p>
+      <p>Think of it as a tireless team member who finds the right contacts, crafts a message that sounds like you, and follows up automatically if they don't respond.</p>
+      <div class="idea-detail">
+        <div class="idea-detail-label">What it could do</div>
+        <div class="detail-items">
+          <span class="detail-item">Find churches in your service area</span>
+          <span class="detail-item">Pull contact info & social profiles</span>
+          <span class="detail-item">Send personalized intro emails</span>
+          <span class="detail-item">Auto follow-up sequences</span>
+          <span class="detail-item">Track who's responded</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDEA 2 -->
+    <div class="idea-card">
+      <div class="idea-number">02</div>
+      <div class="idea-tag">Booking Follow-Up</div>
+      <h3>Lead Nurture & Booking Recovery</h3>
+      <p>When someone visits your FareHarbor page but doesn't book, or fills out a contact form but goes quiet — an agent follows up with a warm, personal message to bring them back.</p>
+      <p>Also handles post-inquiry follow-ups: someone emails asking about a Celebration ride? The agent responds instantly with details and nudges them toward booking.</p>
+      <div class="idea-detail">
+        <div class="idea-detail-label">What it could do</div>
+        <div class="detail-items">
+          <span class="detail-item">Instant inquiry responses</span>
+          <span class="detail-item">Abandoned booking follow-up</span>
+          <span class="detail-item">Personalized booking nudges</span>
+          <span class="detail-item">FAQ auto-responses</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDEA 3 -->
+    <div class="idea-card">
+      <div class="idea-number">03</div>
+      <div class="idea-tag">Post-Ride</div>
+      <h3>Post-Ride Experience Agent</h3>
+      <p>After every ride, an agent reaches out to guests with a thank-you message, asks for a testimonial or review, and invites them into your referral program. Turns one-time riders into repeat bookers and advocates.</p>
+      <div class="idea-detail">
+        <div class="idea-detail-label">What it could do</div>
+        <div class="detail-items">
+          <span class="detail-item">Automated thank-you messages</span>
+          <span class="detail-item">Review & testimonial requests</span>
+          <span class="detail-item">Referral program enrollment</span>
+          <span class="detail-item">Re-booking offers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDEA 4 -->
+    <div class="idea-card">
+      <div class="idea-number">04</div>
+      <div class="idea-tag">Partnerships</div>
+      <h3>Partner Pipeline Manager</h3>
+      <p>You already have a "Partner With Us" page where businesses apply to be route stops. An agent could actively seek out Christian businesses, cafes, and venues along your routes and reach out to them — instead of waiting for applications to come in.</p>
+      <div class="idea-detail">
+        <div class="idea-detail-label">What it could do</div>
+        <div class="detail-items">
+          <span class="detail-item">Find businesses on your routes</span>
+          <span class="detail-item">Send partnership pitches</span>
+          <span class="detail-item">Track application status</span>
+          <span class="detail-item">Follow up with pending partners</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDEA 5 -->
+    <div class="idea-card">
+      <div class="idea-number">05</div>
+      <div class="idea-tag">Social</div>
+      <h3>Social Media & DM Handler</h3>
+      <p>If you're getting inbound DMs on Instagram or TikTok asking about rides, pricing, or availability — an agent can respond instantly in your voice, answer common questions, and direct people to book.</p>
+      <div class="idea-detail">
+        <div class="idea-detail-label">What it could do</div>
+        <div class="detail-items">
+          <span class="detail-item">Instant DM responses</span>
+          <span class="detail-item">Pricing & availability info</span>
+          <span class="detail-item">Direct to FareHarbor booking</span>
+          <span class="detail-item">Capture leads from comments</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- WHAT THIS ISN'T -->
+<div class="not-section">
+  <section class="section">
+    <div class="section-label">Being Honest</div>
+    <h2>You Might Not Need All of This</h2>
+    <p>You're pre-launch with 3 rides/day max capacity. A full 5-agent system would be overkill right now. The smart move is to start with 1–2 agents that solve your most pressing problem — probably outreach and lead follow-up — and add more as you grow.</p>
+    <p>I'd rather build you something lean that actually works than sell you a system you'll outgrow the need for before you even use it.</p>
+  </section>
+</div>
+
+<!-- NEXT STEPS -->
+<section class="section">
+  <div class="section-label">What's Next</div>
+  <h2>Our Call This Week</h2>
+  <p>This is just a starting point. On our call, I want to understand what's actually keeping you up at night so we can figure out the right fit together.</p>
+
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Tell Me Your Pain Points</h4>
+        <p>What's eating up your time? Where do you feel like you're leaving money on the table?</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>We Pick the Right 1–2 Agents</h4>
+        <p>Based on what you actually need, not what sounds cool.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>I Scope It & Send a Proposal</h4>
+        <p>Clear pricing, clear timeline, no surprises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-name">Ayla Blumberg</div>
+  <div class="footer-sub">The Ayla Edit · AI Systems & Automation</div>
+</footer>
+
+</body>
+</html>

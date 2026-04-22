@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elefant International · Memorandum · Ayla Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0e1b2e;
+  --navy-deep: #06101c;
+  --navy-soft: #1a2d47;
+  --paper: #f5efe4;
+  --paper-soft: #ebe4d4;
+  --ivory: #faf6ec;
+  --gold: #c4a878;
+  --gold-deep: #9a8250;
+  --oxblood: #6b1220;
+  --mute: #8a8578;
+  --rule: #d4ccb8;
+  --ink: #0e1b2e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body {
+  font-family: 'Tinos', 'Times New Roman', serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.display { font-family: 'Cormorant Garamond', 'Tinos', serif; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 56px; }
+@media (max-width: 640px) { .wrap { padding: 0 24px; } }
+
+/* ── COVER: annual-report folio ── */
+.cover {
+  min-height: 100vh;
+  background: var(--navy-deep);
+  color: var(--ivory);
+  position: relative;
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--navy-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--navy-soft) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: 0 0;
+  opacity: 0.25;
+  pointer-events: none;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  top: 48px; bottom: 48px; left: 50%;
+  width: 1px;
+  background: rgba(196,168,120,0.15);
+  pointer-events: none;
+}
+.cover > * { position: relative; z-index: 2; }
+
+.cover-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.cover-head .mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ivory);
+}
+.cover-head .mark em { font-style: italic; color: var(--gold); font-weight: 400; }
+.cover-meta {
+  text-align: right;
+  line-height: 1.9;
+}
+.cover-meta div { color: rgba(245,239,228,0.5); }
+.cover-meta b { color: var(--gold); font-weight: 500; }
+
+.cover-center {
+  padding: 80px 0;
+  max-width: 740px;
+}
+.cover-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.cover-eyebrow::before, .cover-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(196,168,120,0.35);
+}
+h1.cover-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(48px, 8.5vw, 104px);
+  line-height: 0.95;
+  color: var(--ivory);
+  letter-spacing: -0.025em;
+  margin-bottom: 40px;
+  text-align: center;
+}
+h1.cover-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+.cover-deck {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.55;
+  color: rgba(245,239,228,0.72);
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 400;
+}
+
+.cover-foot {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(196,168,120,0.3);
+}
+.cover-foot > div {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.cover-foot .label { color: rgba(245,239,228,0.4); margin-bottom: 8px; }
+.cover-foot .val {
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+}
+@media (max-width: 640px) { .cover-foot { grid-template-columns: 1fr 1fr; gap: 16px; } .cover-center { padding: 40px 0; } .cover::after { display: none; } }
+
+/* ── DOC SECTION ── */
+.doc {
+  background: var(--paper);
+  padding: 96px 0;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+@media (max-width: 640px) { .doc { padding: 64px 0; } }
+
+.doc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 12px;
+}
+.doc-kicker { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--mute); margin-bottom: 8px; }
+h2.doc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.08;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 36px;
+  max-width: 780px;
+}
+h2.doc-title em { font-style: italic; color: var(--oxblood); }
+
+.doc-body p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+  max-width: 680px;
+  margin-bottom: 22px;
+}
+.doc-body p em { font-style: italic; color: var(--oxblood); font-weight: 400; }
+
+/* ── HONEST DISCLOSURE BOX ── */
+.disclosure {
+  background: var(--ivory);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--oxblood);
+  padding: 32px 36px;
+  margin: 32px 0;
+  max-width: 740px;
+  font-family: 'Tinos', serif;
+  font-size: 15px;
+  line-height: 1.75;
+  position: relative;
+}
+.disclosure::before {
+  content: 'Note to Reader';
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  background: var(--paper);
+  padding: 0 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+}
+.disclosure p { max-width: none; margin-bottom: 14px; }
+.disclosure p:last-child { margin-bottom: 0; }
+
+/* ── DATA TABLE (a la financial filing) ── */
+.ledger {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  margin: 40px 0;
+  font-family: 'Tinos', serif;
+}
+.ledger-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 200px;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.ledger-row:last-child { border-bottom: none; }
+.ledger-row .idx {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold-deep);
+}
+.ledger-row .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-style: italic;
+  color: var(--ink);
+}
+.ledger-row .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--ink);
+  text-align: right;
+}
+
+/* ── DOSSIER GRID: the roys ── */
+.dossier {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin: 40px 0;
+}
+.dossier-card {
+  background: var(--ivory);
+  padding: 36px 32px;
+  position: relative;
+}
+.dossier-card::before {
+  content: '';
+  position: absolute;
+  top: 32px; right: 32px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--oxblood);
+  box-shadow: 0 0 0 3px rgba(107,18,32,0.12);
+}
+.dossier-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 6px;
+  padding-right: 40px;
+}
+.dossier-initials {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gold-deep);
+}
+.dossier-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+}
+.dossier-name em { font-style: italic; color: var(--oxblood); }
+.dossier-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.dossier-brief {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.dossier-tools {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  text-transform: uppercase;
+}
+@media (max-width: 740px) { .dossier { grid-template-columns: 1fr; } }
+
+/* ── QUESTIONS (discovery probes) ── */
+.questions {
+  counter-reset: q;
+  margin: 40px 0;
+  max-width: 760px;
+}
+.question {
+  counter-increment: q;
+  padding: 22px 0 22px 72px;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.question::before {
+  content: '§ ' counter(q, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold-deep);
+  font-style: normal;
+}
+
+/* ── TIERS: three-column folio ── */
+.structure {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  margin: 40px 0;
+}
+.tier-col {
+  background: var(--paper);
+  padding: 44px 32px 36px;
+  position: relative;
+}
+.tier-col.feat { background: var(--navy); color: var(--ivory); }
+.tier-col.feat .t-tag { color: var(--gold); border-color: var(--gold); }
+.tier-col.feat .t-name { color: var(--ivory); }
+.tier-col.feat .t-price { color: var(--gold); }
+.tier-col.feat .t-unit { color: rgba(245,239,228,0.5); }
+.tier-col.feat .t-desc { color: rgba(245,239,228,0.65); border-bottom-color: rgba(245,239,228,0.18); }
+.tier-col.feat .t-items li { color: rgba(245,239,228,0.72); }
+.tier-col.feat .t-items li::before { color: var(--gold); }
+
+.t-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  padding: 3px 10px;
+  border: 1px solid var(--gold-deep);
+  margin-bottom: 20px;
+}
+.t-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.t-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 500;
+  color: var(--oxblood);
+  line-height: 1;
+}
+.t-unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--mute);
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+.t-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 18px;
+}
+.t-items { list-style: none; }
+.t-items li {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ink);
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 6px;
+  font-family: 'Tinos', serif;
+}
+.t-items li::before { content: '—'; position: absolute; left: 0; color: var(--gold-deep); }
+@media (max-width: 820px) { .structure { grid-template-columns: 1fr; } }
+
+/* ── CTA: telegram ── */
+.cta {
+  background: var(--navy);
+  color: var(--ivory);
+  padding: 120px 56px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.cta::before {
+  content: '§';
+  position: absolute;
+  top: -80px; right: -40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 420px;
+  color: rgba(196,168,120,0.06);
+  line-height: 1;
+  font-style: italic;
+}
+.cta-inner { max-width: 760px; position: relative; z-index: 2; }
+.cta-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+h2.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(40px, 5.5vw, 68px);
+  line-height: 1.08;
+  margin-bottom: 28px;
+}
+h2.cta-title em { font-style: italic; color: var(--gold); }
+.cta-deck {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: rgba(245,239,228,0.7);
+  line-height: 1.55;
+  max-width: 540px;
+  margin-bottom: 44px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--gold);
+  color: var(--navy-deep);
+  padding: 18px 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.cta-btn:hover { background: var(--ivory); transform: translateY(-2px); }
+
+@media (max-width: 640px) { .cta { padding: 80px 24px; } }
+
+.foot {
+  background: var(--navy-deep);
+  color: rgba(245,239,228,0.4);
+  padding: 36px 56px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 1px solid rgba(196,168,120,0.15);
+}
+.foot b { color: var(--gold); font-weight: 500; }
+
+@keyframes ribbon { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.cover-eyebrow, .cover-title, .cover-deck { animation: ribbon 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+.cover-title { animation-delay: 0.15s; }
+.cover-deck { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- COVER: annual report / power-broker folio -->
+<div class="cover">
+  <div class="cover-head">
+    <div>
+      <div class="mark"><em>Ayla</em> Intelligence</div>
+    </div>
+    <div class="cover-meta">
+      <div><b>Confidential</b></div>
+      <div>Ref · EI-001 / 042126</div>
+      <div>For H. Sterling only</div>
+    </div>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-eyebrow">Memorandum of Engagement</div>
+    <h1 class="cover-title">
+      A quiet <em>machine</em><br>for <em>international</em><br>business.
+    </h1>
+    <p class="cover-deck">
+      A proposal for the class of business-development work where volume is the wrong metric &mdash; where being in the right room, before the other party is in any room, is the entire game.
+    </p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <div class="label">Filed</div>
+      <div class="val">21 April 2026</div>
+    </div>
+    <div>
+      <div class="label">Prepared For</div>
+      <div class="val">Elefant International</div>
+    </div>
+    <div>
+      <div class="label">Prepared By</div>
+      <div class="val">Ayla Blumberg</div>
+    </div>
+    <div>
+      <div class="label">Scope</div>
+      <div class="val">Discovery &amp; Pilot</div>
+    </div>
+  </div>
+</div>
+
+<!-- § 01 — The Opening -->
+<section class="doc">
+  <div class="wrap">
+    <div class="doc-num">§ 01 · The Opening</div>
+    <div class="doc-kicker">An honest memorandum.</div>
+    <h2 class="doc-title">Before we price a system, <em>we price the relationship.</em></h2>
+
+    <div class="doc-body">
+      <p>You reached out to me from a personal address. The firm name is <em>Elefant International</em>. The show you picked to theme your team was Succession. I&rsquo;m going to assume you chose that on purpose, because Succession is a show about rooms &mdash; who gets in, who waits outside, and who gets to decide which story is told afterward.</p>
+
+      <p>This proposal is not a pitch. A pitch would be six agents, three prices, a Telegram bot. You&rsquo;ve already seen that template from lesser firms. This memorandum is what I&rsquo;d hand you if we met at the Carlyle for a forty-minute breakfast.</p>
+    </div>
+
+    <div class="disclosure">
+      <p>A deliberate disclosure. I researched Elefant International before writing this. There is no public website, registered address, or director filing I could verify in the time I had. The Gmail suffix suggests an operator who is either early, deliberately private, or both. Any of those is fine &mdash; but I&rsquo;m not going to pretend I know more about your book of business than I do. The first thirty minutes of our first call will be me asking you seven or eight questions that no agent could answer from the outside.</p>
+      <p>What follows is a proposal for <em>how I&rsquo;d enter the engagement</em>, not a quote for a shrink-wrapped product. Price comes after scope. Scope comes after the call.</p>
+    </div>
+  </div>
+</section>
+
+<!-- § 02 — Thesis -->
+<section class="doc">
+  <div class="wrap">
+    <div class="doc-num">§ 02 · Thesis</div>
+    <h2 class="doc-title">Partnership work rewards <em>depth, not volume.</em></h2>
+
+    <div class="doc-body">
+      <p>A direct-to-consumer operation wants 500 qualified emails a week. An international partnership shop wants ten. Of those ten, three will return the call. Of those three, one becomes a decade of revenue. The machine that wins this business is not the machine that sends the most &mdash; it is the machine that researches the deepest, drafts the best, and follows up on the exact day no one else does.</p>
+
+      <p>That is the engagement I&rsquo;d design for Elefant. Low-volume. Bespoke. Every asset forged for a specific target in a specific market. The agents exist to do the reading, the filtering, and the first drafts &mdash; so your time only goes to decisions that actually move the number.</p>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-row">
+        <div class="idx">01</div>
+        <div class="name"><em>The problem:</em> partnership targets are slow to identify, expensive to research, and easy to burn on a bad first email.</div>
+        <div class="val">TIME SINK</div>
+      </div>
+      <div class="ledger-row">
+        <div class="idx">02</div>
+        <div class="name"><em>The failure mode:</em> a BDR sending the same deck to every firm in a list.</div>
+        <div class="val">INBOX DEATH</div>
+      </div>
+      <div class="ledger-row">
+        <div class="idx">03</div>
+        <div class="name"><em>The opportunity:</em> a system that reads 100 firms and writes one letter to three of them.</div>
+        <div class="val">MARGIN</div>
+      </div>
+      <div class="ledger-row">
+        <div class="idx">04</div>
+        <div class="name"><em>The right metric:</em> per-target quality of reply, not reply-rate percentage.</div>
+        <div class="val">SIGNAL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 03 — Dossier: the Roys -->
+<section class="doc">
+  <div class="wrap">
+    <div class="doc-num">§ 03 · The Team</div>
+    <div class="doc-kicker">Dossier &mdash; six agents.</div>
+    <h2 class="doc-title">The <em>Roy family,</em> working for you.</h2>
+
+    <div class="doc-body">
+      <p>You cast them. I staffed them. Each agent has a defined brief, a chain of command, and a narrow remit. Nothing ships without Logan&rsquo;s read. Nothing sends without Shiv&rsquo;s sign-off. Nothing gets overlooked because Roman watched the thread.</p>
+    </div>
+
+    <div class="dossier">
+      <div class="dossier-card">
+        <div class="dossier-head">
+          <span class="dossier-initials">01 · TW</span>
+          <div class="dossier-name">Tom <em>Wambsgans</em></div>
+        </div>
+        <div class="dossier-role">Lead Generation</div>
+        <p class="dossier-brief">Hunts qualified partners across Elefant&rsquo;s target markets. Screens by revenue range, decision-maker access, regulatory fit, partner portfolio. Hungry to move up, relentless on the hunt. Delivers a tight list to Greg daily &mdash; twenty-five names, not five hundred.</p>
+        <div class="dossier-tools">Apollo · Crunchbase · LinkedIn Sales Navigator · BuiltWith</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-head">
+          <span class="dossier-initials">02 · GH</span>
+          <div class="dossier-name">Greg <em>Hirsch</em></div>
+        </div>
+        <div class="dossier-role">Research Analyst</div>
+        <p class="dossier-brief">Takes Tom&rsquo;s list. Writes the dossier. Business model, ownership structure, recent filings, partnership history, decision-maker bios, the names of their spouses and the last conference they spoke at. Logan doesn&rsquo;t read a name until Greg&rsquo;s finished the file.</p>
+        <div class="dossier-tools">OpenCorporates · EDGAR · Companies House · PitchBook · press archives</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-head">
+          <span class="dossier-initials">03 · LR</span>
+          <div class="dossier-name">Logan <em>Roy</em></div>
+        </div>
+        <div class="dossier-role">Strategic Advisor &middot; Orchestrator</div>
+        <p class="dossier-brief">Sets the approach. Who do we go in through &mdash; the CEO or the COO? What&rsquo;s the leverage? What&rsquo;s the opening line? Logan&rsquo;s read determines everything downstream. Nothing ships without him. His standing order: if it doesn&rsquo;t earn a meeting, it doesn&rsquo;t go out.</p>
+        <div class="dossier-tools">the entire stack · the ultimate escalation point</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-head">
+          <span class="dossier-initials">04 · KR</span>
+          <div class="dossier-name">Kendall <em>Roy</em></div>
+        </div>
+        <div class="dossier-role">Senior Copywriter</div>
+        <p class="dossier-brief">Writes the proposal, the deck, the email &mdash; bespoke to the target, the market, the decision-maker. No templates. No &ldquo;Dear First Name.&rdquo; Ambitious, sometimes unhinged, always original. Hands everything to Shiv for a final read before it leaves the building.</p>
+        <div class="dossier-tools">Claude API · voice training · three-variant A/B/C</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-head">
+          <span class="dossier-initials">05 · SR</span>
+          <div class="dossier-name">Siobhan <em>Roy</em></div>
+        </div>
+        <div class="dossier-role">Quality Assurance</div>
+        <p class="dossier-brief">Pressure-tests every asset. Is the financial framing defensible? Is the tone right for the region &mdash; Dubai, Zurich, Singapore read different emails? Is there anything here that would embarrass Elefant if it ended up forwarded internally at the target? Shiv kills it or ships it.</p>
+        <div class="dossier-tools">regional nuance · legal-adjacent read · brand discipline</div>
+      </div>
+
+      <div class="dossier-card">
+        <div class="dossier-head">
+          <span class="dossier-initials">06 · RR</span>
+          <div class="dossier-name">Roman <em>Roy</em></div>
+        </div>
+        <div class="dossier-role">Communications &middot; Sequencing</div>
+        <p class="dossier-brief">Runs the follow-up. Day three bump. Day seven value add. Day fourteen respectful breakup. The moment anyone replies, Roman pauses the sequence instantly and hands the thread to you with full context. Witty when wit helps. Sharp when sharp helps.</p>
+        <div class="dossier-tools">Gmail API · Telegram · cron · respect for the reply</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 04 — Discovery probes -->
+<section class="doc">
+  <div class="wrap">
+    <div class="doc-num">§ 04 · Discovery</div>
+    <h2 class="doc-title">Before we build, <em>eight questions.</em></h2>
+
+    <div class="doc-body">
+      <p>I&rsquo;ll ask these on our first call. Your answers determine whether the engagement is worth your retainer and my time. If any of them feel out of bounds, that&rsquo;s its own data.</p>
+    </div>
+
+    <div class="questions">
+      <div class="question">Which market does Elefant primarily operate across &mdash; DACH, CEE, MENA, APAC, transatlantic? What&rsquo;s the dominant corridor?</div>
+      <div class="question">What is the average deal size &mdash; is a good quarter one closed partnership or ten?</div>
+      <div class="question">Who is the archetypal ideal partner, by name? One company is enough.</div>
+      <div class="question">How does Elefant earn revenue today &mdash; retainer, transaction fee, equity participation, referral?</div>
+      <div class="question">Where does Elefant currently lose deals &mdash; in discovery, pricing, timing, or relationship?</div>
+      <div class="question">How much of your week is spent on outbound you wish wasn&rsquo;t on your desk?</div>
+      <div class="question">What would you not want an agent to handle, ever? The work that has to stay yours.</div>
+      <div class="question">What would &ldquo;obviously worth it&rdquo; look like, twelve months from now?</div>
+    </div>
+  </div>
+</section>
+
+<!-- § 05 — Structure -->
+<section class="doc">
+  <div class="wrap">
+    <div class="doc-num">§ 05 · Structure</div>
+    <h2 class="doc-title">Three ways <em>to engage.</em></h2>
+
+    <div class="doc-body">
+      <p>Same six agents. Same discovery process. The structure below is what changes based on whether you want to run this yourself, have me run it, or tie my upside to yours.</p>
+    </div>
+
+    <div class="structure">
+      <div class="tier-col">
+        <div class="t-tag">§ A · Blueprint</div>
+        <div class="t-name">Discovery &amp; Architecture</div>
+        <div class="t-price">$2,500</div>
+        <div class="t-unit">One-time · no retainer</div>
+        <div class="t-desc">For teams with technical capacity who want a proven architecture they build and run themselves.</div>
+        <ul class="t-items">
+          <li>Full 2-hour discovery session</li>
+          <li>ICP &amp; target-market definition</li>
+          <li>Six-agent architecture spec</li>
+          <li>Tool + integration recommendations</li>
+          <li>Voice training corpus assembled</li>
+          <li>Three-month playbook you execute</li>
+        </ul>
+      </div>
+
+      <div class="tier-col feat">
+        <div class="t-tag">§ B · Full Build</div>
+        <div class="t-name">Deployed &amp; Managed</div>
+        <div class="t-price">$5,000</div>
+        <div class="t-unit">Setup · $900/mo ongoing</div>
+        <div class="t-desc">The full Roy family deployed, run by Ayla Intelligence. Low-volume, research-grade outreach. The engagement most partnership shops need.</div>
+        <ul class="t-items">
+          <li>All six agents built + deployed</li>
+          <li>10&ndash;15 bespoke touches per week</li>
+          <li>Kendall voice-trained on your materials</li>
+          <li>Private Telegram command channel</li>
+          <li>Weekly reply-quality report (Shiv)</li>
+          <li>Bi-weekly strategy call with Logan</li>
+          <li>CRM integration (Salesforce, Pipedrive, or custom)</li>
+        </ul>
+      </div>
+
+      <div class="tier-col">
+        <div class="t-tag">§ C · Aligned</div>
+        <div class="t-name">Retainer + Commission</div>
+        <div class="t-price">$3,500</div>
+        <div class="t-unit">Setup · $500/mo · % of closed deal</div>
+        <div class="t-desc">Lower retainer. A negotiated share of each closed partnership the system sources. Incentives pointed the same direction.</div>
+        <ul class="t-items">
+          <li>All six agents deployed + managed</li>
+          <li>Commission structure defined in engagement letter</li>
+          <li>12-month post-termination attribution window</li>
+          <li>Best for firms with high-LTV deal flow</li>
+          <li>Requires lead-gen to be inside the agent team (Tom Wambsgans)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--mute); font-size: 17px; max-width: 720px; margin-top: 36px;">
+      All three prices are floors. Final scope priced after the discovery call.
+    </p>
+  </div>
+</section>
+
+<!-- § 06 — CTA -->
+<section class="cta">
+  <div class="cta-inner">
+    <div class="cta-num">§ 06 · Next Move</div>
+    <h2 class="cta-title">Book the <em>forty-minute breakfast.</em></h2>
+    <p class="cta-deck">No agents. No slide deck. Just the eight questions and whatever you want to ask me back. Price lands after.</p>
+    <a href="mailto:aylablumberg06@gmail.com?subject=Elefant · Discovery Call" class="cta-btn">Book the call &nbsp;→</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div><b>Ayla Intelligence</b> &nbsp;·&nbsp; Prepared 21 April 2026</div>
+  <div>Confidential &nbsp;·&nbsp; Ref EI-001</div>
+</footer>
+
+</body>
+</html>

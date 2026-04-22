@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lindsay LaBonge × Ayla Intelligence · Issue N°1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&family=Italiana&family=Poppins:wght@300;400;500;600;700&family=Allura&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #e8558b;
+  --pink-hot: #d63384;
+  --pink-soft: #fde8f0;
+  --pink-deep: #8f1e52;
+  --cream: #fdf7f3;
+  --bubble: #fae7ee;
+  --blush: #f7cfe0;
+  --ink: #1a0a12;
+  --ink-soft: #4a2635;
+  --ink-mute: #8a6878;
+  --gold: #c9a957;
+  --paper: #fff;
+  --rule: #efd4e0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--cream); }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.7;
+  font-size: 15.5px;
+  -webkit-font-smoothing: antialiased;
+}
+.display { font-family: 'Playfair Display', serif; }
+.italiana { font-family: 'Italiana', serif; font-weight: 400; }
+.script { font-family: 'Allura', cursive; font-weight: 400; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 48px; }
+@media (max-width: 640px) { .wrap { padding: 0 24px; } }
+
+/* ── COVER: magazine cover ── */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(165deg, var(--cream) 0%, var(--bubble) 52%, var(--blush) 100%);
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -20%;
+  width: 80%; height: 120%;
+  background: radial-gradient(ellipse, rgba(232,85,139,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.cover-masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--ink);
+}
+.mast-title {
+  font-family: 'Italiana', serif;
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.mast-title b { color: var(--pink); font-weight: 400; }
+.mast-issue {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 10.5px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+.cover-center {
+  padding: 40px 0;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.cover-tag {
+  font-family: 'Allura', cursive;
+  font-size: clamp(30px, 4vw, 44px);
+  color: var(--pink);
+  line-height: 1;
+  margin-bottom: 8px;
+  transform: rotate(-3deg);
+  display: inline-block;
+}
+h1.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(68px, 11vw, 152px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0 auto 24px;
+}
+h1.cover-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--pink);
+  display: block;
+}
+.cover-deck {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 620px;
+  margin: 0 auto 16px;
+}
+.cover-subdeck {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  margin-top: 8px;
+}
+
+.cover-strip {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.strip-cell {
+  padding: 20px 24px;
+  border-right: 1px solid var(--ink);
+  text-align: center;
+}
+.strip-cell:last-child { border-right: none; }
+.strip-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--pink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.strip-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+@media (max-width: 640px) {
+  .cover { padding: 32px 24px; }
+  .cover-strip { grid-template-columns: 1fr 1fr; }
+  .strip-cell:nth-child(2) { border-right: none; }
+  .strip-cell:nth-child(1), .strip-cell:nth-child(2) { border-bottom: 1px solid var(--ink); }
+}
+
+/* ── SECTIONS ── */
+.section { padding: 96px 0; position: relative; }
+.section.blush { background: var(--bubble); }
+.section.hotpink { background: var(--pink-deep); color: var(--cream); }
+.section.hotpink h2 { color: var(--cream); }
+.section.hotpink h2 em { color: var(--blush); }
+
+.section-rule {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--pink-deep);
+  margin-bottom: 40px;
+}
+.section-rule b { font-weight: 500; }
+.section.hotpink .section-rule { color: var(--blush); border-bottom-color: var(--blush); }
+
+h2.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+h2.section-title em { font-style: italic; font-weight: 400; color: var(--pink); }
+
+.lede {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(19px, 2.2vw, 24px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 660px;
+  margin-bottom: 40px;
+}
+.section.hotpink .lede { color: rgba(253,247,243,0.82); }
+
+.body { font-size: 16px; line-height: 1.8; color: var(--ink-soft); max-width: 640px; margin-bottom: 22px; }
+.body em { color: var(--pink); font-style: italic; font-weight: 400; }
+.section.hotpink .body { color: rgba(253,247,243,0.75); }
+
+/* ── Dossier: "Who She Is" ── */
+.file-card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  padding: 36px 40px;
+  max-width: 720px;
+  margin: 40px 0;
+  position: relative;
+  box-shadow: 8px 8px 0 var(--pink);
+}
+.file-card::before {
+  content: 'The Dossier';
+  position: absolute;
+  top: -14px;
+  left: 24px;
+  background: var(--pink);
+  color: var(--cream);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+}
+.file-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 28px;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.file-card h3 em { font-style: italic; color: var(--pink); font-weight: 400; }
+.file-card .subj {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 22px;
+}
+.file-card .rows {
+  display: grid;
+  gap: 12px;
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+}
+.file-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  font-size: 14px;
+}
+.file-row .k {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  line-height: 1.5;
+  padding-top: 2px;
+}
+.file-row .v { color: var(--ink); line-height: 1.6; }
+.file-row .v em { color: var(--pink); font-style: italic; font-weight: 400; }
+
+/* ── Pull quote / elle-woods epigraph ── */
+.elle-quote {
+  text-align: center;
+  padding: 80px 48px;
+  background: var(--pink);
+  color: var(--cream);
+  position: relative;
+}
+.elle-quote::before, .elle-quote::after {
+  content: '❀';
+  position: absolute;
+  font-size: 32px;
+  color: var(--cream);
+  opacity: 0.3;
+}
+.elle-quote::before { top: 20px; left: 50%; transform: translateX(-50%); }
+.elle-quote::after { bottom: 20px; left: 50%; transform: translateX(-50%); }
+.elle-quote .quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.25;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.elle-quote .attribution {
+  font-family: 'Allura', cursive;
+  font-size: 32px;
+  margin-top: 24px;
+  color: var(--blush);
+}
+
+/* ── Agents — magazine feature grid ── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+.feature {
+  background: var(--paper);
+  padding: 32px;
+  border: 1px solid var(--rule);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature:hover { transform: translateY(-4px); box-shadow: 12px 12px 0 var(--pink); border-color: var(--ink); }
+.feature-n {
+  position: absolute;
+  top: -16px;
+  left: 24px;
+  background: var(--pink);
+  color: var(--cream);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 20px;
+  border-radius: 50%;
+}
+.feature-head {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.feature-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.feature-name em { font-style: italic; color: var(--pink); font-weight: 400; }
+.feature-role {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  font-weight: 500;
+}
+.feature-desc {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.feature-desc em { color: var(--pink); font-style: italic; }
+.feature-kicker {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-family: 'Allura', cursive;
+  font-size: 22px;
+  color: var(--pink);
+  text-align: right;
+}
+@media (max-width: 640px) { .feature-grid { grid-template-columns: 1fr; } }
+
+/* ── PRICING — fashion label "editions" ── */
+.editions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 40px 0;
+}
+.edition {
+  background: var(--paper);
+  padding: 44px 32px 36px;
+  position: relative;
+  border: 1px solid var(--rule);
+  transition: transform 0.25s ease;
+}
+.edition:hover { transform: translateY(-4px); }
+.edition.hero {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+.edition.hero .ed-name { color: var(--cream); }
+.edition.hero .ed-price { color: var(--pink); }
+.edition.hero .ed-unit { color: rgba(253,247,243,0.55); }
+.edition.hero .ed-desc { color: rgba(253,247,243,0.72); border-bottom-color: rgba(253,247,243,0.2); }
+.edition.hero .ed-list li { color: rgba(253,247,243,0.8); }
+.edition.hero .ed-list li::before { color: var(--pink); }
+.edition.hero .ed-badge { background: var(--pink); color: var(--cream); }
+
+.ed-badge {
+  position: absolute;
+  top: -14px;
+  left: 28px;
+  background: var(--pink);
+  color: var(--cream);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+}
+.edition:not(.hero) .ed-badge { background: var(--cream); color: var(--pink-deep); border: 1px solid var(--pink-deep); }
+.ed-name {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.ed-price {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 44px;
+  color: var(--pink);
+  line-height: 1;
+}
+.ed-unit {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--ink-mute);
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+.ed-desc {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 20px;
+}
+.ed-list { list-style: none; }
+.ed-list li {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  padding-left: 22px;
+  position: relative;
+  margin-bottom: 6px;
+}
+.ed-list li::before { content: '♡'; position: absolute; left: 0; color: var(--pink); font-size: 12px; }
+@media (max-width: 640px) { .editions { grid-template-columns: 1fr; } }
+
+/* ── CTA ── */
+.cta {
+  background: var(--pink);
+  color: var(--cream);
+  padding: 120px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta::before {
+  content: '♡';
+  position: absolute;
+  top: -60px; left: -40px;
+  font-size: 400px;
+  color: rgba(253,247,243,0.08);
+}
+.cta::after {
+  content: '♡';
+  position: absolute;
+  bottom: -60px; right: -40px;
+  font-size: 400px;
+  color: rgba(253,247,243,0.08);
+}
+.cta-script {
+  font-family: 'Allura', cursive;
+  font-size: clamp(36px, 5vw, 54px);
+  color: var(--cream);
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.05;
+  color: var(--cream);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+}
+.cta-title em { font-style: italic; font-weight: 400; }
+.cta-deck {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: rgba(253,247,243,0.85);
+  max-width: 520px;
+  margin: 0 auto 48px;
+  position: relative;
+  z-index: 2;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 44px;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: background 0.2s ease, transform 0.25s ease;
+  position: relative; z-index: 2;
+}
+.cta-btn:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+
+@media (max-width: 640px) { .cta { padding: 80px 24px; } }
+
+.foot {
+  background: var(--ink);
+  color: rgba(253,247,243,0.4);
+  padding: 44px 48px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.foot span { color: var(--pink); }
+.foot .script { font-family: 'Allura', cursive; color: var(--blush); font-size: 20px; text-transform: none; letter-spacing: 0; display: block; margin-bottom: 10px; }
+
+@keyframes riseIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.cover-center > * { animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+h1.cover-title { animation-delay: 0.1s; }
+.cover-deck { animation-delay: 0.25s; }
+.cover-subdeck { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-masthead">
+    <div class="mast-title">Ayla<b>·</b>AI</div>
+    <div class="mast-issue">Spring Issue &middot; N°1 &middot; April 2026 &middot; For Lindsay</div>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-tag">an exclusive feature —</div>
+    <h1 class="cover-title">
+      The Case
+      <em>of the Solo</em>
+      Strategist.
+    </h1>
+    <p class="cover-deck">
+      How one marketing operator in Orange County can run the machinery of a ten-person agency &mdash; without pretending to be one.
+    </p>
+    <div class="cover-subdeck">Six Agents &middot; One Laptop &middot; Zero Apologies</div>
+  </div>
+
+  <div class="cover-strip">
+    <div class="strip-cell">
+      <div class="strip-num">6</div>
+      <div class="strip-label">Agents</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-num">20+</div>
+      <div class="strip-label">Warm touches/wk</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-num">$0</div>
+      <div class="strip-label">BDR salaries</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-num">24/7</div>
+      <div class="strip-label">Pipeline running</div>
+    </div>
+  </div>
+</div>
+
+<!-- § 01 — The Dossier -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-rule">
+      <span><b>01</b> &nbsp; The Honest Opening</span>
+      <span>What We Already Know About You</span>
+    </div>
+
+    <h2 class="section-title">Underestimated is<br>the <em>new secret weapon.</em></h2>
+    <p class="lede">I went looking for you before I wrote this. Here&rsquo;s what I found &mdash; and why it actually works in your favor.</p>
+
+    <div class="file-card">
+      <h3>Subject: Lindsay <em>LaBonge</em></h3>
+      <div class="subj">Solo marketing operator &middot; Orange County, CA &middot; Pre-agency-brand</div>
+      <div class="rows">
+        <div class="file-row"><span class="k">Positioning</span><span class="v">Marketing · Business Strategist · Operations. Fractional-CMO-flavored, not SEO shop.</span></div>
+        <div class="file-row"><span class="k">Agency Name</span><span class="v"><em>Undisclosed</em> &mdash; could be LaBonge Group, could be something new, could be brand in progress.</span></div>
+        <div class="file-row"><span class="k">Digital Footprint</span><span class="v">Active on Instagram (@lindsaylabonge, 1,400+ posts). LinkedIn: modest. No indexed website yet.</span></div>
+        <div class="file-row"><span class="k">Signal</span><span class="v">Pathway School background (Laguna Hills) &mdash; ops + marketing chops, likely solo.</span></div>
+        <div class="file-row"><span class="k">Theme Pick</span><span class="v"><em>Legally Blonde.</em> Reads confident, femme-forward, playful. Elle Woods — who, famously, everyone underestimated.</span></div>
+        <div class="file-row"><span class="k">The Opportunity</span><span class="v">You&rsquo;re closer to the &ldquo;about to build a real brand&rdquo; moment than to the &ldquo;been grinding for ten years&rdquo; one. That matters.</span></div>
+      </div>
+    </div>
+
+    <p class="body">
+      Most of my proposals go out to agencies staffed like small armies. Yours is different &mdash; and that&rsquo;s the pitch. The version of you Elle Woods would write is <em>not</em> &ldquo;solo marketer who should pretend to have ten employees.&rdquo; It&rsquo;s &ldquo;solo operator with the pipeline machinery of a ten-person agency, because she decided to build it.&rdquo;
+    </p>
+  </div>
+</section>
+
+<!-- Elle quote epigraph -->
+<section class="elle-quote">
+  <p class="quote">Whoever said orange was the new pink was <em>seriously disturbed.</em></p>
+  <div class="attribution">— Elle Woods</div>
+</section>
+
+<!-- § 02 — The Problem -->
+<section class="section blush">
+  <div class="wrap">
+    <div class="section-rule">
+      <span><b>02</b> &nbsp; The Real Problem</span>
+      <span>What Every Solo Operator Hits</span>
+    </div>
+
+    <h2 class="section-title">You sell lead-gen<br>but your <em>own</em> lead-gen<br>is a Rolodex.</h2>
+
+    <p class="body">
+      Here&rsquo;s the thing nobody in the agency world says out loud: the solo marketing operator doesn&rsquo;t have a lead problem, she has a <em>capacity</em> problem. You can close, onboard, and deliver &mdash; but while you&rsquo;re delivering, the pipeline goes cold. Then it&rsquo;s a referral week. Then it&rsquo;s a drought. Repeat.</p>
+
+    <p class="body">
+      The sneaky economic truth: hiring a BDR costs $80K and they need three months of training before they&rsquo;re net-positive. For a solo operator, that math is terrifying. The version that actually works is a six-agent team that runs your outbound <em>while you deliver</em> &mdash; so when a client onboards, the next one is already in the funnel.</p>
+
+    <p class="body">
+      That&rsquo;s the whole play. Pipeline continuity without payroll. And the <em>reason</em> it lands with your prospects is the same reason it worked for Elle Woods at Harvard: you look sharp, confident, and over-prepared &mdash; because you actually are.
+    </p>
+  </div>
+</section>
+
+<!-- § 03 — The Team -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-rule">
+      <span><b>03</b> &nbsp; The Team</span>
+      <span>Harvard Law · Reassigned to Marketing</span>
+    </div>
+
+    <h2 class="section-title">Six agents, <em>each</em><br>a section of the show.</h2>
+    <p class="lede">You picked <em>Legally Blonde</em>, so we kept the names &mdash; but each one owns exactly the part of the pipeline most solo operators drop when things get busy.</p>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-n">1</div>
+        <div class="feature-head">
+          <div class="feature-name"><em>Elle</em> Woods</div>
+          <div class="feature-role">Lead Discovery</div>
+        </div>
+        <p class="feature-desc">Hunts the right prospects on your behalf &mdash; scans LinkedIn, Instagram DMs, competitor clients, industry directories. Screens for business size, current marketing maturity, and buying signals. Underestimated by everyone else, which is exactly how she surfaces the leads your competitors miss.</p>
+        <div class="feature-kicker">delivers a warm list, weekly</div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-n">2</div>
+        <div class="feature-head">
+          <div class="feature-name"><em>Vivian</em> Kensington</div>
+          <div class="feature-role">Research Analyst</div>
+        </div>
+        <p class="feature-desc">Runs the deep-dive on every prospect Elle surfaces. Current site scores, SEO gaps, ad-spend signals, social velocity, recent hires, funding news. Vivian&rsquo;s research is the ammo Warner needs to build a strategy that actually <em>fits</em> &mdash; not a template.</p>
+        <div class="feature-kicker">the homework Elle doesn&rsquo;t have time for</div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-n">3</div>
+        <div class="feature-head">
+          <div class="feature-name"><em>Warner</em> Huntington III</div>
+          <div class="feature-role">Strategy Director</div>
+        </div>
+        <p class="feature-desc">Takes Vivian&rsquo;s research and writes the strategic pitch. &ldquo;Here&rsquo;s what you&rsquo;re missing. Here&rsquo;s the 90-day play. Here&rsquo;s the ROI.&rsquo;&rsquo; Warner&rsquo;s strategies are built to close &mdash; not to impress a conference panel.</p>
+        <div class="feature-kicker">the part most freelancers skip</div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-n">4</div>
+        <div class="feature-head">
+          <div class="feature-name"><em>Paulette</em> Bonafonté</div>
+          <div class="feature-role">Creative Content</div>
+        </div>
+        <p class="feature-desc">Produces the outbound &mdash; email sequences, landing page drafts, social posts, ad copy &mdash; all in <em>your</em> voice. Paulette learns your tone from past campaigns and replicates it exactly. Warm, specific, never salesy. Clients can&rsquo;t tell an agent wrote it because it sounds like you did.</p>
+        <div class="feature-kicker">your voice, cloned responsibly</div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-n">5</div>
+        <div class="feature-head">
+          <div class="feature-name"><em>Emmett</em> Richmond</div>
+          <div class="feature-role">Quality Assurance</div>
+        </div>
+        <p class="feature-desc">Reviews every deliverable for accuracy, brand consistency, and effectiveness. Emmett&rsquo;s bar is high &mdash; the rule is simple: if it wouldn&rsquo;t convert <em>him</em>, it doesn&rsquo;t go out. Broken links, off-brand language, sloppy copy all die here.</p>
+        <div class="feature-kicker">the last line of defense</div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-n">6</div>
+        <div class="feature-head">
+          <div class="feature-name"><em>Brooke</em> Windham</div>
+          <div class="feature-role">Client Communication</div>
+        </div>
+        <p class="feature-desc">Manages the outreach cadence + follow-ups. Day 3, Day 7, Day 14 &mdash; auto-paused the moment anyone replies. Brooke also handles the post-signup onboarding so nothing drops between the signed contract and the first deliverable.</p>
+        <div class="feature-kicker">the reason follow-up doesn&rsquo;t slip</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 04 — The Editions (tiers) -->
+<section class="section blush">
+  <div class="wrap">
+    <div class="section-rule">
+      <span><b>04</b> &nbsp; The Editions</span>
+      <span>Three Ways In</span>
+    </div>
+
+    <h2 class="section-title">Choose your <em>edition.</em></h2>
+    <p class="lede">Same Harvard Law team. Same pipeline. The difference is whether you build it yourself, I build it for you, or I build it and we tie my upside to yours.</p>
+
+    <div class="editions">
+      <div class="edition">
+        <div class="ed-badge">Edition A</div>
+        <div class="ed-name">The Blueprint</div>
+        <div class="ed-price">$2,500</div>
+        <div class="ed-unit">one-time · $400/mo ongoing</div>
+        <p class="ed-desc">For the solo operator who wants to build it herself &mdash; with a real architect behind her.</p>
+        <ul class="ed-list">
+          <li>Full 6-agent architecture spec</li>
+          <li>ICP + voice-training guide</li>
+          <li>Google Sheets pipeline tracker template</li>
+          <li>Telegram hot-lead alert setup</li>
+          <li>15 warm touches/wk once live</li>
+          <li>Monthly strategy call</li>
+        </ul>
+      </div>
+
+      <div class="edition hero">
+        <div class="ed-badge">Edition B</div>
+        <div class="ed-name">The Full Wardrobe</div>
+        <div class="ed-price">$4,500</div>
+        <div class="ed-unit">one-time · $800/mo ongoing</div>
+        <p class="ed-desc">All six agents built, voice-trained, and deployed. You handle clients. I handle the pipeline.</p>
+        <ul class="ed-list">
+          <li>Full team, fully deployed + managed</li>
+          <li>25-30 audit-backed warm touches/wk</li>
+          <li>CRM sync (HubSpot / Pipedrive / whatever)</li>
+          <li>Google Sheets + Telegram + full dashboard</li>
+          <li>3-touch follow-up sequences</li>
+          <li>Domain warmup included</li>
+          <li>Weekly performance report + bi-weekly call</li>
+        </ul>
+      </div>
+
+      <div class="edition">
+        <div class="ed-badge">Edition C</div>
+        <div class="ed-name">Aligned Edition</div>
+        <div class="ed-price">$3,000</div>
+        <div class="ed-unit">one-time · $400/mo · $500/closed</div>
+        <p class="ed-desc">Lower retainer. $500 commission per client the system sources and closes. Incentives pointed the same way.</p>
+        <ul class="ed-list">
+          <li>All six agents deployed + managed</li>
+          <li>25-30 warm touches/wk</li>
+          <li>12-month post-term attribution window</li>
+          <li>Weekly performance report</li>
+          <li>Aligned-incentive model &mdash; I win when you win</li>
+          <li><em>Requires Elle Woods in the team</em> (yes)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 05 — CTA -->
+<section class="cta">
+  <div class="cta-script">xoxo,</div>
+  <h2 class="cta-title">Let&rsquo;s put <em>your</em> pipeline<br>on autopilot.</h2>
+  <p class="cta-deck">Thirty-minute discovery call. No deck. No hard sell. I&rsquo;ll ask eight questions about your current pipeline, and you&rsquo;ll leave knowing exactly what the system would do in your first month.</p>
+  <a href="mailto:aylablumberg06@gmail.com?subject=Lindsay · Ayla Intelligence · Let's Talk" class="cta-btn">Book the Call &nbsp;→</a>
+</section>
+
+<footer class="foot">
+  <div class="script">with love,</div>
+  <div>Ayla <span>·</span> Intelligence &nbsp; · &nbsp; April 2026 &nbsp; · &nbsp; An editorial proposal for Lindsay LaBonge</div>
+</footer>
+
+</body>
+</html>

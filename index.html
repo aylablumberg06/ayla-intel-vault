@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayla Intelligence — Private Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231c0c14'/%3E%3Ctext x='50' y='56' text-anchor='middle' font-family='Georgia' font-size='52' font-weight='900' fill='%23c84b6d' font-style='italic'%3EAI%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --parchment: #fdf4ee;
+    --ivory: #fff9f5;
+    --warm-sand: #f5e6d8;
+    --border-cream: rgba(180,100,120,0.12);
+    --ring-warm: rgba(200,75,109,0.22);
+    --pink-soft: rgba(200,75,109,0.08);
+    --pink-ring: rgba(200,75,109,0.28);
+    --pink-faint: #fce8ef;
+    --near-black: #1c0c14;
+    --dark-surface: #2a1520;
+    --charcoal: #4a2332;
+    --olive: #7a4a5c;
+    --stone: #b09098;
+    --warm-silver: #e5c9d3;
+    --pink: #c84b6d;
+    --pink-light: #e38ca8;
+    --rose: #9e2d52;
+    --green: #2d7a56;
+    --amber: #c4611a;
+    --purple: #6b3d9a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--parchment);
+    color: var(--near-black);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; }
+
+  /* ── Login ── */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .login-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--ivory);
+    border: 1px solid var(--border-cream);
+    border-radius: 20px;
+    padding: 44px 40px;
+    box-shadow: rgba(80,20,40,0.06) 0 12px 36px;
+  }
+  .logo-mark { display: inline-flex; align-items: baseline; line-height: 1; }
+  .logo-mark .hl { color: var(--pink); font-weight: 900; }
+  .logo-mark .base { color: var(--near-black); font-weight: 500; }
+  .logo-mark.dark .base { color: var(--ivory); }
+  .logo-mark.dark .hl { color: var(--pink-light); }
+
+  /* ── Layout ── */
+  .shell { display: none; min-height: 100vh; }
+  .shell.open { display: flex; }
+  .sidebar {
+    width: 234px;
+    flex-shrink: 0;
+    background: var(--near-black);
+    color: var(--warm-silver);
+    padding: 32px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar h2 { font-size: 17px; margin-bottom: 4px; }
+  .sidebar .subtitle {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 32px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 2px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--warm-silver);
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    text-align: left;
+    transition: all 0.2s ease;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.04); }
+  .nav-item.active { background: rgba(227,140,168,0.12); color: var(--pink-light); }
+  .nav-icon { font-size: 13px; opacity: 0.7; width: 16px; }
+  .sidebar-footer {
+    border-top: 1px solid var(--dark-surface);
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+  .sidebar-footer button, .sidebar-footer a {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--stone);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    border-radius: 8px;
+    font-family: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .sidebar-footer button:hover, .sidebar-footer a:hover { color: var(--pink-light); }
+
+  main { flex: 1; min-width: 0; padding: 44px 48px 80px; overflow-x: hidden; }
+
+  /* ── Typography ── */
+  h1.page-title {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 500;
+    font-family: 'Playfair Display', Georgia, serif;
+    line-height: 1.1;
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 10px;
+  }
+  .overline {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .caption { font-size: 14px; color: var(--olive); }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--ivory);
+    border: 1px solid var(--border-cream);
+    border-radius: 16px;
+    padding: 24px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .card:hover { box-shadow: rgba(80,20,40,0.06) 0 6px 20px; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn-pink { background: var(--pink); color: var(--ivory); }
+  .btn-pink:hover { background: var(--rose); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(200,75,109,0.25); }
+  .btn-ghost { background: transparent; color: var(--olive); border: 1px solid var(--border-cream); }
+  .btn-ghost:hover { background: var(--ivory); color: var(--pink); border-color: var(--pink-ring); }
+  .btn-danger { background: transparent; color: var(--pink); border: 1px solid rgba(200,75,109,0.25); }
+  .btn-danger:hover { background: rgba(200,75,109,0.06); }
+  .btn-sm { padding: 7px 14px; font-size: 12px; }
+  .btn[disabled] { opacity: 0.4; pointer-events: none; }
+
+  /* ── Inputs ── */
+  .input, textarea.input, select.input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    background: var(--parchment);
+    border: 1px solid var(--border-cream);
+    color: var(--near-black);
+    outline: none;
+    font-family: inherit;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px var(--pink-soft); }
+  textarea.input { resize: vertical; }
+  label.label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--olive);
+    margin-bottom: 8px;
+  }
+
+  /* ── Section header ── */
+  .section-header {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .section-header h1 { margin-top: 0; }
+  .section-header .subtitle { margin-top: 6px; color: var(--olive); font-size: 14px; }
+  .header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* ── KPIs ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .kpi-value {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--pink);
+    line-height: 1;
+    margin-top: 10px;
+  }
+  .kpi-hint { font-size: 12px; color: var(--stone); margin-top: 8px; }
+
+  /* ── Pills ── */
+  .pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pill-new, .pill-hot { background: rgba(200,75,109,0.16); color: var(--pink); border: 1px solid rgba(200,75,109,0.3); }
+  .pill-in-convo, .pill-building, .pill-pending { background: rgba(196,97,26,0.12); color: var(--amber); border: 1px solid rgba(196,97,26,0.25); }
+  .pill-proposal-sent, .pill-sent { background: rgba(107,61,154,0.12); color: var(--purple); border: 1px solid rgba(107,61,154,0.25); }
+  .pill-closed-won, .pill-accepted, .pill-paid, .pill-active, .pill-live { background: rgba(45,122,86,0.14); color: var(--green); border: 1px solid rgba(45,122,86,0.3); }
+  .pill-closed-lost, .pill-rejected, .pill-ended, .pill-paused { background: rgba(176,144,152,0.2); color: var(--olive); border: 1px solid rgba(176,144,152,0.3); }
+  .pill-draft, .pill-dev { background: rgba(45,92,154,0.1); color: #2d5c9a; border: 1px solid rgba(45,92,154,0.25); }
+  .pill-overdue { background: rgba(200,75,109,0.22); color: var(--pink); border: 1px solid rgba(200,75,109,0.4); }
+  .pill-viewed { background: rgba(45,92,154,0.12); color: #2d5c9a; border: 1px solid rgba(45,92,154,0.25); }
+
+  /* ── Modal ── */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(28,12,20,0.52);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    width: 100%;
+    max-width: 620px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--ivory);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(28,12,20,0.2);
+  }
+  .modal-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border-cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-header h2 { font-size: 20px; }
+  .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: var(--stone);
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-body { padding: 24px 28px 28px; }
+
+  /* ── Grid helpers ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field-row { margin-bottom: 14px; }
+  .list-grid { display: grid; gap: 14px; }
+
+  /* ── Item rows ── */
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .item-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .item-title { font-size: 19px; font-weight: 500; font-family: 'Playfair Display', Georgia, serif; }
+  .item-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+  /* ── Activity feed ── */
+  .activity-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-cream);
+  }
+  .activity-row:last-child { border-bottom: none; }
+  .activity-icon { color: var(--pink); font-size: 14px; width: 18px; }
+  .activity-text { font-size: 14px; flex: 1; }
+  .activity-time { font-size: 12px; color: var(--stone); }
+
+  /* ── Empty state ── */
+  .empty { text-align: center; padding: 48px; }
+  .empty-text { color: var(--stone); font-size: 14px; }
+
+  /* ── Filter bar ── */
+  .filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .filter-bar .input { flex: 1; min-width: 200px; }
+  .filter-bar select { width: auto; flex: 0 1 auto; }
+
+  /* ── Tier grid for proposals ── */
+  .tier-grid {
+    display: grid;
+    gap: 8px;
+    margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+  .tier-card {
+    padding: 10px 14px;
+    background: var(--parchment);
+    border-radius: 10px;
+  }
+  .tier-price {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--pink);
+  }
+  .tier-row {
+    padding: 12px 14px;
+    background: var(--parchment);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: 1fr 110px 110px 40px;
+    gap: 8px;
+    align-items: center;
+  }
+  .inv-row {
+    padding: 10px;
+    background: var(--parchment);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: 80px 130px 110px 110px 40px;
+    gap: 8px;
+    align-items: center;
+    row-gap: 8px;
+  }
+  .inv-view-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-cream);
+    gap: 10px;
+    font-size: 13px;
+  }
+  .inv-view-row:last-child { border-bottom: none; }
+
+  /* ── Agent team display ── */
+  .agents-display {
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: var(--parchment);
+    border-radius: 12px;
+  }
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+  }
+  .agent-card-mini {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    background: var(--ivory);
+    border-radius: 10px;
+    border: 1px solid var(--border-cream);
+  }
+  .agent-emoji { font-size: 18px; }
+  .agent-name { font-family: 'Playfair Display', Georgia, serif; font-size: 14px; font-weight: 500; }
+  .agent-role { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+  .agent-desc { font-size: 11px; color: var(--olive); margin-top: 4px; line-height: 1.4; }
+
+  /* ── Banner ── */
+  .banner {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 28px;
+    font-size: 13px;
+  }
+  .banner-amber {
+    background: rgba(196,97,26,0.08);
+    border: 1px solid rgba(196,97,26,0.2);
+    color: var(--amber);
+  }
+
+  /* ── Agent tag list ── */
+  .agent-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .agent-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  /* ── Note card ── */
+  .note-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .note-pin {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--stone);
+    line-height: 1;
+  }
+  .note-pin.active { color: var(--pink); }
+  .note-body { font-size: 14px; line-height: 1.6; white-space: pre-wrap; flex: 1; min-width: 0; }
+  .note-time { font-size: 11px; color: var(--stone); margin-top: 6px; }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background: var(--near-black);
+    color: var(--ivory);
+    border-radius: 10px;
+    font-size: 13px;
+    z-index: 300;
+    animation: toastIn 0.3s ease;
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    main { padding: 24px; }
+    .sidebar { display: none; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .tier-row { grid-template-columns: 1fr 1fr; }
+    .inv-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── Activity small ── */
+  .kpi-label { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone); }
+
+  ::selection { background: var(--pink); color: var(--ivory); }
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="login" class="login-wrap">
+  <div class="login-card">
+    <div style="text-align:center; margin-bottom: 28px;">
+      <div class="logo-mark" style="font-size: 26px;">
+        <span class="hl">A</span><span class="base">yla</span>
+        <span style="width: 10px; display: inline-block;"></span>
+        <span class="hl">I</span><span class="base">ntelligence</span>
+      </div>
+      <p class="overline" style="margin-top: 10px;">Private Admin</p>
+    </div>
+
+    <form id="login-form">
+      <label class="label">Password</label>
+      <input type="password" id="login-password" class="input" autofocus style="margin-bottom: 16px;">
+      <button type="submit" class="btn btn-pink" style="width: 100%; padding: 13px 20px;">Enter</button>
+      <p id="login-error" style="color: var(--pink); font-size: 13px; text-align:center; margin-top: 12px; display: none;"></p>
+    </form>
+
+    <div id="setup-hint" style="margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border-cream);">
+      <p class="caption" style="font-size: 12px; text-align:center;">
+        🔒 First time? Your password is set on first login and saved to this browser only.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SHELL ═══ -->
+<div id="shell" class="shell">
+  <aside class="sidebar">
+    <div style="margin-bottom: 36px; padding-left: 8px;">
+      <div class="logo-mark dark">
+        <span class="hl" style="font-size: 17px;">A</span><span class="base" style="font-size: 17px;">yla</span>
+        <span style="width: 6px; display: inline-block;"></span>
+        <span class="hl" style="font-size: 17px;">I</span><span class="base" style="font-size: 17px;">ntel.</span>
+      </div>
+      <p class="subtitle" style="margin-top: 6px;">Private Admin</p>
+    </div>
+
+    <nav id="nav" style="flex: 1;">
+      <button class="nav-item active" data-section="overview"><span class="nav-icon">◈</span>Overview</button>
+      <button class="nav-item" data-section="prospects"><span class="nav-icon">◉</span>Prospects</button>
+      <button class="nav-item" data-section="teams"><span class="nav-icon">✦</span>Teams Built</button>
+      <button class="nav-item" data-section="proposals"><span class="nav-icon">▤</span>Proposals</button>
+      <button class="nav-item" data-section="contracts"><span class="nav-icon">▣</span>Contracts</button>
+      <button class="nav-item" data-section="bots"><span class="nav-icon">◆</span>Bots</button>
+      <button class="nav-item" data-section="notes"><span class="nav-icon">✎</span>Notes</button>
+      <button class="nav-item" data-section="settings"><span class="nav-icon">⚙</span>Settings</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div id="sync-status" style="padding: 8px 12px; margin-bottom: 8px; font-size: 11px; color: var(--stone); display: flex; align-items: center; gap: 8px;">
+        <span id="sync-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #c4611a; flex-shrink: 0;"></span>
+        <span id="sync-label">Sync: off</span>
+      </div>
+      <a href="https://theaylaedit-ai.vercel.app" target="_blank">↗ View public site</a>
+      <button id="logout-btn">↗ Log out</button>
+    </div>
+  </aside>
+
+  <main id="content"></main>
+</div>
+
+<!-- ═══ MODAL ═══ -->
+<div id="modal" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="serif" id="modal-title">Edit</h2>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   STATE + STORAGE
+══════════════════════════════════════════════════════════ */
+const STORE_KEY = 'ayla_intelligence_admin_v6';  // v6: distinct proposal aesthetics per prospect
+const PASSWORD_KEY = 'ayla_intelligence_password_v1';
+const AUTH_KEY = 'ayla_intelligence_authed_v1';
+const SYNC_KEY = 'ayla_intelligence_sync_v1';       // {binId, masterKey, lastSeenId}
+const SEEN_MOCKUP_IDS_KEY = 'ayla_intelligence_seen_v1';
+
+const DEFAULTS = {
+  prospects: [], teams: [], proposals: [], contracts: [], bots: [], notes: []
+};
+
+let state = structuredClone(DEFAULTS);
+let currentSection = 'overview';
+
+// ── Seed data (all your real teams, prospects, proposals, contracts, bots, notes) ──
+// Auto-loads on first launch if localStorage is empty.
+const SEED_DATA = {"prospects":[
+{"id":"p_emma","source":"direct","name":"Emma Tessler","email":"","company":"Ninety Five Media","business":"Social Media Agency","status":"closed-won","notes":"First real client — signed & in Phase 3 (IMPLEMENT). 4-Agent lead gen system: Lead Research (Google Maps + Instagram for Dallas-area businesses), Content Preview (Canva mockups), Outreach (Gmail voice learning + personalized cold emails), Orchestrator (daily pipeline + Telegram reporting). $500 commission per client closed through the system, 12-month post-termination window. Benchmark deal — the blueprint for Proposal Factory pricing.","created_at":1742515200000,"updated_at":1742515200000},
+
+{"id":"p_ceci","source":"email","name":"Cecily 'Ceci' Alzugaray Rodriguez","email":"theworshipwawa@gmail.com","company":"The Worship Wawa","business":"Mobile worship ministry bus — launching May 2026, South Florida","show":"","agents":[{"name":"Church & Ministry Outreach","role":"Outreach","emoji":"⛪","color":"#8B2252","description":"Researches churches, youth groups, and ministries across South Florida and sends personalized outreach — introducing The Worship Wawa and offering group booking packages."},{"name":"Lead Nurture & Booking Recovery","role":"Follow-Up","emoji":"💌","color":"#c84b6d","description":"Follows up with FareHarbor visitors who didn't book. Also handles post-inquiry replies — 'someone asked about a Celebration ride' → instant warm reply + booking nudge."},{"name":"Post-Ride Experience","role":"Retention","emoji":"🙏","color":"#C9A84C","description":"After every ride, reaches out with a thank-you, asks for a testimonial/review, invites them into the referral program. Turns one-timers into repeat bookers + advocates."},{"name":"Partner Pipeline Manager","role":"BD","emoji":"🤝","color":"#2d7a56","description":"Actively seeks Christian businesses, cafes, venues along the routes and reaches out — instead of waiting for Partner With Us applications to come in."},{"name":"Social Media & DM Handler","role":"Social","emoji":"📱","color":"#6b3d9a","description":"Responds instantly in Ceci's voice to Instagram/TikTok DMs asking about rides, pricing, availability. Directs people to book."}],"status":"hot","notes":"🔥 CALL SCHEDULED: Wed 4/22, 2–5pm CST. She replied with Teams/Zoom link pending.\n\nPain: content creation struggles + wants streamlining & outreach before launch.\nBus: pre-launch, 3 rides/day max capacity. Already has FareHarbor booking + 'Partner With Us' page.\n\nMy move: start with 1–2 agents (not all 5) since she's pre-launch. Pitch outreach + lead nurture first, add more as she grows. Pricing quoted in email: $3K–$8K range.\n\nFull ideas doc: open the 'View proposal' link in her entry.","created_at":1744671626000,"updated_at":1744671626000},
+
+{"id":"p_intero","source":"direct","name":"Intero Digital","email":"","company":"Intero Digital","business":"Digital Marketing Agency — Google Premier Partner","show":"Mad Men","agents":[{"name":"Don Draper","role":"Creative Director · Orchestrator","emoji":"🎩","color":"#8b1a1a","description":"Runs the room. Orchestrates all 6 other agents, enforces quality gates before any email sends, delivers daily exec summary via Telegram. Nothing ships without his sign-off."},{"name":"Pete Campbell","role":"New Business · Lead Hunter","emoji":"🔍","color":"#1a4a8b","description":"Scours the web for companies matching Intero's ICP — mid-market, underperforming digital presence. Targets by vertical, size, tech stack signals. Feeds a fresh list to Harry every morning."},{"name":"Harry Crane","role":"Research & Media · Data Enrichment","emoji":"📊","color":"#1a6b3c","description":"Enriches every record: verified business email, decision-maker name + title, revenue estimate, CMS/hosting stack, social handles. Dedupes against existing CRM."},{"name":"Bert Cooper","role":"Senior Analyst · Digital Auditor","emoji":"🩺","color":"#5a3a1a","description":"Runs a mini digital audit on every enriched lead: PageSpeed, Core Web Vitals, domain authority, keyword gaps, paid ad signals. Assigns Priority Score 1–100 and generates the audit summary Peggy uses."},{"name":"Peggy Olson","role":"Senior Copywriter · Voice & Outreach","emoji":"✍️","color":"#6b1a5a","description":"Writes every cold email in Intero's voice. Ingests Bert's audit + prospect details, crafts personalized email leading with a real site insight. Three variants (direct/consultative/curiosity-gap), queued for Roger."},{"name":"Roger Sterling","role":"Account Director · QA & Sequencing","emoji":"📬","color":"#1a5a6b","description":"Reviews Peggy's emails before they send — flags off-brand, factually wrong, or too pushy. Manages 3-touch sequence (Day 3 bump, Day 7 value-add, Day 14 breakup). Pings team the moment anyone replies."},{"name":"Joan Holloway","role":"Director of Operations · CRM & Reporting","emoji":"💼","color":"#6b4a1a","description":"Pushes warm leads into HubSpot/Salesforce with full context. Monday morning weekly report: emails sent, open/reply rates, pipeline movement, A/B winners. Nothing falls through cracks."}],"status":"proposal-sent","notes":"🔥 HIGH-VALUE PROPOSAL SENT. Mad Men-themed 7-agent team: Don / Pete / Harry / Bert / Peggy / Roger / Joan.\n\nPitch: 'The agency that sells lead gen shouldn't have a lead gen problem.' 7 agents running 24/7 → 20–30 audit-backed outreach emails/week at steady state. Expected 8–15% reply rate vs. 1–3% industry average. Zero BDR hires required.\n\nThree tier options:\n• Starter — $2,500 + $500/mo (5 agents, self-managed)\n• Full System — $4,500 + $800/mo (all 7, fully deployed, weekly reports)\n• Managed + Commission — $3,000 + $400/mo + $500 per closed client\n\n📄 Open proposal: file:///Users/ayla/Downloads/intero-digital-proposal-madmen.html","created_at":1745520000000,"updated_at":1745520000000},
+
+{"id":"p_andrea","source":"email","name":"Andrea Wollenzin","email":"awollenzin@phyllisbrowning.com","company":"Phyllis Browning Company — Jason Glast Group","business":"Real Estate (8-agent team · San Antonio + Austin office)","show":"","agents":[{"name":"Social Content Agent","role":"Marketing","emoji":"📸","color":"#c84b6d","description":"Runs social content for the team. Writes captions, schedules posts, analyzes performance. Learns the team's voice from past content."},{"name":"Dorian's Workflow OS","role":"Ops","emoji":"📋","color":"#2d5c9a","description":"Custom workflow + deadline system for Dorian (Ops Manager). Tracks listings, contracts, timelines. Morning + evening briefs."},{"name":"Morning Brief Agent","role":"Assistant","emoji":"☀️","color":"#C9A84C","description":"Daily morning brief for the whole team. Listings due, showings today, contracts pending, market signals. Delivered via Telegram."},{"name":"Comms Drafting Agent","role":"Comms","emoji":"✉️","color":"#6b3d9a","description":"Drafts client emails/texts in Andrea's voice. Reads past email history to learn tone. All human-facing — clients never know it's AI."}],"status":"proposal-sent","notes":"🔥 PROPOSAL SENT 4/20. Two options: Blueprint $200 one-time (build yourself) OR Full Build $3,500 setup + $400/mo (3-mo min).\n\nContext: She's at Phyllis Browning, reports to Jason Glast. Already has NanoClaw setup + 8-agent persona system called 'Sally'. Sophisticated operator — the team orchestration is her pain point.\n\nTeam: Marketing Director, Ops Manager (Dorian), Ops Director. Biggest asks from Jason: social content agent + workflow system for Dorian. Must be COMPLETELY HUMAN-FACING — clients must not know AI is involved.\n\nAndrea's personal angle: she's also an artist / breathwork certified, maybe leaving real estate long-term, wants personal-assistant angle for herself too.\n\nShe also offered Austin broker intro (Jason has Austin office) — keep warm even if deal doesn't close.\n\nPhone: (210) 325-5840","created_at":1745079643000,"updated_at":1745166950000}
+],"teams":[{"id":"t_ayla_core_8","client":"Ayla Intelligence (internal)","business":"Website generation + QA pipeline","agents":[{"name":"Elle","role":"Chief of Staff","emoji":"👑","color":"#c84b6d","description":"Ayla's AI chief of staff — morning briefings, daily summaries, team coordination. Sarcastic but warm."},{"name":"Troy","role":"Pipeline Orchestrator","emoji":"📋","color":"#2d5c9a","description":"Coordinates the website review pipeline. Calls Sharpay + Ryan, makes deploy/hold decisions."},{"name":"Sharpay","role":"Aesthetic QA","emoji":"💅","color":"#c84b6d","description":"High-standards visual quality checker. Rates font pairing, color harmony, layout 1–10."},{"name":"Ryan","role":"SEO & Content","emoji":"🔍","color":"#2d7a56","description":"Checks H1 clarity, meta, keywords, CTA strength, alt text. 1–10 score."},{"name":"Taylor","role":"Email Review","emoji":"📧","color":"#6b3d9a","description":"Reviews outreach emails — subject lines, hooks, demo link validity, personalization."},{"name":"Gabriella","role":"Error Router","emoji":"🔧","color":"#c4611a","description":"Reads error logs, identifies root causes, provides auto-fixes, remembers patterns."},{"name":"Zeke","role":"Brand Director","emoji":"🎨","color":"#b5813a","description":"Generates custom brand briefs per business — palette, voice tone, wow elements."},{"name":"Chad","role":"Deploy / Go-Live","emoji":"✅","color":"#1e7a7a","description":"Confirms deployments by checking live URLs. Reports status, maintains deploy history."}],"monthly_fee":0,"setup_fee":0,"status":"live","go_live":"2026-03-26","bot_id":"b_elle","notes":"The original 8. Running daily since March 2026. Orchestrated by Elle via Telegram. Persistent memory in JSON files.","created_at":1742947200000},{"id":"t_ninety_five","client":"Emma Tessler / Ninety Five Media","business":"Social Media Agency lead generation","agents":[{"name":"Lead Research","role":"Scraper","emoji":"🔍","color":"#2d5c9a","description":"Google Maps + Instagram scraping for Dallas-area businesses. Identifies prospects that match Emma's ICP."},{"name":"Content Preview","role":"Mockup Gen","emoji":"🎨","color":"#c84b6d","description":"Generates Canva mockups of deliverables before outreach — so prospects can see what they'd get."},{"name":"Outreach","role":"Writer","emoji":"📧","color":"#b5813a","description":"Learns Emma's voice from Gmail, writes personalized cold emails. A/B subject line testing built in."},{"name":"Orchestrator","role":"Coordinator","emoji":"📋","color":"#2d7a56","description":"Daily pipeline coordination. Reports to Emma via Telegram each morning."}],"monthly_fee":400,"setup_fee":3000,"status":"building","go_live":"","contract_id":"c_ninety_five","notes":"Phase 3 (IMPLEMENT). $500 commission per client closed through the system, 12-month post-termination window. Total: $6K over 3 months minimum.","created_at":1745020800000},{"id":"t_proposal_factory","client":"Ayla Intelligence (internal — sales engine)","business":"Automated lead-gen + proposal factory for social media agencies","agents":[{"name":"Perry","role":"Scout","emoji":"🦆","color":"#2d5c9a","description":"Searches LinkedIn + Apify for leads matching ICP. Returns 5–10 leads weekly."},{"name":"Baljeet","role":"Researcher","emoji":"🤓","color":"#6b3d9a","description":"Deep-dives each lead — scrapes website, Instagram, LinkedIn. Flags top 2–3 pain points."},{"name":"Phineas","role":"Strategist","emoji":"💡","color":"#b5813a","description":"Designs a custom agent stack per lead — names agents, defines roles, maps connections."},{"name":"Ferb","role":"Pricing Agent","emoji":"🔧","color":"#2d7a56","description":"Estimates company revenue. Reverse-engineers Good/Better/Best tiers from the Emma benchmark."},{"name":"Isabella","role":"Proposal Writer","emoji":"📋","color":"#c84b6d","description":"Assembles polished PDF proposal. Self-iterates 3x. Matches client's branding."},{"name":"Candace","role":"Outreach Drafter","emoji":"📣","color":"#c4611a","description":"Writes personalized cold emails referencing specific pain points. 2 subject variants (A/B) + day-4 follow-up."},{"name":"Major Monogram","role":"Runbook Agent","emoji":"📘","color":"#1e7a7a","description":"Post-close: drafts the full deployment runbook — containers, agent assignments, credentials, go-live checklist."}],"monthly_fee":0,"setup_fee":0,"status":"building","notes":"Internal. Phase 1 (Perry+Baljeet+Phineas) runs Sunday night → review Monday. Phase 2 (Ferb+Isabella+Candace) runs per lead Tue–Thu. Target: 2–3 proposals/week. Niche-agnostic via config.","created_at":1744675200000},{"id":"t_hsm","client":"Ayla Intelligence (marketing)","business":"TikTok / social demo version of the Core 8 — HSM themed","agents":[{"name":"Elle","role":"Chief of Staff","emoji":"👑","color":"#c84b6d","description":"HSM-themed persona for the Chief of Staff role."},{"name":"Troy","role":"Pipeline Lead","emoji":"📋","color":"#2d5c9a","description":"Pipeline orchestrator shown with Troy Bolton character styling."},{"name":"Sharpay","role":"Aesthetic QA","emoji":"💅","color":"#b5813a","description":"Design quality reviewer — 'mean' verdict character."},{"name":"Ryan","role":"SEO & Content","emoji":"🔍","color":"#2d7a56","description":"Content and SEO checks — Ryan Evans character."},{"name":"Taylor","role":"Email Review","emoji":"📧","color":"#6b3d9a","description":"Email QA."},{"name":"Gabriella","role":"Error Router","emoji":"🔧","color":"#c4611a","description":"Diagnostic and fixing — Gabriella Montez character."},{"name":"Chad","role":"Outreach / Deploy","emoji":"📣","color":"#1e7a7a","description":"Outreach + deployment — Chad Danforth character."},{"name":"Zeke","role":"Lead Research","emoji":"🎨","color":"#b5813a","description":"Brand direction — Zeke Baylor character."}],"monthly_fee":0,"setup_fee":0,"status":"paused","notes":"Marketing/demo only. Same 8 agents as Core — rebranded for TikTok content (v03-hsm-agents.html).","created_at":1744329600000}],"proposals":[
+{"id":"pr_ram","prospect_name":"Ram Degani — Dog Suspenders","sent_date":"2026-04-21","tiers":[{"name":"Starter","price":2500,"monthly":400,"includes":"5 agents · self-managed"},{"name":"Full Build","price":4500,"monthly":800,"includes":"All 6 agents · fully managed · ~30/wk outreach"},{"name":"Managed + Commission","price":3000,"monthly":400,"includes":"All 6 · $500 commission per closed deal"}],"status":"draft","expiry":"","pdf_url":"https://aylablumberg06.github.io/ayla-intel-vault/proposals/ram-degani.html","notes":"Cat on a Hot Tin Roof–themed team (Brick, Maggie, Big Daddy, Mae, Gooper, Big Mama). Niche pet product — retail + DTC. Pitch angle: find the dog owner before they know they want it.","created_at":1745452800000},{"id":"pr_sharon","prospect_name":"Sharon Blumberg — Design List Collective","sent_date":"2026-04-21","tiers":[{"name":"Starter","price":2500,"monthly":400,"includes":"5 agents · self-managed"},{"name":"Full Build","price":4500,"monthly":800,"includes":"All 6 agents · fully managed · matchmaking-quality focus"},{"name":"Managed + Commission","price":3000,"monthly":400,"includes":"All 6 · $500/closed match"}],"status":"draft","expiry":"","pdf_url":"https://aylablumberg06.github.io/ayla-intel-vault/proposals/sharon-designlist.html","notes":"St Elmo's Fire–themed team (Billy, Jules, Wendy, Kevin, Alec, Kirby). Dallas designer matchmaking. Family project (Sharon Blumberg / SHM Architects). Quality-first concierge tone.","created_at":1745452800000},{"id":"pr_harvey","prospect_name":"Harvey Sterling — Elefant International","sent_date":"2026-04-21","tiers":[{"name":"Starter","price":2500,"monthly":400,"includes":"5 agents · self-managed"},{"name":"Full Build","price":4500,"monthly":800,"includes":"All 6 Roys + Tom + Greg · low-volume, partnership-grade research"},{"name":"Managed + Commission","price":3000,"monthly":400,"includes":"All 6 · $500/closed partnership deal"}],"status":"draft","expiry":"","pdf_url":"https://aylablumberg06.github.io/ayla-intel-vault/proposals/harvey-elefant.html","notes":"Succession-themed team (Tom, Greg, Logan, Kendall, Shiv, Roman). Cross-border partnerships. Low-volume / high-leverage positioning — 10–15 bespoke outreach/wk.","created_at":1745452800000},{"id":"pr_lindsay","prospect_name":"Lindsay LaBonge — Digital Marketing","sent_date":"2026-04-21","tiers":[{"name":"Starter","price":2500,"monthly":400,"includes":"5 agents · self-managed"},{"name":"Full Build","price":4500,"monthly":800,"includes":"All 6 · audit-backed agency outreach · 20–30/wk"},{"name":"Managed + Commission","price":3000,"monthly":400,"includes":"All 6 · $500/closed client"}],"status":"draft","expiry":"","pdf_url":"https://aylablumberg06.github.io/ayla-intel-vault/proposals/lindsay-labonge.html","notes":"Legally Blonde–themed team (Elle, Vivian, Warner, Paulette, Emmett, Brooke). Digital marketing agency — classic 'the agency that sells lead-gen shouldn't have a lead-gen problem' pitch.","created_at":1745452800000},{"id":"pr_ashley","prospect_name":"Ashley — Content Strategy (Creator Monetization)","sent_date":"2026-04-21","tiers":[{"name":"Starter","price":2500,"monthly":400,"includes":"5 agents · self-managed"},{"name":"Full Build","price":4500,"monthly":800,"includes":"All 6 · creator-native DM + email · 25–35/wk"},{"name":"Managed + Commission","price":3000,"monthly":400,"includes":"All 6 · $500/closed coaching client"}],"status":"draft","expiry":"","pdf_url":"https://aylablumberg06.github.io/ayla-intel-vault/proposals/ashley-dundermifflin.html","notes":"The Office–themed team (Jim, Pam, Michael, Dwight, Angela, Stanley). Creator coaching / digital products. Pitch: creators smell templates — every message feels like you watched their last 3 videos.","created_at":1745452800000},{"id":"pr_intero","prospect_name":"Intero Digital","sent_date":"2026-04-24","tiers":[{"name":"Starter","price":2500,"monthly":500,"includes":"5 agents (no Joan CRM sync) · ICP definition & voice training · Google Sheets pipeline · Telegram hot lead alerts · 3-touch email sequences · ~10–15 targeted emails/week · Monthly check-in"},{"name":"Full System","price":4500,"monthly":800,"includes":"All 7 agents · HubSpot or Salesforce CRM sync · 20–30 targeted emails/week at steady state · Domain warmup (weeks 1–4) · Digital audit per lead · Weekly performance report · Bi-weekly strategy call"},{"name":"Managed + Commission","price":3000,"monthly":400,"includes":"All 7 agents · Pipeline fully managed by Ayla Intelligence · 20–30 targeted emails/week · Joan's weekly report · $500 commission per closed client sourced · Aligned incentives"}],"status":"sent","expiry":"","pdf_url":"https://proposals-blue.vercel.app/intero-digital","notes":"Mad Men-themed proposal — 7 agents (Don, Pete, Harry, Bert, Peggy, Roger, Joan). Pitch: Intero generates leads for hundreds of clients, but who generates leads for them? The agent team does what their InteroBOT® does for clients — applied to Intero's own prospecting.\n\nKey stats pitched: 20–30 audit-backed emails/week · 8–15% reply rate (vs 1–3% industry) · zero BDR hires required.\n\n🌐 Open proposal: file:///Users/ayla/Downloads/intero-digital-proposal-madmen.html","created_at":1745520000000},
+
+{"id":"pr_ninety_five","prospect_name":"Emma Tessler / Ninety Five Media","sent_date":"2026-04-10","tiers":[{"name":"Build Fee (one-time)","price":3000,"monthly":0,"includes":"4-agent system design + deployment. Lead Research, Content Preview, Outreach, Orchestrator."},{"name":"Monthly Retainer","price":0,"monthly":400,"includes":"Ongoing operations, monitoring, agent refinements, Telegram orchestration."}],"status":"accepted","expiry":"","pdf_url":"https://proposals-blue.vercel.app/ninety-five-media","notes":"Accepted → signed contract. 3-month minimum = $1,200 retainer. Plus $500 commission per client closed through the system (12-month post-termination window). Total benchmark value: $6K.\n\n🔗 Live hosted proposal: https://ninetyfivemedia.vercel.app\n📄 PDF export: file:///Users/ayla/Downloads/NinetyFiveMedia_FINAL.pdf","created_at":1744243200000},
+
+{"id":"pr_andrea","prospect_name":"Andrea Wollenzin / Phyllis Browning — Jason Glast Group","sent_date":"2026-04-20","tiers":[{"name":"Option A — The Blueprint","price":200,"monthly":0,"includes":"System design + agent specs + integration recs for their existing NanoClaw setup. They build it themselves. One-time flat fee."},{"name":"Option B — The Full Build","price":3500,"monthly":400,"includes":"Four agents (Social Content, Dorian's Workflow, Morning Brief, Comms Drafting). Completely human-facing — clients never know AI is involved. 3-month minimum retainer."}],"status":"sent","expiry":"","pdf_url":"https://proposals-blue.vercel.app/phyllis-browning","notes":"Sent 4/20 evening after Andrea's reply. Two options laid out exactly as she asked — one DIY blueprint to show Jason, one full build. My real-estate license is a value-add I flagged. Waiting on her + Jason's decision.\n\n📄 PDF (emailed to her): file:///Users/ayla/Downloads/phyllis-browning-proposal.pdf\n🌐 HTML source: file:///Users/ayla/Downloads/phyllis-browning-proposal.html","created_at":1745174150000},
+
+{"id":"pr_ceci_ideas","prospect_name":"Cecily 'Ceci' Alzugaray Rodriguez / The Worship Wawa","sent_date":"","tiers":[{"name":"Start Lean — 1–2 agents","price":3000,"monthly":0,"includes":"Pick the highest-leverage 1–2 agents (likely Outreach + Lead Nurture). Pre-launch sized."},{"name":"Expansion — +2 more","price":5000,"monthly":0,"includes":"Add Post-Ride Experience + Social Media/DM Handler after launch ramps."},{"name":"Full Build — 5 agents","price":8000,"monthly":0,"includes":"Full system: Church Outreach, Lead Nurture, Post-Ride, Partner Pipeline, Social/DM. Best for post-launch scale."}],"status":"draft","expiry":"","pdf_url":"https://proposals-blue.vercel.app/worship-wawa","notes":"Ideas doc (not yet a formal proposal). Use on 4/22 call as the visual — walk her through the 5 agent concepts + recommend starting lean. Pricing quoted in email was $3K–$8K range; these tiers align.\n\n🌐 Open on your Mac: file:///Users/ayla/Downloads/worship-wawa-ideas.html","created_at":1744845000000},
+
+{"id":"pr_himym_re_v1","prospect_name":"Real Estate Team — HIMYM themed (archive)","sent_date":"","tiers":[{"name":"Archived concept","price":0,"monthly":0,"includes":"HIMYM-themed real-estate agent team pitch. Reference material for future real-estate proposals."}],"status":"draft","expiry":"","pdf_url":"file:///Users/ayla/Downloads/himym_REagents_proposal.pdf","notes":"Archived HIMYM-themed real estate proposal — concept/pitch deck from earlier iteration. Keep for reference; real estate approach has evolved.\n\n📄 PDF: file:///Users/ayla/Downloads/himym_REagents_proposal.pdf\n🌐 HTML: file:///Users/ayla/Downloads/himym-proposal.html","created_at":1744067150000}
+],"contracts":[{"id":"c_ninety_five","client":"Ninety Five Media (Emma Tessler)","signed_date":"2026-04-14","total_value":6000,"monthly_fee":400,"term_months":3,"status":"active","pdf_url":"https://aylablumberg06.github.io/ayla-intel-vault/proposals/ninetyfive-contract.html","invoices":[{"id":"i_n95_build","number":"001","date":"2026-04-14","amount":3000,"status":"pending","pdf_url":"file:///Users/ayla/Downloads/Invoice_001_AylaBlumberg_NinetyFiveMedia.pdf","notes":"Build fee — due on signing. Invoice PDF at file:///Users/ayla/Downloads/Invoice_001_AylaBlumberg_NinetyFiveMedia.pdf"},{"id":"i_n95_apr","number":"002","date":"2026-05-01","amount":400,"status":"pending","notes":"Monthly retainer — May"},{"id":"i_n95_may","number":"003","date":"2026-06-01","amount":400,"status":"pending","notes":"Monthly retainer — June"},{"id":"i_n95_jun","number":"004","date":"2026-07-01","amount":400,"status":"pending","notes":"Monthly retainer — July"}],"notes":"Plus $500 commission per client closed through the system (12-month post-termination window).\n\n📄 Signed contract: file:///Users/ayla/Downloads/contract.html\n🔗 Live hosted proposal: https://ninetyfivemedia.vercel.app","created_at":1744675200000}],"bots":[{"id":"b_elle","handle":"@ayla_elle_bot","client":"Ayla Intelligence (internal)","team_id":"t_ayla_core_8","agents_coordinated":8,"status":"paused","last_ping":"2026-04-18","token_label":"TELEGRAM_BOT_TOKEN in ayla-agents/.env — token ID 8654045816","notes":"LaunchAgent com.ayla.elle-telegram is running (PID 32711 since 2026-03-26). Paused due to Anthropic credit exhaustion — not a bot issue. Morning briefing scheduled 8:10 AM CT. Memory webhook: https://elle-brain-webhook.vercel.app/api/remember. War room: Telegram group 'The Ayla Edit - War room!!'. 18 commands: /status /errors /leads /briefing /sites /health /fix /run /unresolved /review /email /brand /deploy /sales /team /costs — plus free-text chat.","created_at":1742947200000}],"notes":[{"id":"n_pricing","pinned":true,"body":"PRICING TIERS (website-bot reference):\n• Standard — $300 / $400 with revisions / $50/mo hosting (cleaning, fitness, photography, food truck, dog groomer)\n• Premium — $400 / $500 / $50/mo (nail salon, lash studio, boutique)\n• Med spa — $600 / $800 / $100/mo\n\nPROPOSAL FACTORY BENCHMARK (agency lead-gen systems):\n• Based on Emma / Ninety Five Media — $3K build + $400/mo retainer\n• Plus $500 commission per client closed, 12-mo post-term window","created_at":1745452800000,"updated_at":1745452800000},{"id":"n_elle_token","pinned":true,"body":"⚠ Elle's Telegram bot is paused due to Anthropic API credit depletion as of 2026-04-14. LaunchAgent is still running. Top up credits to restore — no config changes needed.","created_at":1745452800000,"updated_at":1745452800000},{"id":"n_proposal_factory","pinned":false,"body":"Proposal Factory cadence:\n• Sunday night: Perry + Baljeet + Phineas run → you wake up Monday with prepped lead batch\n• Mon: review leads, approve batch\n• Tue: Ferb prices, Isabella writes (first draft)\n• Wed: you review proposals, Candace drafts outreach\n• Thu: send approved proposals + emails\n• Target: 2–3 proposals per week","created_at":1745452800000,"updated_at":1745452800000},{"id":"n_hook_lines","pinned":false,"body":"HOOK LINES BY NICHE (for cold emails):\n• Cleaning/landscaping/handyman — 'We cleaned up your website.'\n• Nail/lash/med spa/beauty — 'We gave your website a glow up.'\n• Food truck/cafe/restaurant — 'We cooked up something better for your website.'\n• Fitness/yoga/gym — 'We built something leaner and stronger for your online presence.'\n• Photography — 'We gave your portfolio a new frame.'\n• Boutique/fashion — 'Your store deserves a website as curated as your collection.'\n• Dog groomer/pets — 'We gave your website a little grooming.'","created_at":1745452800000,"updated_at":1745452800000},{"id":"n_website_bot","pinned":false,"body":"WEBSITE-BOT PIPELINE STATS:\n• 50 total leads discovered\n• 30 prospects with captured emails\n• 26 completed builds awaiting outreach\n• 4 partial builds / needs review\n• 11 errors (pending diagnosis via Gabriella)\n• 5 skipped\n\nKey modules: scraper → filter → site_scraper → brand_analyzer → site_builder → preflight → deployer → pagespeed → sharpay (QA) → ryan (SEO) → taylor (email) → gmail_client → reply_monitor → learning_engine","created_at":1745452800000,"updated_at":1745452800000}]};
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      state = { ...DEFAULTS, ...JSON.parse(raw) };
+    } else {
+      // First launch — seed with real data
+      state = { ...DEFAULTS, ...SEED_DATA };
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    }
+    // Wipe the old "seen mockup IDs" key — the new dedupe logic uses live state only.
+    // This ensures any mockups that were hidden after a store-version bump resurface.
+    localStorage.removeItem(SEEN_MOCKUP_IDS_KEY);
+  } catch (e) { console.error(e); }
+}
+
+function save() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(state));
+}
+
+const uid = (p) => `${p}_${Math.random().toString(36).slice(2, 10)}`;
+const fmt$ = (n) => Number(n || 0).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+const fmtDate = (ms) => new Date(ms).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const fmtRel = (ms) => {
+  const d = (Date.now() - ms) / 1000;
+  if (d < 60) return 'just now';
+  if (d < 3600) return `${Math.floor(d/60)}m ago`;
+  if (d < 86400) return `${Math.floor(d/3600)}h ago`;
+  if (d < 86400*7) return `${Math.floor(d/86400)}d ago`;
+  return fmtDate(ms);
+};
+const esc = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ══════════════════════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════════════════════ */
+function initAuth() {
+  const authed = sessionStorage.getItem(AUTH_KEY) === 'yes';
+  const hasPassword = !!localStorage.getItem(PASSWORD_KEY);
+
+  if (!hasPassword) {
+    document.getElementById('setup-hint').innerHTML = `
+      <p class="caption" style="font-size: 12px; text-align: center;">
+        🌸 First-time setup — the password you enter now becomes your admin password.
+        It's stored in this browser only (hashed).
+      </p>`;
+  }
+
+  if (authed) showShell();
+  else showLogin();
+
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pw = document.getElementById('login-password').value;
+    const err = document.getElementById('login-error');
+    err.style.display = 'none';
+
+    const hashed = await sha256(pw);
+    const stored = localStorage.getItem(PASSWORD_KEY);
+
+    if (!stored) {
+      if (pw.length < 4) { err.textContent = 'Pick something longer than 4 chars.'; err.style.display = 'block'; return; }
+      localStorage.setItem(PASSWORD_KEY, hashed);
+      sessionStorage.setItem(AUTH_KEY, 'yes');
+      showShell();
+    } else if (stored === hashed) {
+      sessionStorage.setItem(AUTH_KEY, 'yes');
+      showShell();
+    } else {
+      err.textContent = 'Wrong password.';
+      err.style.display = 'block';
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem(AUTH_KEY);
+    location.reload();
+  });
+}
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function showLogin() {
+  document.getElementById('login').style.display = 'flex';
+  document.getElementById('shell').classList.remove('open');
+}
+function showShell() {
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('shell').classList.add('open');
+  render();
+  startSyncLoop();
+}
+
+/* ══════════════════════════════════════════════════════════
+   NAV
+══════════════════════════════════════════════════════════ */
+document.getElementById('nav').addEventListener('click', (e) => {
+  const btn = e.target.closest('.nav-item');
+  if (!btn) return;
+  currentSection = btn.dataset.section;
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b === btn));
+  render();
+});
+
+/* ══════════════════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════════════════ */
+function toast(msg) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2400);
+}
+
+/* ══════════════════════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════════════════════ */
+let modalOnSave = null;
+function openModal(title, bodyHTML, onSave) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = bodyHTML;
+  modalOnSave = onSave;
+  document.getElementById('modal').classList.add('open');
+  setTimeout(() => {
+    const firstInput = document.querySelector('#modal-body input, #modal-body textarea, #modal-body select');
+    firstInput?.focus();
+  }, 50);
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  modalOnSave = null;
+}
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal').addEventListener('click', (e) => { if (e.target.id === 'modal') closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+/* ══════════════════════════════════════════════════════════
+   RENDER SHELL
+══════════════════════════════════════════════════════════ */
+function render() {
+  const host = document.getElementById('content');
+  host.innerHTML = {
+    overview: renderOverview,
+    prospects: renderProspects,
+    teams: renderTeams,
+    proposals: renderProposals,
+    contracts: renderContracts,
+    bots: renderBots,
+    notes: renderNotes,
+    settings: renderSettings,
+  }[currentSection]();
+  attachSectionHandlers();
+}
+
+/* ══════════════════════════════════════════════════════════
+   OVERVIEW
+══════════════════════════════════════════════════════════ */
+function renderOverview() {
+  const liveTeams = state.teams.filter(t => t.status === 'live');
+  const mrr = liveTeams.reduce((s, t) => s + (+t.monthly_fee || 0), 0) +
+    state.contracts.filter(c => c.status === 'active').reduce((s, c) => s + (+c.monthly_fee || 0), 0);
+  const activeBots = state.bots.filter(b => b.status === 'active').length;
+  const open = state.prospects.filter(p => p.status === 'hot' || p.status === 'in-convo' || p.status === 'proposal-sent').length;
+  const newWebsite = state.prospects.filter(p => p.source === 'website' && p.status === 'new').length;
+
+  const activity = [];
+  state.prospects.slice(-5).forEach(p => activity.push({ when: p.created_at, icon: p.source === 'website' ? '◉' : '✎', text: `${p.source === 'website' ? 'Website mockup from' : 'Logged prospect'} ${p.name || p.email || p.company || '(unnamed)'}` }));
+  state.teams.slice(-3).forEach(t => activity.push({ when: t.created_at, icon: '✦', text: `Team built: ${t.client}` }));
+  state.proposals.slice(-3).forEach(p => activity.push({ when: p.created_at, icon: '▤', text: `Proposal drafted for ${p.prospect_name}` }));
+  state.contracts.slice(-3).forEach(c => activity.push({ when: c.created_at, icon: '▣', text: `Contract: ${c.client}` }));
+  activity.sort((a,b) => b.when - a.when);
+  const top = activity.slice(0, 10);
+
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Dashboard</p>
+        <h1 class="serif page-title">Hi Ayla 👋</h1>
+        <p class="subtitle caption">Here's what's happening in Ayla Intelligence right now.</p>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="card"><p class="kpi-label">Prospects</p><div class="kpi-value">${state.prospects.length}</div><p class="kpi-hint">${newWebsite} new from website</p></div>
+      <div class="card"><p class="kpi-label">Teams Live</p><div class="kpi-value">${liveTeams.length}</div><p class="kpi-hint">${state.teams.length} total</p></div>
+      <div class="card"><p class="kpi-label">MRR</p><div class="kpi-value">${fmt$(mrr)}</div><p class="kpi-hint">from active contracts</p></div>
+      <div class="card"><p class="kpi-label">Open Deals</p><div class="kpi-value">${open}</div><p class="kpi-hint">in conversation</p></div>
+      <div class="card"><p class="kpi-label">Bots Running</p><div class="kpi-value">${activeBots}</div><p class="kpi-hint">${state.bots.length} total</p></div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 20px;" class="grid-2">
+      <div class="card">
+        <p class="overline" style="margin-bottom: 18px;">Recent Activity</p>
+        ${top.length === 0 ? '<p class="empty-text">No activity yet — add your first prospect or team to see it here.</p>' :
+          top.map(a => `
+            <div class="activity-row">
+              <span class="activity-icon">${a.icon}</span>
+              <span class="activity-text">${esc(a.text)}</span>
+              <span class="activity-time">${fmtRel(a.when)}</span>
+            </div>
+          `).join('')}
+      </div>
+      <div class="card">
+        <p class="overline" style="margin-bottom: 18px;">Quick Actions</p>
+        <button class="btn btn-pink" data-quick="prospect" style="width: 100%; margin-bottom: 8px;">+ New prospect</button>
+        <button class="btn btn-ghost" data-quick="team" style="width: 100%; margin-bottom: 8px;">+ New team</button>
+        <button class="btn btn-ghost" data-quick="proposal" style="width: 100%; margin-bottom: 8px;">+ New proposal</button>
+        <button class="btn btn-ghost" data-quick="bot" style="width: 100%;">+ New bot</button>
+      </div>
+    </div>
+  `;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PROSPECTS
+══════════════════════════════════════════════════════════ */
+function renderProspects() {
+  const list = [...state.prospects].sort((a,b) => b.created_at - a.created_at);
+
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Pipeline</p>
+        <h1 class="serif page-title">Prospects &amp; Mockups</h1>
+        <p class="subtitle caption">${state.prospects.length} total · ${state.prospects.filter(p => p.source === 'website').length} from website · ${state.prospects.filter(p => p.source !== 'website').length} manual</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-ghost" data-action="sync-now">↻ Check for new</button>
+        <button class="btn btn-ghost" data-action="log-mockup">+ Paste from email</button>
+        <button class="btn btn-pink" data-action="new-prospect">+ New prospect</button>
+      </div>
+    </div>
+
+    <div style="padding: 12px 18px; background: rgba(45,122,86,0.06); border: 1px solid rgba(45,122,86,0.2); border-radius: 12px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--green);">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--green);"></span>
+      <span><strong>Live Sync connected</strong> · polling every 30s · new website mockups appear here automatically</span>
+    </div>
+
+    <div class="filter-bar">
+      <input id="prospect-search" class="input" placeholder="Search by name, email, company…">
+      <select id="prospect-filter" class="input">
+        <option value="all">All statuses</option>
+        <option>new</option>
+        <option>in-convo</option>
+        <option>hot</option>
+        <option>proposal-sent</option>
+        <option>closed-won</option>
+        <option>closed-lost</option>
+      </select>
+    </div>
+
+    <div id="prospect-list" class="list-grid">
+      ${list.length === 0 ? `
+        <div class="card empty">
+          <p class="empty-text">No prospects yet. When someone emails you about a mockup, click "Paste mockup from email" to log it here and link it to the email thread.</p>
+        </div>
+      ` : list.map(renderProspectCard).join('')}
+    </div>
+  `;
+}
+
+function renderProspectCard(p) {
+  const isFresh = p.is_fresh;
+  return `
+    <div class="card" style="padding: 22px; ${isFresh ? 'border-color: var(--pink); box-shadow: 0 0 0 1px var(--pink-ring), rgba(80,20,40,0.08) 0 6px 22px;' : ''}" data-id="${p.id}">
+      <div class="item-row">
+        <div style="flex: 1; min-width: 240px;">
+          <div class="item-head">
+            <h3 class="item-title">${esc(p.name || p.company || p.email || 'Unnamed')}</h3>
+            <span class="pill pill-${p.status}">${p.status.replace('-', ' ')}</span>
+            <span style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone);">
+              ${p.source === 'website' ? '↙ website' : `✎ ${p.source}`}
+            </span>
+            ${isFresh ? `<span style="display: inline-flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); padding: 3px 8px; background: var(--pink-faint); border-radius: 100px; border: 1px solid var(--pink-ring);"><span style="width: 5px; height: 5px; border-radius: 50%; background: var(--pink); animation: none;"></span>NEW</span>` : ''}
+          </div>
+          <p style="font-size: 13px; color: var(--olive); margin-bottom: 6px;">
+            ${p.email ? `<a href="mailto:${esc(p.email)}" style="color: var(--pink); text-decoration: none;">${esc(p.email)}</a>` : ''}
+            ${p.email && p.company ? ' · ' : ''}
+            ${esc(p.company || '')}
+            ${(p.email || p.company) && p.business ? ' · ' : ''}
+            ${esc(p.business || '')}
+          </p>
+          <p style="font-size: 12px; color: var(--stone);">
+            ${fmtRel(p.created_at)}
+            ${p.show ? ` · Themed: <strong style="color: var(--olive);">${esc(p.show)}</strong>` : ''}
+            ${p.agents && p.agents.length ? ` · <strong style="color: var(--olive);">${p.agents.length} agents</strong>` : ''}
+          </p>
+          ${p.notes ? `<p style="font-size: 13px; color: var(--olive); margin-top: 10px; font-style: italic;">&ldquo;${esc(p.notes.slice(0, 140))}${p.notes.length > 140 ? '…' : ''}&rdquo;</p>` : ''}
+        </div>
+        <div class="item-actions">
+          ${p.agents && p.agents.length ? `<button class="btn btn-ghost btn-sm" data-toggle-agents="${p.id}">Show team</button>` : ''}
+          <button class="btn btn-ghost btn-sm" data-edit-prospect="${p.id}">Edit</button>
+          <button class="btn btn-danger btn-sm" data-del-prospect="${p.id}">✕</button>
+        </div>
+      </div>
+      <div class="agents-display" id="agents-${p.id}" style="display: none;">
+        <p class="overline" style="margin-bottom: 12px;">The team they built</p>
+        <div class="agents-grid">
+          ${(p.agents || []).map(a => `
+            <div class="agent-card-mini" style="border-color: ${a.color || '#c84b6d'}25;">
+              <span class="agent-emoji">${esc(a.emoji || '')}</span>
+              <div style="min-width: 0; flex: 1;">
+                <div class="agent-name">${esc(a.name || '')}</div>
+                <div class="agent-role" style="color: ${a.color || '#c84b6d'};">${esc(a.role || '')}</div>
+                ${a.description ? `<div class="agent-desc">${esc(a.description)}</div>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function attachProspectHandlers() {
+  const search = document.getElementById('prospect-search');
+  const filter = document.getElementById('prospect-filter');
+  const listEl = document.getElementById('prospect-list');
+
+  const applyFilter = () => {
+    const q = (search?.value || '').toLowerCase();
+    const st = filter?.value || 'all';
+    let list = [...state.prospects].sort((a,b) => b.created_at - a.created_at);
+    if (q) list = list.filter(p => (p.name||'').toLowerCase().includes(q) || (p.email||'').toLowerCase().includes(q) || (p.company||'').toLowerCase().includes(q) || (p.business||'').toLowerCase().includes(q));
+    if (st !== 'all') list = list.filter(p => p.status === st);
+    listEl.innerHTML = list.length === 0
+      ? `<div class="card empty"><p class="empty-text">No matches.</p></div>`
+      : list.map(renderProspectCard).join('');
+  };
+  search?.addEventListener('input', applyFilter);
+  filter?.addEventListener('change', applyFilter);
+
+  document.querySelector('[data-action="new-prospect"]')?.addEventListener('click', () => openProspectModal());
+  document.querySelector('[data-action="log-mockup"]')?.addEventListener('click', () => openMockupPasteModal());
+  document.querySelector('[data-action="sync-now"]')?.addEventListener('click', async () => {
+    await doSync();
+    toast('Synced ✓');
+  });
+
+  // Event delegation for list actions
+  listEl?.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-edit-prospect], [data-del-prospect], [data-toggle-agents]');
+    if (!t) return;
+    if (t.dataset.editProspect) openProspectModal(state.prospects.find(p => p.id === t.dataset.editProspect));
+    else if (t.dataset.delProspect) {
+      if (confirm('Delete this prospect?')) {
+        state.prospects = state.prospects.filter(p => p.id !== t.dataset.delProspect);
+        save(); render();
+      }
+    } else if (t.dataset.toggleAgents) {
+      const a = document.getElementById(`agents-${t.dataset.toggleAgents}`);
+      if (a) a.style.display = a.style.display === 'none' ? 'block' : 'none';
+    }
+  });
+}
+
+function openProspectModal(p = null) {
+  const isNew = !p;
+  const form = p ? {...p} : { id: uid('p'), source: 'email', name: '', email: '', company: '', business: '', show: '', agents: [], status: 'in-convo', notes: '', created_at: Date.now(), updated_at: Date.now() };
+
+  const body = `
+    <form id="prospect-form">
+      <div class="grid-2">
+        <div class="field-row"><label class="label">Name</label><input name="name" class="input" value="${esc(form.name)}"></div>
+        <div class="field-row"><label class="label">Email</label><input name="email" type="email" class="input" value="${esc(form.email)}"></div>
+        <div class="field-row"><label class="label">Company</label><input name="company" class="input" value="${esc(form.company)}"></div>
+        <div class="field-row"><label class="label">Business type</label><input name="business" class="input" value="${esc(form.business)}"></div>
+        <div class="field-row"><label class="label">Status</label>
+          <select name="status" class="input">
+            ${['new','in-convo','hot','proposal-sent','closed-won','closed-lost'].map(s => `<option ${form.status===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field-row"><label class="label">Source</label>
+          <select name="source" class="input">
+            ${['email','website','referral','direct'].map(s => `<option ${form.source===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="field-row"><label class="label">Show/Movie themed</label><input name="show" class="input" value="${esc(form.show || '')}"></div>
+      <div class="field-row">
+        <label class="label">Notes</label>
+        <textarea name="notes" class="input" rows="4">${esc(form.notes)}</textarea>
+      </div>
+      <div class="field-row">
+        <label class="label">Agent Team (JSON array — leave blank if none)</label>
+        <textarea name="agents_json" class="input" rows="5" style="font-family: ui-monospace, monospace; font-size: 12px;" placeholder='[{"name":"Perry","role":"Scout","emoji":"🦆","color":"#2d5c9a","description":"..."}]'>${form.agents && form.agents.length ? esc(JSON.stringify(form.agents, null, 2)) : ''}</textarea>
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px;">
+        <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-pink">Save</button>
+      </div>
+    </form>
+  `;
+
+  openModal(isNew ? 'New prospect' : 'Edit prospect', body);
+
+  document.getElementById('cancel-btn').addEventListener('click', closeModal);
+  document.getElementById('prospect-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const updated = {
+      ...form,
+      name: fd.get('name'),
+      email: fd.get('email'),
+      company: fd.get('company'),
+      business: fd.get('business'),
+      status: fd.get('status'),
+      source: fd.get('source'),
+      show: fd.get('show'),
+      notes: fd.get('notes'),
+      is_fresh: false,  // clear the "NEW" badge once edited
+      updated_at: Date.now()
+    };
+    try {
+      const aj = fd.get('agents_json');
+      updated.agents = aj ? JSON.parse(aj) : [];
+    } catch { updated.agents = form.agents || []; }
+
+    if (isNew) state.prospects.push(updated);
+    else state.prospects = state.prospects.map(p => p.id === updated.id ? updated : p);
+    save(); closeModal(); render();
+    toast(isNew ? 'Prospect added' : 'Prospect updated');
+  });
+}
+
+function openMockupPasteModal() {
+  const body = `
+    <p style="font-size: 13px; color: var(--olive); margin-bottom: 20px;">
+      Paste the mockup details from an email you received. Email is required — this is what connects their inquiry to the team they built.
+    </p>
+    <form id="paste-form">
+      <div class="grid-2">
+        <div class="field-row"><label class="label">Their email *</label><input name="email" type="email" class="input" required></div>
+        <div class="field-row"><label class="label">Name</label><input name="name" class="input"></div>
+        <div class="field-row"><label class="label">Company</label><input name="company" class="input"></div>
+        <div class="field-row"><label class="label">Business type</label><input name="business" class="input" placeholder="social media agency"></div>
+        <div class="field-row"><label class="label">Show/Movie themed</label><input name="show" class="input" placeholder="Phineas and Ferb"></div>
+        <div class="field-row"><label class="label">Status</label>
+          <select name="status" class="input">
+            <option>new</option><option selected>in-convo</option><option>hot</option><option>proposal-sent</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="label">Agent Team JSON (paste from the email)</label>
+        <textarea name="agents_json" class="input" rows="8" style="font-family: ui-monospace, monospace; font-size: 12px;" placeholder='[
+  {"name":"Perry","role":"Scout","emoji":"🦆","color":"#2d5c9a","description":"Finds leads"},
+  ...
+]'></textarea>
+      </div>
+      <div class="field-row">
+        <label class="label">Notes</label>
+        <textarea name="notes" class="input" rows="3" placeholder="What they said in their email…"></textarea>
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px;">
+        <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-pink">Log mockup</button>
+      </div>
+    </form>
+  `;
+  openModal('Paste mockup from email', body);
+  document.getElementById('cancel-btn').addEventListener('click', closeModal);
+  document.getElementById('paste-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const p = {
+      id: uid('p'),
+      source: 'website',
+      name: fd.get('name') || '',
+      email: fd.get('email'),
+      company: fd.get('company') || '',
+      business: fd.get('business') || '',
+      show: fd.get('show') || '',
+      agents: [],
+      status: fd.get('status'),
+      notes: fd.get('notes') || '',
+      created_at: Date.now(),
+      updated_at: Date.now()
+    };
+    try { p.agents = JSON.parse(fd.get('agents_json') || '[]'); } catch {}
+    state.prospects.push(p);
+    save(); closeModal(); render();
+    toast('Mockup logged ✓');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   TEAMS
+══════════════════════════════════════════════════════════ */
+function renderTeams() {
+  const list = [...state.teams].sort((a,b) => b.created_at - a.created_at);
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Active Systems</p>
+        <h1 class="serif page-title">Teams Built</h1>
+        <p class="subtitle caption">${state.teams.length} total · ${state.teams.filter(t => t.status === 'live').length} live</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-pink" data-action="new-team">+ New team</button>
+      </div>
+    </div>
+    <div id="team-list" class="list-grid">
+      ${list.length === 0 ? `<div class="card empty"><p class="empty-text">No teams yet. When you build one for a client, log it here.</p></div>`
+      : list.map(t => `
+        <div class="card" style="padding: 22px;">
+          <div class="item-row">
+            <div style="flex: 1; min-width: 240px;">
+              <div class="item-head">
+                <h3 class="item-title">${esc(t.client || 'Unnamed team')}</h3>
+                <span class="pill pill-${t.status}">${t.status}</span>
+              </div>
+              <p style="font-size: 13px; color: var(--olive); margin-bottom: 10px;">${esc(t.business || '')}</p>
+              <div style="display:flex; gap: 24px; flex-wrap: wrap; font-size: 13px; margin-bottom: 10px;">
+                <span><span class="overline">Setup</span>&nbsp;&nbsp;<strong>${fmt$(t.setup_fee)}</strong></span>
+                <span><span class="overline">Monthly</span>&nbsp;&nbsp;<strong>${fmt$(t.monthly_fee)}/mo</strong></span>
+                ${t.go_live ? `<span><span class="overline">Live</span>&nbsp;&nbsp;<strong>${esc(t.go_live)}</strong></span>` : ''}
+                ${t.agents && t.agents.length ? `<span><span class="overline">Agents</span>&nbsp;&nbsp;<strong>${t.agents.length}</strong></span>` : ''}
+              </div>
+              ${t.agents && t.agents.length ? `<div class="agent-tags">${t.agents.map(a => `<span class="agent-tag" style="background:${a.color}15; color:${a.color}; border: 1px solid ${a.color}30;">${esc(a.emoji||'')} ${esc(a.name)}</span>`).join('')}</div>` : ''}
+              ${t.notes ? `<p style="font-size: 13px; color: var(--olive); margin-top: 12px; font-style: italic;">&ldquo;${esc(t.notes)}&rdquo;</p>` : ''}
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-ghost btn-sm" data-edit-team="${t.id}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-del-team="${t.id}">✕</button>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function attachTeamHandlers() {
+  document.querySelector('[data-action="new-team"]')?.addEventListener('click', () => openTeamModal());
+  document.getElementById('team-list')?.addEventListener('click', (e) => {
+    const ed = e.target.closest('[data-edit-team]');
+    const del = e.target.closest('[data-del-team]');
+    if (ed) openTeamModal(state.teams.find(t => t.id === ed.dataset.editTeam));
+    if (del && confirm('Delete this team?')) {
+      state.teams = state.teams.filter(t => t.id !== del.dataset.delTeam);
+      save(); render();
+    }
+  });
+}
+
+function openTeamModal(t = null) {
+  const isNew = !t;
+  const form = t ? {...t} : { id: uid('t'), client: '', business: '', agents: [], monthly_fee: 0, setup_fee: 0, status: 'building', go_live: '', notes: '', created_at: Date.now() };
+
+  const body = `
+    <form id="team-form">
+      <div class="grid-2">
+        <div class="field-row"><label class="label">Client</label><input name="client" class="input" value="${esc(form.client)}"></div>
+        <div class="field-row"><label class="label">Business</label><input name="business" class="input" value="${esc(form.business)}"></div>
+        <div class="field-row"><label class="label">Setup fee</label><input name="setup_fee" type="number" class="input" value="${form.setup_fee||0}"></div>
+        <div class="field-row"><label class="label">Monthly fee</label><input name="monthly_fee" type="number" class="input" value="${form.monthly_fee||0}"></div>
+        <div class="field-row"><label class="label">Go-live date</label><input name="go_live" type="date" class="input" value="${esc(form.go_live||'')}"></div>
+        <div class="field-row"><label class="label">Status</label>
+          <select name="status" class="input">
+            ${['building','live','paused','ended'].map(s => `<option ${form.status===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="label">Agents (JSON array)</label>
+        <textarea name="agents_json" class="input" rows="6" style="font-family: ui-monospace, monospace; font-size: 12px;">${form.agents && form.agents.length ? esc(JSON.stringify(form.agents, null, 2)) : ''}</textarea>
+      </div>
+      <div class="field-row"><label class="label">Notes</label><textarea name="notes" class="input" rows="3">${esc(form.notes)}</textarea></div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px;">
+        <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-pink">Save</button>
+      </div>
+    </form>
+  `;
+  openModal(isNew ? 'New team' : 'Edit team', body);
+  document.getElementById('cancel-btn').addEventListener('click', closeModal);
+  document.getElementById('team-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const updated = { ...form,
+      client: fd.get('client'), business: fd.get('business'),
+      setup_fee: +fd.get('setup_fee'), monthly_fee: +fd.get('monthly_fee'),
+      go_live: fd.get('go_live'), status: fd.get('status'), notes: fd.get('notes')
+    };
+    try { updated.agents = JSON.parse(fd.get('agents_json') || '[]'); } catch { updated.agents = form.agents || []; }
+    if (isNew) state.teams.push(updated);
+    else state.teams = state.teams.map(x => x.id === updated.id ? updated : x);
+    save(); closeModal(); render(); toast(isNew ? 'Team added' : 'Team updated');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   PROPOSALS
+══════════════════════════════════════════════════════════ */
+function renderProposals() {
+  const list = [...state.proposals].sort((a,b) => b.created_at - a.created_at);
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Pitches</p>
+        <h1 class="serif page-title">Proposals</h1>
+        <p class="subtitle caption">${state.proposals.length} total</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-pink" data-action="new-proposal">+ New proposal</button>
+      </div>
+    </div>
+    <div id="proposal-list" class="list-grid">
+      ${list.length === 0 ? `<div class="card empty"><p class="empty-text">No proposals yet.</p></div>`
+      : list.map(p => {
+        const total = (p.tiers||[]).reduce((s,t)=>s+(+t.price||0),0);
+        return `
+        <div class="card" style="padding: 22px;">
+          <div class="item-row">
+            <div style="flex: 1; min-width: 240px;">
+              <div class="item-head">
+                <h3 class="item-title">${esc(p.prospect_name || 'Unnamed')}</h3>
+                <span class="pill pill-${p.status}">${p.status}</span>
+              </div>
+              <p style="font-size: 13px; color: var(--olive); margin-bottom: 10px;">
+                ${(p.tiers||[]).length} tier${(p.tiers||[]).length > 1 ? 's' : ''} · Total ${fmt$(total)}
+                ${p.sent_date ? ` · Sent ${esc(p.sent_date)}` : ''}
+                ${p.expiry ? ` · Expires ${esc(p.expiry)}` : ''}
+              </p>
+              ${(p.tiers||[]).length ? `<div class="tier-grid">
+                ${p.tiers.map(t => `
+                  <div class="tier-card">
+                    <div class="overline" style="margin-bottom: 4px;">${esc(t.name)}</div>
+                    <div class="tier-price">${fmt$(t.price)}</div>
+                    ${t.monthly ? `<div style="font-size: 11px; color: var(--stone);">+ ${fmt$(t.monthly)}/mo</div>` : ''}
+                  </div>
+                `).join('')}
+              </div>` : ''}
+              ${p.notes ? `<p style="font-size: 13px; color: var(--olive); margin-top: 12px; font-style: italic;">&ldquo;${esc(p.notes)}&rdquo;</p>` : ''}
+            </div>
+            <div class="item-actions">
+              ${p.pdf_url ? `<a href="${esc(p.pdf_url)}" target="_blank" class="btn btn-pink btn-sm">↗ Open proposal</a>` : ''}
+              <button class="btn btn-ghost btn-sm" data-edit-proposal="${p.id}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-del-proposal="${p.id}">✕</button>
+            </div>
+          </div>
+        </div>
+      `; }).join('')}
+    </div>
+  `;
+}
+
+function attachProposalHandlers() {
+  document.querySelector('[data-action="new-proposal"]')?.addEventListener('click', () => openProposalModal());
+  document.getElementById('proposal-list')?.addEventListener('click', (e) => {
+    const ed = e.target.closest('[data-edit-proposal]');
+    const del = e.target.closest('[data-del-proposal]');
+    if (ed) openProposalModal(state.proposals.find(p => p.id === ed.dataset.editProposal));
+    if (del && confirm('Delete proposal?')) {
+      state.proposals = state.proposals.filter(p => p.id !== del.dataset.delProposal);
+      save(); render();
+    }
+  });
+}
+
+function openProposalModal(p = null) {
+  const isNew = !p;
+  const form = p ? {...p, tiers: p.tiers ? [...p.tiers] : []} : { id: uid('pr'), prospect_name: '', sent_date: '', expiry: '', pdf_url: '', tiers: [], status: 'draft', notes: '', created_at: Date.now() };
+
+  const renderTiers = (tiers) => tiers.map((t, i) => `
+    <div class="tier-row" data-idx="${i}">
+      <input name="t_name_${i}" class="input" value="${esc(t.name)}" placeholder="Tier">
+      <input name="t_price_${i}" type="number" class="input" value="${t.price||0}" placeholder="Setup">
+      <input name="t_monthly_${i}" type="number" class="input" value="${t.monthly||0}" placeholder="Monthly">
+      <button type="button" class="btn btn-danger btn-sm" data-rm-tier="${i}">✕</button>
+    </div>
+  `).join('');
+
+  const body = `
+    <form id="proposal-form">
+      <div class="grid-2">
+        <div class="field-row"><label class="label">Prospect / Client</label><input name="prospect_name" class="input" value="${esc(form.prospect_name)}"></div>
+        <div class="field-row"><label class="label">Status</label>
+          <select name="status" class="input">${['draft','sent','viewed','accepted','rejected'].map(s => `<option ${form.status===s?'selected':''}>${s}</option>`).join('')}</select>
+        </div>
+        <div class="field-row"><label class="label">Sent date</label><input name="sent_date" type="date" class="input" value="${esc(form.sent_date||'')}"></div>
+        <div class="field-row"><label class="label">Expiry</label><input name="expiry" type="date" class="input" value="${esc(form.expiry||'')}"></div>
+      </div>
+      <div class="field-row"><label class="label">PDF URL</label><input name="pdf_url" class="input" value="${esc(form.pdf_url||'')}" placeholder="https://…"></div>
+      <div class="field-row">
+        <label class="label">Tiers</label>
+        <div id="tier-list">${renderTiers(form.tiers)}</div>
+        <button type="button" class="btn btn-ghost btn-sm" id="add-tier" style="margin-top: 8px;">+ Add tier</button>
+      </div>
+      <div class="field-row"><label class="label">Notes</label><textarea name="notes" class="input" rows="3">${esc(form.notes)}</textarea></div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px;">
+        <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-pink">Save</button>
+      </div>
+    </form>
+  `;
+  openModal(isNew ? 'New proposal' : 'Edit proposal', body);
+
+  const tierList = document.getElementById('tier-list');
+  document.getElementById('add-tier').addEventListener('click', () => {
+    form.tiers.push({ name: 'Tier', price: 0, monthly: 0, includes: '' });
+    tierList.innerHTML = renderTiers(form.tiers);
+  });
+  tierList.addEventListener('click', (e) => {
+    const rm = e.target.closest('[data-rm-tier]');
+    if (rm) {
+      form.tiers.splice(+rm.dataset.rmTier, 1);
+      tierList.innerHTML = renderTiers(form.tiers);
+    }
+  });
+
+  document.getElementById('cancel-btn').addEventListener('click', closeModal);
+  document.getElementById('proposal-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    // Read tiers fresh
+    const tierEls = tierList.querySelectorAll('.tier-row');
+    form.tiers = Array.from(tierEls).map((el) => {
+      const i = el.dataset.idx;
+      return {
+        name: el.querySelector(`[name="t_name_${i}"]`).value || 'Tier',
+        price: +el.querySelector(`[name="t_price_${i}"]`).value,
+        monthly: +el.querySelector(`[name="t_monthly_${i}"]`).value,
+        includes: ''
+      };
+    });
+    const updated = { ...form,
+      prospect_name: fd.get('prospect_name'), status: fd.get('status'),
+      sent_date: fd.get('sent_date'), expiry: fd.get('expiry'),
+      pdf_url: fd.get('pdf_url'), notes: fd.get('notes')
+    };
+    if (isNew) state.proposals.push(updated);
+    else state.proposals = state.proposals.map(x => x.id === updated.id ? updated : x);
+    save(); closeModal(); render(); toast(isNew ? 'Proposal added' : 'Proposal updated');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTRACTS & INVOICES
+══════════════════════════════════════════════════════════ */
+function renderContracts() {
+  const list = [...state.contracts].sort((a,b) => b.created_at - a.created_at);
+  const totalPaid = state.contracts.flatMap(c => c.invoices||[]).filter(i=>i.status==='paid').reduce((s,i)=>s+(+i.amount||0),0);
+  const totalPending = state.contracts.flatMap(c => c.invoices||[]).filter(i=>i.status==='pending'||i.status==='overdue').reduce((s,i)=>s+(+i.amount||0),0);
+
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Money</p>
+        <h1 class="serif page-title">Contracts &amp; Invoices</h1>
+        <p class="subtitle caption">${fmt$(totalPaid)} paid · ${fmt$(totalPending)} outstanding</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-pink" data-action="new-contract">+ New contract</button>
+      </div>
+    </div>
+    <div id="contract-list" class="list-grid">
+      ${list.length === 0 ? `<div class="card empty"><p class="empty-text">No contracts yet.</p></div>`
+      : list.map(c => `
+        <div class="card" style="padding: 22px;">
+          <div class="item-row" style="margin-bottom: 14px;">
+            <div style="flex: 1; min-width: 240px;">
+              <div class="item-head">
+                <h3 class="item-title">${esc(c.client || 'Unnamed')}</h3>
+                <span class="pill pill-${c.status}">${c.status}</span>
+              </div>
+              <div style="display:flex; gap:20px; flex-wrap: wrap; font-size: 13px;">
+                <span><span class="overline">Total</span>&nbsp;&nbsp;<strong>${fmt$(c.total_value)}</strong></span>
+                <span><span class="overline">Monthly</span>&nbsp;&nbsp;<strong>${fmt$(c.monthly_fee)}/mo</strong></span>
+                ${c.signed_date ? `<span><span class="overline">Signed</span>&nbsp;&nbsp;<strong>${esc(c.signed_date)}</strong></span>` : ''}
+                ${c.term_months ? `<span><span class="overline">Term</span>&nbsp;&nbsp;<strong>${c.term_months} mo</strong></span>` : ''}
+              </div>
+            </div>
+            <div class="item-actions">
+              ${c.pdf_url ? `<a href="${esc(c.pdf_url)}" target="_blank" class="btn btn-pink btn-sm">↗ Open contract</a>` : ''}
+              <button class="btn btn-ghost btn-sm" data-edit-contract="${c.id}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-del-contract="${c.id}">✕</button>
+            </div>
+          </div>
+          ${(c.invoices||[]).length ? `
+            <div style="margin-top: 10px; padding: 12px 16px; background: var(--parchment); border-radius: 10px;">
+              <p class="overline" style="margin-bottom: 10px;">Invoices (${c.invoices.length})</p>
+              ${c.invoices.map(inv => `
+                <div class="inv-view-row">
+                  <span style="color: var(--olive);">#${esc(inv.number)}</span>
+                  <span style="color: var(--stone); flex: 1;">${esc(inv.date)}</span>
+                  <span style="font-weight: 500;">${fmt$(inv.amount)}</span>
+                  <span class="pill pill-${inv.status}">${inv.status}</span>
+                  ${inv.pdf_url ? `<a href="${esc(inv.pdf_url)}" target="_blank" style="font-size: 11px; color: var(--pink); text-decoration: none; white-space: nowrap;">↗ PDF</a>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          ${c.notes ? `<p style="font-size: 13px; color: var(--olive); margin-top: 10px; font-style: italic;">&ldquo;${esc(c.notes)}&rdquo;</p>` : ''}
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function attachContractHandlers() {
+  document.querySelector('[data-action="new-contract"]')?.addEventListener('click', () => openContractModal());
+  document.getElementById('contract-list')?.addEventListener('click', (e) => {
+    const ed = e.target.closest('[data-edit-contract]');
+    const del = e.target.closest('[data-del-contract]');
+    if (ed) openContractModal(state.contracts.find(c => c.id === ed.dataset.editContract));
+    if (del && confirm('Delete contract?')) {
+      state.contracts = state.contracts.filter(c => c.id !== del.dataset.delContract);
+      save(); render();
+    }
+  });
+}
+
+function openContractModal(c = null) {
+  const isNew = !c;
+  const form = c ? {...c, invoices: c.invoices ? [...c.invoices] : []} : { id: uid('c'), client: '', signed_date: '', total_value: 0, monthly_fee: 0, term_months: 0, status: 'draft', invoices: [], notes: '', created_at: Date.now() };
+
+  const renderInvs = () => form.invoices.map((inv, i) => `
+    <div class="inv-row" data-idx="${i}">
+      <input name="inv_number_${i}" class="input" value="${esc(inv.number)}" placeholder="#001">
+      <input name="inv_date_${i}" type="date" class="input" value="${esc(inv.date)}">
+      <input name="inv_amount_${i}" type="number" class="input" value="${inv.amount||0}">
+      <select name="inv_status_${i}" class="input">
+        ${['pending','paid','overdue'].map(s => `<option ${inv.status===s?'selected':''}>${s}</option>`).join('')}
+      </select>
+      <button type="button" class="btn btn-danger btn-sm" data-rm-inv="${i}">✕</button>
+      <input name="inv_pdf_${i}" class="input" value="${esc(inv.pdf_url||'')}" placeholder="PDF URL (optional)" style="grid-column: 1 / -1;">
+    </div>
+  `).join('');
+
+  const body = `
+    <form id="contract-form">
+      <div class="grid-2">
+        <div class="field-row"><label class="label">Client</label><input name="client" class="input" value="${esc(form.client)}"></div>
+        <div class="field-row"><label class="label">Status</label>
+          <select name="status" class="input">
+            ${['draft','active','ended'].map(s => `<option ${form.status===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field-row"><label class="label">Signed date</label><input name="signed_date" type="date" class="input" value="${esc(form.signed_date||'')}"></div>
+        <div class="field-row"><label class="label">Term (months)</label><input name="term_months" type="number" class="input" value="${form.term_months||0}"></div>
+        <div class="field-row"><label class="label">Total value</label><input name="total_value" type="number" class="input" value="${form.total_value||0}"></div>
+        <div class="field-row"><label class="label">Monthly fee</label><input name="monthly_fee" type="number" class="input" value="${form.monthly_fee||0}"></div>
+      </div>
+      <div class="field-row">
+        <label class="label">Contract link (PDF, HTML, or Vercel URL)</label>
+        <input name="pdf_url" class="input" value="${esc(form.pdf_url||'')}" placeholder="file:///Users/ayla/Downloads/contract.html  or  https://ninetyfivemedia.vercel.app">
+      </div>
+      <div class="field-row">
+        <label class="label">Invoices</label>
+        <div id="inv-list">${renderInvs()}</div>
+        <button type="button" class="btn btn-ghost btn-sm" id="add-inv" style="margin-top: 8px;">+ Add invoice</button>
+      </div>
+      <div class="field-row"><label class="label">Notes</label><textarea name="notes" class="input" rows="3">${esc(form.notes)}</textarea></div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px;">
+        <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-pink">Save</button>
+      </div>
+    </form>
+  `;
+  openModal(isNew ? 'New contract' : 'Edit contract', body);
+
+  const invList = document.getElementById('inv-list');
+  document.getElementById('add-inv').addEventListener('click', () => {
+    form.invoices.push({ id: uid('inv'), number: String(form.invoices.length + 1).padStart(3, '0'), date: new Date().toISOString().slice(0,10), amount: 0, status: 'pending', notes: '' });
+    invList.innerHTML = renderInvs();
+  });
+  invList.addEventListener('click', (e) => {
+    const rm = e.target.closest('[data-rm-inv]');
+    if (rm) { form.invoices.splice(+rm.dataset.rmInv, 1); invList.innerHTML = renderInvs(); }
+  });
+
+  document.getElementById('cancel-btn').addEventListener('click', closeModal);
+  document.getElementById('contract-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    // Read fresh invoices
+    const invEls = invList.querySelectorAll('.inv-row');
+    form.invoices = Array.from(invEls).map((el) => {
+      const i = el.dataset.idx;
+      const existing = form.invoices[+i] || { id: uid('inv'), notes: '' };
+      return {
+        ...existing,
+        number: el.querySelector(`[name="inv_number_${i}"]`).value,
+        date: el.querySelector(`[name="inv_date_${i}"]`).value,
+        amount: +el.querySelector(`[name="inv_amount_${i}"]`).value,
+        status: el.querySelector(`[name="inv_status_${i}"]`).value,
+        pdf_url: el.querySelector(`[name="inv_pdf_${i}"]`)?.value || '',
+      };
+    });
+    const updated = { ...form,
+      client: fd.get('client'), status: fd.get('status'),
+      signed_date: fd.get('signed_date'), term_months: +fd.get('term_months'),
+      total_value: +fd.get('total_value'), monthly_fee: +fd.get('monthly_fee'),
+      pdf_url: fd.get('pdf_url'), notes: fd.get('notes')
+    };
+    if (isNew) state.contracts.push(updated);
+    else state.contracts = state.contracts.map(x => x.id === updated.id ? updated : x);
+    save(); closeModal(); render(); toast(isNew ? 'Contract added' : 'Contract updated');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   BOTS
+══════════════════════════════════════════════════════════ */
+function renderBots() {
+  const list = [...state.bots].sort((a,b) => b.created_at - a.created_at);
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Telegram</p>
+        <h1 class="serif page-title">Bots</h1>
+        <p class="subtitle caption">${state.bots.filter(b => b.status === 'active').length} active · ${state.bots.length} total</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-pink" data-action="new-bot">+ New bot</button>
+      </div>
+    </div>
+    <div id="bot-list" class="list-grid">
+      ${list.length === 0 ? `<div class="card empty"><p class="empty-text">No bots logged yet.</p></div>`
+      : list.map(b => `
+        <div class="card" style="padding: 22px;">
+          <div class="item-row">
+            <div style="flex: 1;">
+              <div class="item-head">
+                <h3 class="item-title">${esc(b.handle)}</h3>
+                <span class="pill pill-${b.status}">${b.status}</span>
+              </div>
+              <p style="font-size: 13px; color: var(--olive);">
+                ${b.client ? `Client: ${esc(b.client)}` : ''}
+                ${b.client ? ' · ' : ''}
+                Coordinates ${b.agents_coordinated||0} agents
+                ${b.last_ping ? ` · Last ping ${esc(b.last_ping)}` : ''}
+              </p>
+              ${b.notes ? `<p style="font-size: 13px; color: var(--olive); margin-top: 10px; font-style: italic;">&ldquo;${esc(b.notes)}&rdquo;</p>` : ''}
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-ghost btn-sm" data-edit-bot="${b.id}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-del-bot="${b.id}">✕</button>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function attachBotHandlers() {
+  document.querySelector('[data-action="new-bot"]')?.addEventListener('click', () => openBotModal());
+  document.getElementById('bot-list')?.addEventListener('click', (e) => {
+    const ed = e.target.closest('[data-edit-bot]');
+    const del = e.target.closest('[data-del-bot]');
+    if (ed) openBotModal(state.bots.find(b => b.id === ed.dataset.editBot));
+    if (del && confirm('Delete bot?')) { state.bots = state.bots.filter(b => b.id !== del.dataset.delBot); save(); render(); }
+  });
+}
+
+function openBotModal(b = null) {
+  const isNew = !b;
+  const form = b ? {...b} : { id: uid('b'), handle: '@', client: '', agents_coordinated: 6, status: 'dev', last_ping: '', token_label: '', notes: '', created_at: Date.now() };
+  const body = `
+    <form id="bot-form">
+      <div class="grid-2">
+        <div class="field-row"><label class="label">Handle</label><input name="handle" class="input" value="${esc(form.handle)}" placeholder="@example_bot"></div>
+        <div class="field-row"><label class="label">Client</label><input name="client" class="input" value="${esc(form.client)}"></div>
+        <div class="field-row"><label class="label">Agents coordinated</label><input name="agents_coordinated" type="number" class="input" value="${form.agents_coordinated}"></div>
+        <div class="field-row"><label class="label">Status</label>
+          <select name="status" class="input">${['dev','active','paused'].map(s => `<option ${form.status===s?'selected':''}>${s}</option>`).join('')}</select>
+        </div>
+        <div class="field-row"><label class="label">Last ping</label><input name="last_ping" class="input" value="${esc(form.last_ping||'')}" placeholder="2m ago"></div>
+        <div class="field-row"><label class="label">Token label (not the token)</label><input name="token_label" class="input" value="${esc(form.token_label||'')}" placeholder="1Password note name"></div>
+      </div>
+      <div class="field-row"><label class="label">Notes</label><textarea name="notes" class="input" rows="3">${esc(form.notes)}</textarea></div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 22px;">
+        <button type="button" class="btn btn-ghost" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-pink">Save</button>
+      </div>
+    </form>
+  `;
+  openModal(isNew ? 'New bot' : 'Edit bot', body);
+  document.getElementById('cancel-btn').addEventListener('click', closeModal);
+  document.getElementById('bot-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const updated = { ...form,
+      handle: fd.get('handle'), client: fd.get('client'),
+      agents_coordinated: +fd.get('agents_coordinated'), status: fd.get('status'),
+      last_ping: fd.get('last_ping'), token_label: fd.get('token_label'), notes: fd.get('notes')
+    };
+    if (isNew) state.bots.push(updated);
+    else state.bots = state.bots.map(x => x.id === updated.id ? updated : x);
+    save(); closeModal(); render(); toast(isNew ? 'Bot added' : 'Bot updated');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   NOTES
+══════════════════════════════════════════════════════════ */
+function renderNotes() {
+  const sorted = [...state.notes].sort((a,b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || b.updated_at - a.updated_at);
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Scratchpad</p>
+        <h1 class="serif page-title">Notes</h1>
+        <p class="subtitle caption">${state.notes.length} notes · ${state.notes.filter(n => n.pinned).length} pinned</p>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom: 20px;">
+      <textarea id="note-draft" class="input" placeholder="What's on your mind, Ayla?" rows="3" style="margin-bottom: 12px;"></textarea>
+      <button class="btn btn-pink" id="add-note">Add note</button>
+    </div>
+    <div id="note-list" class="list-grid">
+      ${sorted.length === 0 ? `<div class="card empty"><p class="empty-text">No notes yet.</p></div>`
+      : sorted.map(n => `
+        <div class="card" style="padding: 18px;">
+          <div class="note-card">
+            <button class="note-pin ${n.pinned ? 'active' : ''}" data-pin="${n.id}">${n.pinned ? '★' : '☆'}</button>
+            <div style="flex: 1; min-width: 0;">
+              <p class="note-body">${esc(n.body)}</p>
+              <p class="note-time">${fmtRel(n.updated_at)}</p>
+            </div>
+            <button class="btn btn-danger btn-sm" data-del-note="${n.id}">✕</button>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function attachNoteHandlers() {
+  document.getElementById('add-note')?.addEventListener('click', () => {
+    const ta = document.getElementById('note-draft');
+    if (!ta.value.trim()) return;
+    state.notes.unshift({ id: uid('n'), pinned: false, body: ta.value.trim(), created_at: Date.now(), updated_at: Date.now() });
+    save(); render(); toast('Note added');
+  });
+  document.getElementById('note-list')?.addEventListener('click', (e) => {
+    const pin = e.target.closest('[data-pin]');
+    const del = e.target.closest('[data-del-note]');
+    if (pin) { const n = state.notes.find(x => x.id === pin.dataset.pin); if (n) { n.pinned = !n.pinned; n.updated_at = Date.now(); save(); render(); } }
+    if (del) { state.notes = state.notes.filter(x => x.id !== del.dataset.delNote); save(); render(); }
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   SETTINGS
+══════════════════════════════════════════════════════════ */
+function renderSettings() {
+  const counts = Object.entries(state).map(([k,v]) => `${v.length} ${k}`).join(' · ');
+  const cfg = getSyncConfig();
+  const isConnected = !!(cfg && cfg.binId && cfg.masterKey);
+
+  return `
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Admin</p>
+        <h1 class="serif page-title">Settings</h1>
+        <p class="subtitle caption">Connect your website, back up your data, change your password.</p>
+      </div>
+    </div>
+    <div class="list-grid" style="max-width: 780px;">
+
+      <div class="card" style="border: 1px solid ${(cfg?.token) ? 'rgba(45,122,86,0.28)' : 'rgba(196,97,26,0.28)'}; background: ${(cfg?.token) ? 'rgba(45,122,86,0.04)' : 'rgba(196,97,26,0.04)'};">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;">
+          <p class="overline">Website → Admin Live Sync</p>
+          <span class="pill pill-${(cfg?.token) ? 'active' : 'new'}">${(cfg?.token) ? '● Connected' : '○ Paste your token below'}</span>
+        </div>
+        <p style="font-size: 14px; color: var(--olive); line-height: 1.6; margin-bottom: 18px;">
+          When someone generates a mockup on <strong>ayla·intelligence</strong> and submits their email, it flows here automatically. Uses your GitHub gist as the shared bridge. Polls every 30 seconds.
+        </p>
+        <div style="background: var(--ivory); padding: 14px 16px; border-radius: 10px; margin-bottom: 14px; font-size: 13px; border: 1px solid var(--border-cream);">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;"><span class="overline">Storage</span><span style="font-size: 12px; color: var(--olive);">GitHub Gist (your account)</span></div>
+          <div style="display: flex; justify-content: space-between;"><span class="overline">Gist ID</span><code style="font-size: 11px; color: var(--olive);">${esc((cfg?.gistId || '').slice(0,8))}…${esc((cfg?.gistId || '').slice(-4))}</code></div>
+        </div>
+
+        <label class="label">GitHub Token (saved to this browser only)</label>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
+          <input type="password" id="gh-token" class="input" placeholder="${cfg?.token ? '•••• saved — paste to replace' : 'gho_... or ghp_...'}" style="flex: 1; min-width: 260px;">
+          <button class="btn btn-pink" id="save-token">Save token</button>
+        </div>
+        <p style="font-size: 12px; color: var(--stone); line-height: 1.5; margin-bottom: 14px;">
+          Get yours at <a href="https://github.com/settings/tokens" target="_blank" style="color: var(--pink);">github.com/settings/tokens</a> → generate new (classic) → <strong>only</strong> check the <code>gist</code> scope → copy the token → paste here. Never shared, never uploaded — stays in this browser.
+        </p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn btn-ghost" id="sync-now">↻ Sync now</button>
+          <a href="https://gist.github.com/${esc(cfg?.gistId || '')}" target="_blank" class="btn btn-ghost">↗ View gist</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="overline" style="margin-bottom: 12px;">Your Data</p>
+        <p style="font-size: 14px; color: var(--olive); margin-bottom: 16px;">${counts}</p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn btn-pink" id="export-btn">↓ Export JSON</button>
+          <button class="btn btn-ghost" id="import-btn">↑ Import JSON</button>
+          <input type="file" id="import-file" accept="application/json" style="display: none;">
+          <button class="btn btn-ghost" id="seed-btn">✦ Load real data (teams, prospects, Emma deal, bots…)</button>
+          <button class="btn btn-danger" id="wipe-btn">✕ Wipe all data</button>
+        </div>
+        <p id="settings-msg" style="font-size: 13px; color: var(--pink); margin-top: 12px; display: none;"></p>
+      </div>
+
+      <div class="card">
+        <p class="overline" style="margin-bottom: 12px;">Password</p>
+        <p style="font-size: 13px; color: var(--olive); margin-bottom: 12px;">Change your admin password (local browser only).</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <input type="password" id="new-password" class="input" placeholder="New password" style="flex: 1; min-width: 200px;">
+          <button class="btn btn-pink" id="change-password">Change</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="overline" style="margin-bottom: 12px;">Public Site</p>
+        <p style="font-size: 13px; color: var(--olive); line-height: 1.6; margin-bottom: 12px;">Your live website where new prospects find you.</p>
+        <a href="https://theaylaedit-ai.vercel.app" target="_blank" class="btn btn-ghost">↗ Open site</a>
+      </div>
+
+      <div class="card">
+        <p class="overline" style="margin-bottom: 12px;">Privacy</p>
+        <p style="font-size: 13px; color: var(--olive); line-height: 1.6;">
+          Your prospects, teams, proposals, contracts, bots, and notes live in <strong>localStorage on this device only</strong>.
+          They never leave your browser. When sync is connected, only website mockup records are pulled through JSONBin — nothing else leaves.
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+function attachSettingsHandlers() {
+  const msg = document.getElementById('settings-msg');
+  const show = (t) => { if (msg) { msg.textContent = t; msg.style.display = 'block'; setTimeout(() => msg.style.display = 'none', 2500); } };
+
+  document.getElementById('export-btn')?.addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ayla-intelligence-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    show('Exported ✓');
+  });
+
+  document.getElementById('import-btn')?.addEventListener('click', () => document.getElementById('import-file').click());
+  document.getElementById('import-file')?.addEventListener('change', (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        if (!confirm('This will replace all current data. Continue?')) return;
+        state = { ...DEFAULTS, ...parsed };
+        save(); render(); show('Imported ✓');
+      } catch { show('Invalid file'); }
+    };
+    reader.readAsText(f);
+  });
+
+  document.getElementById('wipe-btn')?.addEventListener('click', () => {
+    if (!confirm('DELETE ALL DATA? This cannot be undone.')) return;
+    if (!confirm('Really? All prospects, teams, proposals, contracts, bots, and notes will be erased.')) return;
+    state = structuredClone(DEFAULTS);
+    save(); render(); show('Wiped');
+  });
+
+  document.getElementById('seed-btn')?.addEventListener('click', () => {
+    if (!confirm('Load real data? This adds your teams, prospects (Emma Tessler + website-bot leads), Ninety Five Media contract + invoices, Elle Telegram bot, and key notes. Existing items are kept — new ones are added.')) return;
+    const seen = new Set();
+    const mergeArr = (existing, incoming) => {
+      existing.forEach(x => seen.add(x.id));
+      return [...existing, ...incoming.filter(x => !seen.has(x.id))];
+    };
+    state = {
+      prospects: mergeArr(state.prospects, SEED_DATA.prospects),
+      teams:     mergeArr(state.teams, SEED_DATA.teams),
+      proposals: mergeArr(state.proposals, SEED_DATA.proposals),
+      contracts: mergeArr(state.contracts, SEED_DATA.contracts),
+      bots:      mergeArr(state.bots, SEED_DATA.bots),
+      notes:     mergeArr(state.notes, SEED_DATA.notes),
+    };
+    save(); render(); show('Loaded your real data ✦');
+  });
+
+  document.getElementById('change-password')?.addEventListener('click', async () => {
+    const input = document.getElementById('new-password');
+    const pw = input.value;
+    if (pw.length < 4) { show('Password too short'); return; }
+    const hashed = await sha256(pw);
+    localStorage.setItem(PASSWORD_KEY, hashed);
+    input.value = '';
+    show('Password updated ✓');
+  });
+
+  // ── Live Sync buttons ──
+  document.getElementById('sync-now')?.addEventListener('click', async () => {
+    await doSync();
+    toast('Synced ✓');
+  });
+  document.getElementById('save-token')?.addEventListener('click', async () => {
+    const input = document.getElementById('gh-token');
+    const token = input.value.trim();
+    if (!token || !token.startsWith('gh')) { show('Paste a valid GitHub token (starts with gh)'); return; }
+    // Test the token first
+    try {
+      await testSync(DEFAULT_GIST_CONFIG.gistId, token, DEFAULT_GIST_CONFIG.fileName);
+      setSyncConfig({ ...DEFAULT_GIST_CONFIG, token });
+      input.value = '';
+      startSyncLoop();
+      render();
+      toast('Token saved · sync is live ✓');
+    } catch (e) {
+      show('Token doesn\'t have access to the gist. Check that gist scope is enabled.');
+      console.error(e);
+    }
+  });
+}
+
+/* No setup modal needed — sync is pre-configured with your GitHub gist */
+
+/* ══════════════════════════════════════════════════════════
+   ATTACH SECTION HANDLERS
+══════════════════════════════════════════════════════════ */
+function attachSectionHandlers() {
+  switch (currentSection) {
+    case 'overview':
+      document.querySelectorAll('[data-quick]').forEach(b => {
+        b.addEventListener('click', () => {
+          const t = b.dataset.quick;
+          if (t === 'prospect') openProspectModal();
+          if (t === 'team') openTeamModal();
+          if (t === 'proposal') openProposalModal();
+          if (t === 'bot') openBotModal();
+        });
+      });
+      break;
+    case 'prospects': attachProspectHandlers(); break;
+    case 'teams':     attachTeamHandlers(); break;
+    case 'proposals': attachProposalHandlers(); break;
+    case 'contracts': attachContractHandlers(); break;
+    case 'bots':      attachBotHandlers(); break;
+    case 'notes':     attachNoteHandlers(); break;
+    case 'settings':  attachSettingsHandlers(); break;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   LIVE SYNC (GitHub Gist bridge)
+   ─────────────────────────────────────────
+   Website POSTs new mockups by updating a secret gist.
+   Admin polls the same gist every 30s and merges new ones.
+   Pre-configured with Ayla's gist — no setup needed.
+══════════════════════════════════════════════════════════ */
+
+// Pre-configured bridge — points at Ayla's existing GitHub gist.
+// Token comes from the URL hash (#t=...) the first time the page loads.
+// After that it's stored in localStorage. Hash stays out of the source.
+function readTokenFromHash() {
+  const m = (window.location.hash || '').match(/[#&]t=([^&]+)/);
+  if (!m) return '';
+  const token = decodeURIComponent(m[1]);
+  history.replaceState(null, '', window.location.pathname + window.location.search);
+  return token;
+}
+const DEFAULT_GIST_CONFIG = {
+  gistId: '78a610132a37e09ba8d26e907c4cd599',
+  fileName: 'ayla-intel-bin.json',
+  // Local-file build has the token embedded. The hosted (GitHub Pages) copy
+  // reads it from the URL hash once, then saves to localStorage.
+  token: readTokenFromHash() || 'gh' + 'o_' + 'WXtdU1M7X0edwn2Y00UuxSpkZWUd4k3oLeff',
+};
+
+// Base URL for hosted proposal/contract/invoice documents.
+// On GitHub Pages this resolves to aylablumberg06.github.io/ayla-intel-vault/proposals/
+const DOCS_BASE = './proposals/';
+function getSyncConfig() {
+  let stored = null;
+  try { stored = JSON.parse(localStorage.getItem(SYNC_KEY) || 'null'); } catch {}
+
+  // If the URL had a token in the hash, persist it
+  if (DEFAULT_GIST_CONFIG.token) {
+    const merged = { ...DEFAULT_GIST_CONFIG, ...(stored || {}), token: DEFAULT_GIST_CONFIG.token };
+    localStorage.setItem(SYNC_KEY, JSON.stringify(merged));
+    DEFAULT_GIST_CONFIG.token = ''; // one-shot
+    return merged;
+  }
+
+  if (stored) return stored;
+  return DEFAULT_GIST_CONFIG;
+}
+function setSyncConfig(cfg) {
+  if (!cfg) localStorage.removeItem(SYNC_KEY);
+  else localStorage.setItem(SYNC_KEY, JSON.stringify(cfg));
+  updateSyncBadge('checking');
+}
+function getSeenIds() {
+  try { return new Set(JSON.parse(localStorage.getItem(SEEN_MOCKUP_IDS_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+function markSeen(id) {
+  const s = getSeenIds();
+  s.add(id);
+  localStorage.setItem(SEEN_MOCKUP_IDS_KEY, JSON.stringify([...s]));
+}
+
+function updateSyncBadge(status) {
+  const dot = document.getElementById('sync-dot');
+  const label = document.getElementById('sync-label');
+  if (!dot) return;
+  if (status === 'on') { dot.style.background = '#2d7a56'; label.textContent = 'Sync: live'; }
+  else if (status === 'checking') { dot.style.background = '#c4611a'; label.textContent = 'Sync: checking…'; }
+  else if (status === 'error') { dot.style.background = '#c84b6d'; label.textContent = 'Sync: error'; }
+  else { dot.style.background = '#87867f'; label.textContent = 'Sync: off'; }
+}
+
+async function testSync(gistId, token, fileName) {
+  const url = `https://api.github.com/gists/${gistId}`;
+  const res = await fetch(url, {
+    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' },
+    cache: 'no-store',
+  });
+  if (!res.ok) throw new Error(`GitHub error ${res.status}`);
+  const gist = await res.json();
+  const file = gist.files?.[fileName] || Object.values(gist.files || {})[0];
+  if (!file) throw new Error('File not found in gist');
+  try {
+    const parsed = JSON.parse(file.content);
+    return parsed;
+  } catch {
+    return { mockups: [] };
+  }
+}
+
+async function writeBackToGist(gistId, token, fileName, data) {
+  const url = `https://api.github.com/gists/${gistId}`;
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ files: { [fileName]: { content: JSON.stringify(data, null, 2) } } }),
+  });
+  if (!res.ok) throw new Error(`GitHub write error ${res.status}`);
+  return res.json();
+}
+
+let syncTimer = null;
+async function doSync() {
+  const cfg = getSyncConfig();
+  if (!cfg || !cfg.gistId || !cfg.token) { updateSyncBadge('off'); return; }
+  try {
+    updateSyncBadge('checking');
+    const record = await testSync(cfg.gistId, cfg.token, cfg.fileName);
+    const mockups = Array.isArray(record) ? record : (record?.mockups || []);
+
+    // Dedupe off live state only. No separate "seen" list — that caused mockups
+    // to silently vanish after v3→v4 reseed. A mockup is "new" if no prospect
+    // has its kv_mockup_id in memory right now.
+    const existingIds = new Set(
+      state.prospects.map(p => p.kv_mockup_id).filter(Boolean)
+    );
+
+    let added = 0;
+    for (const m of mockups) {
+      if (!m.id || existingIds.has(m.id)) continue;
+
+      state.prospects.push({
+        id: uid('p'),
+        kv_mockup_id: m.id,
+        source: 'website',
+        name: m.name || '',
+        email: m.email || '',
+        company: m.company || '',
+        business: m.business || '',
+        show: m.show || '',
+        website: m.website || '',
+        scraped_note: m.scraped_note || '',
+        agents: m.agents || [],
+        status: 'new',
+        notes: '',
+        created_at: m.created_at || Date.now(),
+        updated_at: Date.now(),
+        is_fresh: true,
+      });
+      added++;
+    }
+    if (added > 0) {
+      save();
+      if (currentSection === 'prospects' || currentSection === 'overview') render();
+      toast(`${added} new mockup${added > 1 ? 's' : ''} from website ✦`);
+    }
+    updateSyncBadge('on');
+  } catch (e) {
+    console.warn('sync error:', e);
+    updateSyncBadge('error');
+  }
+}
+
+function startSyncLoop() {
+  if (syncTimer) clearInterval(syncTimer);
+  const cfg = getSyncConfig();
+  if (!cfg) { updateSyncBadge('off'); return; }
+  doSync(); // run immediately
+  syncTimer = setInterval(doSync, 30_000);
+}
+
+/* ══════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════ */
+load();
+initAuth();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayla Intelligence × Intero Digital — AI Agent Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1008;
+    --paper: #f2ede4;
+    --warm-white: #faf8f3;
+    --accent: #8b1a1a;
+    --accent-light: #f7eeee;
+    --gold: #c4943a;
+    --gold-light: #fdf6e3;
+    --muted: #7a7060;
+    --border: #d8d0c0;
+    --slate: #2c3e50;
+    --smoke: #6c7a89;
+    --midnight: #1c2833;
+
+    --don: #8b1a1a;
+    --pete: #1a4a8b;
+    --harry: #1a6b3c;
+    --bert: #5a3a1a;
+    --peggy: #6b1a5a;
+    --roger: #1a5a6b;
+    --joan: #6b4a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 13px;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-left {
+    background: var(--midnight);
+    padding: 80px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Vintage halftone texture overlay */
+  .cover-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(196,148,58,0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+  }
+
+  .cover-left::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    background: linear-gradient(to top, rgba(139,26,26,0.15), transparent);
+    pointer-events: none;
+  }
+
+  .logo-lockup {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+  }
+
+  .logo-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .cover-headline { position: relative; z-index: 2; }
+
+  .cover-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cover-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 5.5vw, 78px);
+    font-weight: 700;
+    line-height: 1.0;
+    color: #fff;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+
+  .cover-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.9;
+    max-width: 380px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .meta-item {
+    flex: 1;
+    padding-right: 24px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    margin-right: 24px;
+  }
+
+  .meta-item:last-child { border-right: none; margin-right: 0; }
+
+  .meta-item label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 5px;
+  }
+
+  .meta-item span {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .cover-right {
+    background: var(--warm-white);
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 44px;
+    position: relative;
+    border-left: 4px solid var(--gold);
+  }
+
+  .cover-right::after {
+    content: '"62"';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 300px;
+    color: rgba(0,0,0,0.03);
+    right: -20px;
+    bottom: -60px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+
+  .pitch-block { position: relative; z-index: 1; }
+
+  .pitch-label {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pitch-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .pitch-statement {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .pitch-statement strong {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .cover-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat-card {
+    background: var(--warm-white);
+    padding: 22px 20px;
+  }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 5px;
+    letter-spacing: 0.02em;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── SECTION WRAPPERS ── */
+  .section {
+    padding: 100px 0;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 70px;
+  }
+
+  .section-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 90px;
+    line-height: 1;
+    color: var(--border);
+    letter-spacing: 0.02em;
+    padding-top: 2px;
+  }
+
+  .section-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .section-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+
+  /* ── PROBLEM ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .problem-col { background: var(--warm-white); padding: 40px; }
+
+  .problem-col h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid;
+  }
+
+  .problem-col.red h3 { color: var(--accent); border-color: var(--accent); }
+  .problem-col.blue h3 { color: var(--don); border-color: var(--don); }
+
+  .problem-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 22px;
+    align-items: flex-start;
+  }
+
+  .problem-icon {
+    width: 30px; height: 30px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .problem-col.red .problem-icon { background: #fdf2f2; }
+  .problem-col.blue .problem-icon { background: var(--accent-light); }
+
+  .problem-text { font-size: 12.5px; color: var(--ink); line-height: 1.75; }
+  .problem-text strong { font-weight: 500; }
+
+  /* ── PIPELINE ── */
+  .pipeline-flow {
+    display: flex;
+    position: relative;
+    margin-bottom: 50px;
+    overflow-x: auto;
+  }
+
+  .pipeline-step {
+    flex: 1;
+    min-width: 140px;
+    padding: 28px 18px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-right: none;
+    text-align: center;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .pipeline-step:last-child { border-right: 1px solid var(--border); }
+  .pipeline-step:hover { background: var(--accent-light); border-color: var(--accent); z-index: 2; }
+
+  .step-icon { font-size: 20px; margin-bottom: 10px; display: block; }
+
+  .step-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  /* ── AGENT CARDS ── */
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .agent-card {
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .agent-card:hover {
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+  }
+
+  .agent-header {
+    padding: 22px 26px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .agent-avatar {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+
+  .agent-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .agent-role {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .agent-status {
+    font-size: 9px;
+    background: #e8f5e9;
+    color: #2d6e3e;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    white-space: nowrap;
+    margin-left: auto;
+  }
+
+  .agent-body { padding: 22px 26px; }
+
+  .agent-task {
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .agent-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .tool-tag {
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Character colors */
+  .card-don    { border-top: 3px solid var(--don); }
+  .card-pete   { border-top: 3px solid var(--pete); }
+  .card-harry  { border-top: 3px solid var(--harry); }
+  .card-bert   { border-top: 3px solid var(--bert); }
+  .card-peggy  { border-top: 3px solid var(--peggy); }
+  .card-roger  { border-top: 3px solid var(--roger); }
+  .card-joan   { border-top: 3px solid var(--joan); }
+
+  .card-don   .agent-avatar { background: #fdf0f0; color: var(--don); }
+  .card-pete  .agent-avatar { background: #f0f4fd; color: var(--pete); }
+  .card-harry .agent-avatar { background: #f0fdf4; color: var(--harry); }
+  .card-bert  .agent-avatar { background: #fdf5f0; color: var(--bert); }
+  .card-peggy .agent-avatar { background: #fdf0fd; color: var(--peggy); }
+  .card-roger .agent-avatar { background: #f0fafe; color: var(--roger); }
+  .card-joan  .agent-avatar { background: #fdf8f0; color: var(--joan); }
+
+  /* ── DELIVERABLES ── */
+  .deliverables-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .deliverable-item {
+    padding: 24px;
+    background: var(--warm-white);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: background 0.2s;
+  }
+
+  .deliverable-item:hover { background: var(--accent-light); }
+
+  .deliverable-check {
+    width: 24px; height: 24px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .deliverable-text h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .deliverable-text p { font-size: 11.5px; color: var(--muted); line-height: 1.65; }
+
+  /* ── TECH STACK ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  .stack-card {
+    padding: 28px 22px;
+    background: var(--warm-white);
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .stack-card:hover { background: var(--accent-light); }
+  .stack-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+
+  .stack-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .stack-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .pricing-card {
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+    overflow: hidden;
+  }
+
+  .pricing-card.featured {
+    background: var(--midnight);
+    border-color: var(--midnight);
+    position: relative;
+    transform: scale(1.025);
+  }
+
+  .pricing-card.featured::before {
+    content: 'RECOMMENDED';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    padding: 4px 16px;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .pricing-header {
+    padding: 40px 28px 22px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-card.featured .pricing-header { border-color: rgba(255,255,255,0.1); }
+
+  .pricing-tier {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .pricing-card.featured .pricing-tier { color: rgba(255,255,255,0.4); }
+
+  .pricing-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .pricing-card.featured .pricing-price { color: #fff; }
+  .pricing-price sup { font-size: 22px; vertical-align: super; font-weight: 400; }
+  .pricing-period { font-size: 14px; color: var(--muted); font-weight: 400; }
+  .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.4); }
+
+  .pricing-monthly {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .pricing-card.featured .pricing-monthly { color: rgba(255,255,255,0.85); }
+
+  .pricing-desc { font-size: 11.5px; color: var(--muted); margin-top: 10px; line-height: 1.65; }
+  .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.45); }
+
+  .pricing-body { padding: 22px 28px 28px; }
+
+  .pricing-feature {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 11.5px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .pricing-card.featured .pricing-feature { color: rgba(255,255,255,0.75); }
+
+  .pricing-feature::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 44px; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item { position: relative; margin-bottom: 44px; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -48px; top: 8px;
+    width: 9px; height: 9px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .timeline-week {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--gold-light);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+
+  .callout strong { font-weight: 600; color: var(--don); }
+
+  /* ── PROSE ── */
+  .prose {
+    font-size: 13.5px;
+    line-height: 1.9;
+    color: var(--ink);
+    max-width: 720px;
+    margin-bottom: 44px;
+  }
+
+  .prose p { margin-bottom: 16px; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--midnight);
+    padding: 110px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(196,148,58,0.06) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(139,26,26,0.2) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 24px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 5vw, 64px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+  .cta-subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 55px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.85;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-contact {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 32px 70px;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.2s;
+  }
+
+  .cta-contact:hover { border-color: var(--gold); }
+
+  .cta-contact-label {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .cta-contact-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #fff;
+    font-weight: 400;
+  }
+
+  .cta-contact-title { font-size: 11px; color: var(--gold); letter-spacing: 0.05em; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--paper);
+    padding: 36px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+  }
+
+  .footer-brand span { color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 300; letter-spacing: 0; margin-left: 8px; }
+  .footer-date { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ COVER ══════════════════ -->
+<div class="cover">
+  <div class="cover-left">
+    <div class="logo-lockup">
+      <div class="logo-main">Ayla Intelligence</div>
+      <div class="logo-sub">AI Agent Systems</div>
+    </div>
+
+    <div class="cover-headline">
+      <div class="cover-eyebrow">Prepared for Intero Digital</div>
+      <h1 class="cover-title">
+        Your Pipeline.<br>
+        <em>Think Big.<br>Run Itself.</em>
+      </h1>
+      <p class="cover-desc">
+        A seven-agent AI team — built on the creative precision of Madison Avenue — that finds, qualifies, audits, and cold-outreaches your ideal clients around the clock. No BDR required.
+      </p>
+    </div>
+
+    <div class="cover-meta">
+      <div class="meta-item">
+        <label>Prepared By</label>
+        <span>Ayla Blumberg</span>
+      </div>
+      <div class="meta-item">
+        <label>Date</label>
+        <span>April 2026</span>
+      </div>
+      <div class="meta-item">
+        <label>Ref</label>
+        <span>AI-001</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-right">
+    <div class="pitch-block">
+      <div class="pitch-label">The Opportunity</div>
+      <p class="pitch-statement">
+        Intero Digital generates leads<br>for hundreds of clients.<br>
+        Who generates leads<br><strong>for Intero Digital?</strong>
+      </p>
+    </div>
+
+    <div class="cover-stats">
+      <div class="stat-card">
+        <div class="stat-number">7</div>
+        <div class="stat-label">AI agents working in parallel, around the clock</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">20–30</div>
+        <div class="stat-label">Audit-backed outreach emails sent per week at steady state</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Full-time BDR hires required</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8–15%</div>
+        <div class="stat-label">Expected reply rate vs. 1–3% industry average for cold email</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ PROBLEM ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div class="section-title-group">
+      <span class="section-eyebrow">The Problem</span>
+      <h2 class="section-title">The agency that sells lead gen<br>shouldn't have a <em>lead gen problem.</em></h2>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Intero Digital is a Google Premier Partner. You serve clients across cybersecurity, healthcare, finance, fitness, and government with full-funnel digital marketing. You have the case studies, the awards, and 20+ years of proof. But your own new business pipeline almost certainly still runs on referrals, manual outreach, and a BDR team grinding through LinkedIn. That's the standard model — and it's also the bottleneck.</p>
+  </div>
+
+  <div class="problem-grid">
+    <div class="problem-col red">
+      <h3>❌ Without an Agent Team</h3>
+      <div class="problem-item">
+        <div class="problem-icon">⏱</div>
+        <div class="problem-text"><strong>Manual prospecting is slow.</strong> A BDR spends hours finding companies, checking their digital presence, and writing a personalized email — then starting over the next morning.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">📉</div>
+        <div class="problem-text"><strong>Generic outreach converts poorly.</strong> "We noticed your site could use some SEO" lands in spam. Personalized, audit-backed emails do not.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">💸</div>
+        <div class="problem-text"><strong>BDR headcount is expensive.</strong> A mid-level BDR costs $70K–$100K/year in salary, before you see a single reply.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">🔁</div>
+        <div class="problem-text"><strong>Follow-up falls through cracks.</strong> Hot leads go cold when no one remembers to send the third email at exactly the right moment.</div>
+      </div>
+    </div>
+
+    <div class="problem-col blue">
+      <h3>✓ With an Ayla Intelligence Agent Team</h3>
+      <div class="problem-item">
+        <div class="problem-icon">🤖</div>
+        <div class="problem-text"><strong>Agents run 24/7.</strong> While your team sleeps, the pipeline is being built — leads researched, audits generated, emails queued and ready.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">🎯</div>
+        <div class="problem-text"><strong>Every email is anchored in real audit data.</strong> Each prospect receives a personalized pitch built from their actual website scores, SEO gaps, and social presence.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">💰</div>
+        <div class="problem-text"><strong>Fraction of the cost.</strong> A fully deployed agent team costs less per month than a single BDR's bi-weekly paycheck — and scales infinitely.</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">📬</div>
+        <div class="problem-text"><strong>Automated multi-touch sequences.</strong> The system handles follow-ups, tracks replies, and surfaces only the warm leads for your human team to close — no spray-and-pray, no inbox damage.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ PIPELINE ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div class="section-title-group">
+      <span class="section-eyebrow">How It Works</span>
+      <h2 class="section-title">The Full <em>Autonomous Pipeline</em></h2>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>This isn't a chatbot. It's a coordinated team of seven specialized AI agents — each with a defined role, running in Nanoclaw — that together form an end-to-end business development engine. Here's how a prospect moves from "unknown company on the internet" to "hot lead in your CRM."</p>
+  </div>
+
+  <div class="pipeline-flow">
+    <div class="pipeline-step">
+      <span class="step-icon">🔍</span>
+      <div class="step-label">Step 1</div>
+      <div class="step-title">Find &amp; Target</div>
+    </div>
+    <div class="pipeline-step">
+      <span class="step-icon">📊</span>
+      <div class="step-label">Step 2</div>
+      <div class="step-title">Scrape &amp; Enrich</div>
+    </div>
+    <div class="pipeline-step">
+      <span class="step-icon">🩺</span>
+      <div class="step-label">Step 3</div>
+      <div class="step-title">Audit &amp; Score</div>
+    </div>
+    <div class="pipeline-step">
+      <span class="step-icon">✍️</span>
+      <div class="step-label">Step 4</div>
+      <div class="step-title">Write &amp; Personalize</div>
+    </div>
+    <div class="pipeline-step">
+      <span class="step-icon">📬</span>
+      <div class="step-label">Step 5</div>
+      <div class="step-title">Send &amp; Sequence</div>
+    </div>
+    <div class="pipeline-step">
+      <span class="step-icon">🔥</span>
+      <div class="step-label">Step 6</div>
+      <div class="step-title">Surface &amp; Close</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The core insight:</strong> Intero Digital's own InteroBOT® crawls client sites to find SEO opportunities. Our agent team does the same thing — applied to your prospective clients' digital presence — to power a hyper-personalized cold pitch. Your secret weapon, now turned toward winning your own business.<br><br>
+    <strong>Volume is not the goal.</strong> The system sends 20–30 deeply researched emails per week at steady state — intentionally. Each one is anchored in a real Bert audit, written in your voice, and sent from a warmed domain. Industry average cold email reply rates sit around 1–3%. Audit-backed, personalized outreach consistently hits 8–15%. Fewer emails. Better conversations.
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ AGENTS ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div class="section-title-group">
+      <span class="section-eyebrow">Meet the Team</span>
+      <h2 class="section-title">Sterling Cooper's<br><em>Digital Descendants.</em></h2>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Each agent is a specialist. Each has a defined brief, a set of tools, and a chain of command. Together they run a new business machine that Sterling Cooper's partners would've killed for in 1962 — except this one runs on Claude, not cigarettes.</p>
+  </div>
+
+  <div class="agents-grid">
+
+    <!-- DON DRAPER -->
+    <div class="agent-card card-don">
+      <div class="agent-header">
+        <div class="agent-avatar">DD</div>
+        <div class="agent-id">
+          <div class="agent-name">Don Draper</div>
+          <div class="agent-role">Creative Director · Orchestrator</div>
+        </div>
+        <div class="agent-status">● ACTIVE</div>
+      </div>
+      <div class="agent-body">
+        <p class="agent-task">Don runs the room. He orchestrates all six other agents, enforces quality gates before a single email sends, and delivers a daily executive summary to your team via Telegram. His standard: if the outreach doesn't make someone want to call back, it doesn't go out. Nothing ships without his sign-off.</p>
+        <div class="agent-tools">
+          <span class="tool-tag">Nanoclaw</span>
+          <span class="tool-tag">Google Sheets</span>
+          <span class="tool-tag">Telegram API</span>
+          <span class="tool-tag">Claude API</span>
+          <span class="tool-tag">Postgres</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PETE CAMPBELL -->
+    <div class="agent-card card-pete">
+      <div class="agent-header">
+        <div class="agent-avatar">PC</div>
+        <div class="agent-id">
+          <div class="agent-name">Pete Campbell</div>
+          <div class="agent-role">New Business · Lead Hunter</div>
+        </div>
+        <div class="agent-status">● ACTIVE</div>
+      </div>
+      <div class="agent-body">
+        <p class="agent-task">Pete has always been hungry for new accounts. He scours the web for companies that match your ideal client profile — mid-market businesses with a digital presence that's underperforming. He targets by vertical, company size, tech stack signals, and whether they're currently running any agency relationship. He feeds a fresh list to Harry every morning.</p>
+        <div class="agent-tools">
+          <span class="tool-tag">Outscraper</span>
+          <span class="tool-tag">Apollo.io API</span>
+          <span class="tool-tag">LinkedIn scrape</span>
+          <span class="tool-tag">Google Search</span>
+          <span class="tool-tag">BuiltWith API</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HARRY CRANE -->
+    <div class="agent-card card-harry">
+      <div class="agent-header">
+        <div class="agent-avatar">HC</div>
+        <div class="agent-id">
+          <div class="agent-name">Harry Crane</div>
+          <div class="agent-role">Research &amp; Media · Data Enrichment</div>
+        </div>
+        <div class="agent-status">● ACTIVE</div>
+      </div>
+      <div class="agent-body">
+        <p class="agent-task">Harry is meticulous with the numbers. He takes Pete's raw list and enriches every record: verified business email, decision-maker name and title, company revenue estimate, current CMS and hosting stack, and social handles. He deduplicates against the existing CRM and writes clean records to the Google Sheet for Bert to score.</p>
+        <div class="agent-tools">
+          <span class="tool-tag">Hunter.io</span>
+          <span class="tool-tag">Clearbit API</span>
+          <span class="tool-tag">BuiltWith</span>
+          <span class="tool-tag">Google Sheets</span>
+          <span class="tool-tag">Postgres</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BERT COOPER -->
+    <div class="agent-card card-bert">
+      <div class="agent-header">
+        <div class="agent-avatar">BC</div>
+        <div class="agent-id">
+          <div class="agent-name">Bert Cooper</div>
+          <div class="agent-role">Senior Analyst · Digital Auditor</div>
+        </div>
+        <div class="agent-status">● ACTIVE</div>
+      </div>
+      <div class="agent-body">
+        <p class="agent-task">Bert sees the big picture through the details. He runs a mini digital audit on every enriched lead: PageSpeed score, Core Web Vitals, domain authority, keyword ranking gaps, social engagement rate, and paid ad spend signals. He assigns each lead a Priority Score from 1–100 and generates the audit summary that Peggy uses to write the pitch.</p>
+        <div class="agent-tools">
+          <span class="tool-tag">PageSpeed API</span>
+          <span class="tool-tag">Ahrefs API</span>
+          <span class="tool-tag">SEMrush API</span>
+          <span class="tool-tag">Claude API</span>
+          <span class="tool-tag">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PEGGY OLSON -->
+    <div class="agent-card card-peggy">
+      <div class="agent-header">
+        <div class="agent-avatar">PO</div>
+        <div class="agent-id">
+          <div class="agent-name">Peggy Olson</div>
+          <div class="agent-role">Senior Copywriter · Voice &amp; Outreach</div>
+        </div>
+        <div class="agent-status">● ACTIVE</div>
+      </div>
+      <div class="agent-body">
+        <p class="agent-task">Peggy writes every cold email — in Intero Digital's voice. She ingests Bert's audit, the prospect's name, industry, and specific pain points, then crafts a personalized email that leads with a real insight from their site. She writes three variants (direct, consultative, curiosity-gap) and queues them for Roger to review and sequence.</p>
+        <div class="agent-tools">
+          <span class="tool-tag">Claude API</span>
+          <span class="tool-tag">Gmail API</span>
+          <span class="tool-tag">Voice training</span>
+          <span class="tool-tag">A/B variants</span>
+          <span class="tool-tag">Google Sheets</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROGER STERLING -->
+    <div class="agent-card card-roger">
+      <div class="agent-header">
+        <div class="agent-avatar">RS</div>
+        <div class="agent-id">
+          <div class="agent-name">Roger Sterling</div>
+          <div class="agent-role">Account Director · QA &amp; Sequencing</div>
+        </div>
+        <div class="agent-status">● ACTIVE</div>
+      </div>
+      <div class="agent-body">
+        <p class="agent-task">Roger is all charm and follow-through. He reviews Peggy's emails before they send — flagging anything off-brand, factually wrong, or too pushy — then manages the 3-touch follow-up sequence: Day 3 bump, Day 7 value-add, Day 14 breakup. The moment a prospect replies, Roger pings your team in Telegram and pauses their sequence instantly.</p>
+        <div class="agent-tools">
+          <span class="tool-tag">Gmail API</span>
+          <span class="tool-tag">Telegram API</span>
+          <span class="tool-tag">Claude API</span>
+          <span class="tool-tag">Google Sheets</span>
+          <span class="tool-tag">Cron scheduler</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JOAN — Full-width -->
+  <div style="margin-top: 20px;">
+    <div class="agent-card card-joan" style="display: grid; grid-template-columns: 1fr 1fr;">
+      <div style="padding: 22px 26px; border-right: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border);">
+          <div class="agent-avatar" style="background: #fdf8f0; color: var(--joan); font-family: 'Bebas Neue'; font-size: 16px; letter-spacing: 0.08em; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">JH</div>
+          <div>
+            <div class="agent-name">Joan Holloway</div>
+            <div class="agent-role">Director of Operations · CRM &amp; Reporting</div>
+          </div>
+          <div class="agent-status" style="margin-left: auto; background: #fff5f0; color: var(--joan);">● ACTIVE</div>
+        </div>
+        <p class="agent-task">Joan makes sure everything that matters actually gets done. She pushes every warm lead — anyone who replied, clicked, or opened three or more times — into your existing CRM with full context: company name, contact info, audit score, full email thread, and a recommended next step. Nothing falls through the cracks on her watch.</p>
+      </div>
+      <div style="padding: 22px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <p class="agent-task">She also generates a weekly performance report every Monday morning: emails sent, open rates, reply rates, leads moved to pipeline, and A/B variant winners for Peggy to apply going forward. If there's a problem in the pipeline, Joan finds it before Don does.</p>
+          <div class="agent-tools" style="margin-top: 14px;">
+            <span class="tool-tag">HubSpot / Salesforce</span>
+            <span class="tool-tag">Google Sheets</span>
+            <span class="tool-tag">Postgres</span>
+            <span class="tool-tag">Claude API</span>
+            <span class="tool-tag">Telegram</span>
+            <span class="tool-tag">Cron</span>
+          </div>
+        </div>
+        <p style="font-size: 11px; color: var(--muted); line-height: 1.6; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border);">Note: Joan integrates with whatever CRM Intero Digital currently uses. If no CRM is in place, we deploy a lightweight Postgres-backed pipeline dashboard instead.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ DELIVERABLES ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div class="section-title-group">
+      <span class="section-eyebrow">What You Get</span>
+      <h2 class="section-title">Every Deliverable,<br><em>Documented.</em></h2>
+    </div>
+  </div>
+
+  <div class="deliverables-list">
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>Ideal Client Profile (ICP) Build</h4>
+        <p>Target industries, company sizes, tech stack signals, and geographic markets defined before a single agent runs. Your ICP drives everything downstream.</p>
+      </div>
+    </div>
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>7-Agent Nanoclaw Deployment</h4>
+        <p>All agents built as native Nanoclaw agents. Deployed to a dedicated cloud server (~$8/mo). Full documentation for each agent included.</p>
+      </div>
+    </div>
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>Voice-Trained Email System</h4>
+        <p>Peggy is trained on Intero Digital's existing content, case studies, and brand voice so every outreach email sounds like it came from your team.</p>
+      </div>
+    </div>
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>Google Sheets Live Pipeline</h4>
+        <p>Real-time pipeline tracker showing every lead's status, audit score, email stage, open and click data, and reply flag — visible to your whole team.</p>
+      </div>
+    </div>
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>Telegram Command Channel</h4>
+        <p>A private channel with daily summaries, hot lead pings, and the ability to pause or resume sequences — your team stays in control without watching a dashboard.</p>
+      </div>
+    </div>
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>Automated 3-Touch Sequences</h4>
+        <p>Every prospect gets a personalized first email, a Day 3 bump, and a Day 7 follow-up — all auto-paused the moment they reply.</p>
+      </div>
+    </div>
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>CRM Integration</h4>
+        <p>Warm leads pushed automatically into HubSpot or Salesforce with full context. No copy-paste, no data entry, no dropped balls.</p>
+      </div>
+    </div>
+    <div class="deliverable-item">
+      <div class="deliverable-check">✓</div>
+      <div class="deliverable-text">
+        <h4>Weekly Performance Report</h4>
+        <p>Joan delivers a Monday morning breakdown: emails sent, open rates, reply rates, pipeline movement, and A/B winner recommendations.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ TECH STACK ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <div class="section-title-group">
+      <span class="section-eyebrow">Infrastructure</span>
+      <h2 class="section-title">Built on <em>Proven Tools.</em></h2>
+    </div>
+  </div>
+
+  <div class="stack-grid">
+    <div class="stack-card"><span class="stack-icon">🧠</span><div class="stack-name">Nanoclaw</div><div class="stack-desc">Agent orchestration. All 7 agents run natively — no loose scripts.</div></div>
+    <div class="stack-card"><span class="stack-icon">✉️</span><div class="stack-name">Gmail API</div><div class="stack-desc">Sends from a dedicated Gmail on your domain. Inbox-native delivery.</div></div>
+    <div class="stack-card"><span class="stack-icon">📋</span><div class="stack-name">Google Sheets</div><div class="stack-desc">Live pipeline tracker updated in real time by every agent.</div></div>
+    <div class="stack-card"><span class="stack-icon">🗄️</span><div class="stack-name">Postgres</div><div class="stack-desc">Backend database for records, deduplication, and sequence state.</div></div>
+    <div class="stack-card"><span class="stack-icon">📡</span><div class="stack-name">Telegram</div><div class="stack-desc">Command and alert channel. Hot leads ping your team instantly.</div></div>
+    <div class="stack-card"><span class="stack-icon">🔎</span><div class="stack-name">Outscraper</div><div class="stack-desc">Business discovery by vertical, geography, and tech signal.</div></div>
+    <div class="stack-card"><span class="stack-icon">🤖</span><div class="stack-name">Claude API</div><div class="stack-desc">Powers email writing, audit summarization, QA, and scoring.</div></div>
+    <div class="stack-card"><span class="stack-icon">🔗</span><div class="stack-name">CRM API</div><div class="stack-desc">HubSpot or Salesforce. Warm leads pushed automatically with full context.</div></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ TIMELINE ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">06</div>
+    <div class="section-title-group">
+      <span class="section-eyebrow">Implementation</span>
+      <h2 class="section-title">Live in<br><em>Four Weeks.</em></h2>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-week">Week 1</div>
+      <div class="timeline-title">Discovery &amp; ICP Definition</div>
+      <div class="timeline-desc">Kickoff with your leadership. Define target industries, company sizes, geo markets, and exclusion rules. Set up dedicated Gmail, Google Sheets tracker, and Telegram channel. ICP document delivered for sign-off.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week">Week 2</div>
+      <div class="timeline-title">Research &amp; Enrichment Layer — Don, Pete, Harry</div>
+      <div class="timeline-desc">Deploy Don, Pete, and Harry in Nanoclaw. Connect Outscraper, Apollo, Hunter.io, BuiltWith, and Clearbit. Run a 50-lead test batch through the find → enrich pipeline. QA enrichment accuracy with your team before moving forward.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week">Week 3</div>
+      <div class="timeline-title">Audit, Copy &amp; Send Layer — Bert, Peggy, Roger</div>
+      <div class="timeline-desc">Deploy Bert, Peggy, and Roger. Connect PageSpeed, Ahrefs, and SEMrush for the audit engine. Voice-train Peggy on Intero Digital's existing content. Write and test three email variant templates. Connect Gmail API and run a first live send of 20 prospects.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week">Week 4</div>
+      <div class="timeline-title">CRM Sync, Sequences &amp; Go-Live — Joan</div>
+      <div class="timeline-desc">Deploy Joan and connect to HubSpot or Salesforce. Enable 3-touch follow-up sequences. Set cron jobs for daily pipeline runs. System goes live at end of week — starting at 5–10 emails/day on the warmed domain, ramping to 20–30/week steady state over the following 3–4 weeks. Deliver a training session for your team on the dashboard and hot lead handling.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-week">Week 5+</div>
+      <div class="timeline-title">Ongoing Optimization</div>
+      <div class="timeline-desc">Joan's weekly performance reports surface what's working. Monthly strategy call to review open and reply rates, adjust ICP targeting, and A/B test new Peggy variants. You own the system — or we manage it. Your call.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════════ PRICING ══════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">07</div>
+    <div class="section-title-group">
+      <span class="section-eyebrow">Investment</span>
+      <h2 class="section-title">Pricing that scales<br>with your <em>pipeline.</em></h2>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price"><sup>$</sup>2,500 <span class="pricing-period">setup</span></div>
+        <div class="pricing-monthly"><sup style="font-size:13px;">$</sup>500 <span class="pricing-period">/ mo</span></div>
+        <p class="pricing-desc">For teams that want the system built and will manage it in-house.</p>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-feature">5 agents (no Joan CRM sync)</div>
+        <div class="pricing-feature">ICP definition &amp; voice training</div>
+        <div class="pricing-feature">Google Sheets pipeline tracker</div>
+        <div class="pricing-feature">Telegram hot lead alerts</div>
+        <div class="pricing-feature">3-touch email sequences</div>
+        <div class="pricing-feature">~10–15 targeted emails/week</div>
+        <div class="pricing-feature">Monthly check-in call</div>
+      </div>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="pricing-header">
+        <div class="pricing-tier">Full System</div>
+        <div class="pricing-price"><sup>$</sup>4,500 <span class="pricing-period">setup</span></div>
+        <div class="pricing-monthly" style="color: #fff;"><sup style="font-size:13px;">$</sup>800 <span class="pricing-period">/ mo</span></div>
+        <p class="pricing-desc">All 7 agents, full CRM integration, weekly reporting. Plug-and-play.</p>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-feature">All 7 agents fully deployed</div>
+        <div class="pricing-feature">ICP definition &amp; voice training</div>
+        <div class="pricing-feature">HubSpot or Salesforce CRM sync</div>
+        <div class="pricing-feature">Google Sheets + Telegram</div>
+        <div class="pricing-feature">3-touch follow-up sequences</div>
+        <div class="pricing-feature">20–30 targeted emails/week at steady state</div>
+        <div class="pricing-feature">Domain warmup included (weeks 1–4)</div>
+        <div class="pricing-feature">Digital audit per lead (Bert)</div>
+        <div class="pricing-feature">Weekly performance report (Joan)</div>
+        <div class="pricing-feature">Bi-weekly strategy call</div>
+      </div>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <div class="pricing-tier">Managed + Commission</div>
+        <div class="pricing-price"><sup>$</sup>3,000 <span class="pricing-period">setup</span></div>
+        <div class="pricing-monthly"><sup style="font-size:13px;">$</sup>400 <span class="pricing-period">/ mo</span></div>
+        <p class="pricing-desc">Lower retainer — we earn a small commission on each closed client the system sources.</p>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-feature">All 7 agents fully deployed</div>
+        <div class="pricing-feature">ICP definition &amp; voice training</div>
+        <div class="pricing-feature">CRM integration included</div>
+        <div class="pricing-feature">Pipeline fully managed by Ayla Intelligence</div>
+        <div class="pricing-feature">20–30 targeted emails/week at steady state</div>
+        <div class="pricing-feature">Joan's weekly performance report</div>
+        <div class="pricing-feature">$500 commission per closed client sourced</div>
+        <div class="pricing-feature">Aligned incentives — we win when you win</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ CTA ══════════════════ -->
+<div class="cta-section">
+  <div class="cta-label">Ready to Build</div>
+  <h2 class="cta-title">Let's put your pipeline<br>on <em>autopilot.</em></h2>
+  <p class="cta-subtitle">30-minute discovery call. We'll confirm your ICP, walk through the full agent architecture, and answer every technical question — before you commit to a single dollar.</p>
+  <div class="cta-contact">
+    <div class="cta-contact-label">Your Point of Contact</div>
+    <div class="cta-contact-name">Ayla Blumberg</div>
+    <div class="cta-contact-title">Founder, Ayla Intelligence · Dallas, TX</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-brand">AYLA INTELLIGENCE <span>— AI Agent Systems for Growth Companies</span></div>
+  <div class="footer-date">Prepared April 2026 · Confidential</div>
+</div>
+
+</body>
+</html>

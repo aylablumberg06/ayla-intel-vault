@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dog Suspenders, Co. × Ayla Intelligence — A Trade Catalog</title>
+<link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f5ecd9;
+  --paper-deep: #ecdfc3;
+  --ivory: #faf3e0;
+  --oxblood: #7a1d1d;
+  --oxblood-deep: #5c1010;
+  --brass: #a67c3e;
+  --brass-deep: #7a5a28;
+  --ink: #1a120a;
+  --ink-soft: #3d2d1c;
+  --ink-mute: #6b5840;
+  --magnolia: #e8dcc0;
+  --rule: #c4b38a;
+  --moss: #4a5a3a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body {
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14.5px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+/* Subtle paper noise */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(122,29,29,0.04) 0, transparent 25%),
+    radial-gradient(circle at 88% 72%, rgba(166,124,62,0.04) 0, transparent 28%);
+  pointer-events: none;
+  z-index: 1;
+}
+.mono { font-family: 'Cutive Mono', 'Courier New', monospace; }
+.display { font-family: 'Playfair Display', 'Libre Baskerville', serif; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 56px; position: relative; z-index: 2; }
+@media (max-width: 640px) { .wrap { padding: 0 24px; } }
+
+/* ── Cover: vintage trade catalog ── */
+.cover {
+  min-height: 100vh;
+  background: var(--paper);
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border-bottom: 4px double var(--oxblood);
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 24px; right: 24px; bottom: 24px;
+  border: 1px solid var(--ink);
+  pointer-events: none;
+}
+.cover > * { position: relative; z-index: 2; }
+
+.cover-head {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.stamp {
+  display: inline-block;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  color: var(--oxblood);
+  border: 2px solid var(--oxblood);
+  padding: 6px 12px;
+  transform: rotate(-3deg);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.cover-body {
+  padding: 60px 32px;
+  text-align: center;
+  position: relative;
+}
+.cover-prefix {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: var(--oxblood);
+  margin-bottom: 36px;
+  text-transform: uppercase;
+}
+.cover-prefix::before, .cover-prefix::after { content: '✦'; margin: 0 14px; color: var(--brass); }
+
+h1.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(48px, 9vw, 112px);
+  line-height: 0.92;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+h1.cover-title em { font-style: italic; font-weight: 400; color: var(--oxblood); display: block; }
+.cover-est {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin: 36px 0 24px;
+}
+.cover-est span { color: var(--oxblood); font-weight: 700; }
+.cover-deck {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin: 0 auto 32px;
+}
+.cover-flourish {
+  display: inline-block;
+  letter-spacing: 0.5em;
+  color: var(--brass);
+  font-size: 16px;
+}
+
+.cover-foot {
+  padding: 24px 32px;
+  border-top: 1px solid var(--ink);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  font-family: 'Cutive Mono', monospace;
+}
+.cover-foot .label {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 4px;
+}
+.cover-foot .val {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-style: italic;
+  color: var(--ink);
+  letter-spacing: 0;
+}
+@media (max-width: 640px) {
+  .cover { padding: 28px; }
+  .cover::before { top: 12px; left: 12px; right: 12px; bottom: 12px; }
+  .cover-head, .cover-foot { padding: 16px; }
+  .cover-foot { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cover-body { padding: 40px 16px; }
+}
+
+/* ── Section base ── */
+.section { padding: 80px 0; position: relative; z-index: 2; border-bottom: 1px solid var(--rule); }
+.section.dark { background: var(--ink); color: var(--paper); }
+.section.dark h2 { color: var(--ivory); }
+.section.dark h2 em { color: var(--brass); }
+.section.dark p { color: rgba(245,236,217,0.75); }
+.section.dark .lede { color: rgba(245,236,217,0.9); }
+.section.dark .rule-kicker { color: var(--brass); }
+
+.rule-kicker {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.rule-kicker::before { content: ''; width: 40px; height: 2px; background: currentColor; }
+.rule-kicker::after { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.3; }
+
+h2.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  max-width: 780px;
+}
+h2.section-title em { font-style: italic; color: var(--oxblood); }
+
+.lede {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+
+p.body {
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 640px;
+  margin-bottom: 22px;
+  color: var(--ink-soft);
+}
+p.body em { color: var(--oxblood); font-style: italic; }
+
+/* ── Note in the margin ── */
+.margin-note {
+  background: var(--magnolia);
+  border-left: 4px solid var(--brass);
+  padding: 24px 28px;
+  margin: 32px 0;
+  max-width: 620px;
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  position: relative;
+}
+.margin-note::before {
+  content: '— from Ram\'s dossier';
+  display: block;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--oxblood);
+  margin-bottom: 10px;
+}
+
+/* ── Spec sheet — receipt/ledger look ── */
+.spec-sheet {
+  background: var(--ivory);
+  border: 1px solid var(--ink);
+  padding: 36px 40px;
+  margin: 40px 0;
+  max-width: 700px;
+  font-family: 'Cutive Mono', monospace;
+  box-shadow: 4px 4px 0 var(--oxblood);
+}
+.spec-sheet-head {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 20px;
+}
+.spec-sheet-head .title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--oxblood);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.spec-sheet-head .sub {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.spec-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--rule);
+  font-size: 13px;
+  color: var(--ink);
+  align-items: baseline;
+}
+.spec-row:last-child { border-bottom: none; }
+.spec-row .k { color: var(--ink-mute); letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px; }
+.spec-row .v { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: var(--ink); }
+
+/* ── The Three Angles — triptych ── */
+.triptych {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 48px 0;
+  border: 1px solid var(--ink);
+}
+.angle {
+  padding: 32px 28px;
+  border-right: 1px solid var(--ink);
+  background: var(--ivory);
+  position: relative;
+}
+.angle:last-child { border-right: none; }
+.angle-n {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--oxblood);
+  margin-bottom: 12px;
+}
+.angle-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.angle-title em { font-style: italic; color: var(--oxblood); font-weight: 400; }
+.angle-body { font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+@media (max-width: 640px) { .triptych { grid-template-columns: 1fr; } .angle { border-right: none; border-bottom: 1px solid var(--ink); } .angle:last-child { border-bottom: none; } }
+
+/* ── Agents — vintage product catalog listing ── */
+.catalog {
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  margin: 40px 0;
+}
+.catalog-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 180px;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.catalog-row:last-child { border-bottom: none; }
+.catalog-idx {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 36px;
+  color: var(--oxblood);
+  line-height: 1;
+}
+.catalog-head h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.15;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.catalog-head h3 em { font-style: italic; color: var(--oxblood); }
+.catalog-head .role {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brass-deep);
+  margin-bottom: 14px;
+}
+.catalog-head p { font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); }
+.catalog-tag {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-mute);
+  text-align: right;
+  line-height: 1.4;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule);
+}
+@media (max-width: 640px) {
+  .catalog-row { grid-template-columns: 1fr; gap: 14px; }
+  .catalog-idx { font-size: 28px; }
+  .catalog-tag { text-align: left; padding-top: 10px; }
+}
+
+/* ── Tiers: hangtag / price-card aesthetic ── */
+.hangtags {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin: 40px 0;
+}
+.hangtag {
+  background: var(--ivory);
+  border: 1px solid var(--ink);
+  padding: 36px 28px;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--oxblood);
+  transition: transform 0.25s ease;
+}
+.hangtag:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--oxblood); }
+.hangtag::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.hangtag.feat {
+  background: var(--ink);
+  color: var(--ivory);
+  border-color: var(--oxblood);
+}
+.hangtag.feat .h-tag { background: var(--oxblood); color: var(--ivory); }
+.hangtag.feat .h-name { color: var(--ivory); }
+.hangtag.feat .h-price { color: var(--brass); }
+.hangtag.feat .h-unit { color: rgba(245,236,217,0.55); }
+.hangtag.feat .h-desc { color: rgba(245,236,217,0.72); border-bottom-color: rgba(245,236,217,0.2); }
+.hangtag.feat .h-items li { color: rgba(245,236,217,0.8); }
+.hangtag.feat .h-items li::before { color: var(--brass); }
+
+.h-tag {
+  display: inline-block;
+  margin-top: 28px;
+  margin-bottom: 18px;
+  padding: 4px 12px;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  border: 1px solid var(--oxblood);
+}
+.h-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.h-price {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--oxblood);
+  line-height: 1;
+}
+.h-unit {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+.h-desc {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 20px;
+}
+.h-items { list-style: none; padding: 0; }
+.h-items li {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  padding-left: 22px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.h-items li::before {
+  content: '✦';
+  position: absolute;
+  left: 0; top: 2px;
+  color: var(--oxblood);
+  font-size: 10px;
+}
+@media (max-width: 640px) { .hangtags { grid-template-columns: 1fr; } }
+
+/* ── CTA ── */
+.cta {
+  background: var(--oxblood);
+  color: var(--paper);
+  padding: 100px 48px;
+  text-align: center;
+  border-top: 4px double var(--ink);
+  border-bottom: 4px double var(--ink);
+}
+.cta-flourish {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--brass);
+  margin-bottom: 32px;
+}
+.cta-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.05;
+  color: var(--ivory);
+  margin-bottom: 28px;
+}
+.cta-title em { font-style: italic; color: var(--brass); }
+.cta-deck {
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-size: 19px;
+  color: rgba(245,236,217,0.75);
+  max-width: 520px;
+  margin: 0 auto 40px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 40px;
+  background: var(--brass);
+  color: var(--ink);
+  font-family: 'Cutive Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.cta-btn:hover { background: var(--paper); transform: translateY(-2px); }
+
+.foot {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 40px 48px;
+  text-align: center;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245,236,217,0.5);
+}
+.foot b { color: var(--brass); font-weight: 700; }
+
+@keyframes stampIn { from { opacity: 0; transform: scale(0.9) rotate(-3deg); } to { opacity: 1; transform: scale(1) rotate(-3deg); } }
+.stamp { animation: stampIn 0.8s cubic-bezier(0.34,1.56,0.64,1) both 0.2s; }
+
+@keyframes fadeRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.cover-prefix, h1.cover-title, .cover-est, .cover-deck, .cover-flourish { animation: fadeRise 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+h1.cover-title { animation-delay: 0.15s; }
+.cover-est { animation-delay: 0.3s; }
+.cover-deck { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- COVER: old trade catalog -->
+<div class="cover">
+  <div class="cover-head">
+    <div>Catalog № 001 &middot; Spring 2026</div>
+    <div class="stamp">Confidential · for Ram only</div>
+    <div>Ayla Intelligence &middot; Dallas, TX</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-prefix">A Plan in Four Parts</div>
+    <h1 class="cover-title">
+      A Second Brand,<br>
+      <em>Built Right<br>The First Time.</em>
+    </h1>
+    <div class="cover-est">
+      <span>Ram Degani</span> · 25 Years in Dallas · Still Does Things Properly
+    </div>
+    <p class="cover-deck">
+      How the founder of Lone Star Blinds turns a dog-apparel idea into a real brand on day one &mdash; without the Wix template, the shouty ads, or the "is this real?" hesitation from the people he needs to buy it.
+    </p>
+    <div class="cover-flourish">✦ &middot; ✦ &middot; ✦</div>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <div class="label">Prepared For</div>
+      <div class="val">Ram Degani</div>
+    </div>
+    <div>
+      <div class="label">Operating Name</div>
+      <div class="val">To Be Decided</div>
+    </div>
+    <div>
+      <div class="label">Theme</div>
+      <div class="val">Cat on a Hot Tin Roof</div>
+    </div>
+    <div>
+      <div class="label">From</div>
+      <div class="val">Ayla Blumberg</div>
+    </div>
+  </div>
+</div>
+
+<!-- § 01 — The Opening -->
+<section class="section">
+  <div class="wrap">
+    <div class="rule-kicker">Part One · The Honest Opening</div>
+    <h2 class="section-title">You already know how to run <em>a real business.</em></h2>
+
+    <p class="body">
+      Most proposals for a new pet brand start with the founder. Yours doesn't &mdash; because you&rsquo;re not most founders. You&rsquo;ve been running Lone Star Blinds in Dallas for a quarter-century. You know what a real order looks like, what a professional install looks like, what it takes for a first-time customer to become a referral. Your second brand gets to skip the part where it has to prove it&rsquo;s not a hobbyist.</p>
+
+    <p class="body">
+      The question isn&rsquo;t whether the dog-suspenders venture is a real business &mdash; it&rsquo;s how quickly the <em>rest of the world</em> treats it like one. That means a brand that looks made, not assembled. A site that could sit next to Walkee Paws without flinching. And a sales engine that doesn&rsquo;t need you to be grinding on Etsy and Instagram fourteen hours a week.</p>
+
+    <div class="margin-note">
+      Ram operates Lone Star Blinds on Wix with Kevin handling inbound email. He has 25+ years in window treatments (ASID-affiliated, 5/5 on Houzz). The dog-suspenders venture has no public storefront or socials yet. This proposal is scoped for a brand <em>launch</em>, not a brand refresh.
+    </div>
+  </div>
+</section>
+
+<!-- § 02 — The Three Angles -->
+<section class="section dark">
+  <div class="wrap">
+    <div class="rule-kicker">Part Two · The Three Angles</div>
+    <h2 class="section-title">Which dog<br><em>do we sell to?</em></h2>
+    <p class="lede">Before the agents run, we need to pick the market. These are the three places "suspenders for dogs" actually makes money. You&rsquo;re probably in one of them. The agents are sized for each.</p>
+
+    <div class="triptych">
+      <div class="angle" style="background: var(--oxblood-deep); color: var(--ivory);">
+        <div class="angle-n" style="color: var(--brass);">Angle · A</div>
+        <div class="angle-title"><em>Diaper &amp; senior-dog</em> retention</div>
+        <p class="angle-body" style="color: rgba(245,236,217,0.75);">Heat cycles. Incontinence. Post-surgery. A huge, underserved Etsy market ready to be consolidated by a DTC brand with nicer photos and a better story. Vet-clinic channel is real money. The Dallas-founder-who-actually-knows-fabric angle plays here.</p>
+      </div>
+      <div class="angle" style="background: var(--oxblood-deep); color: var(--ivory);">
+        <div class="angle-n" style="color: var(--brass);">Angle · B</div>
+        <div class="angle-title"><em>Boot &amp; paw-protection</em> retention</div>
+        <p class="angle-body" style="color: rgba(245,236,217,0.75);">Walkee Paws owns this nationally. In Dallas, you&rsquo;re fighting the weather question. If you sell, you sell hot pavement in July, not snow in January. Smaller addressable market but higher prestige if you pair with vet referrals.</p>
+      </div>
+      <div class="angle" style="background: var(--oxblood-deep); color: var(--ivory);">
+        <div class="angle-n" style="color: var(--brass);">Angle · C</div>
+        <div class="angle-title"><em>Novelty &amp; weddings</em></div>
+        <p class="angle-body" style="color: rgba(245,236,217,0.75);">"Little gentleman" suspenders for dog ring-bearers, photoshoots, Instagram. Low AOV, viral potential, pet boutique channel. A harder business to grow past $300K but a fun beachhead.</p>
+      </div>
+    </div>
+
+    <p class="body" style="color: rgba(245,236,217,0.75); max-width: 600px;">
+      The first call is where we pick one. The agent team is configured differently for each &mdash; the same six roles, but different channels, pricing, and copy. We don&rsquo;t build all three at once.
+    </p>
+  </div>
+</section>
+
+<!-- § 03 — Spec Sheet + Agents -->
+<section class="section">
+  <div class="wrap">
+    <div class="rule-kicker">Part Three · The Team</div>
+    <h2 class="section-title">Six agents,<br>cast from <em>Tennessee Williams.</em></h2>
+    <p class="lede">You chose <em>Cat on a Hot Tin Roof</em> &mdash; a Pollitt family affair. So the team is the family. Each one named, each one doing exactly what they do best. Brick hunts. Maggie reads. Big Daddy decides. Mae writes. Gooper audits. Big Mama follows up.</p>
+
+    <div class="catalog">
+      <div class="catalog-row">
+        <div class="catalog-idx">I.</div>
+        <div class="catalog-head">
+          <h3><em>Brick</em> Pollitt &mdash; Lead Finder</h3>
+          <div class="role">Finds Dog Owners Who Need You</div>
+          <p>Scours pet-owner communities, vet directories, breed-specific Facebook groups, local rescue networks, and boutique-retailer lists. Targets by dog breed (the dogs that actually need suspenders), geography, and owner spend signals. Delivers 40&ndash;60 qualified prospects a week &mdash; ranked, not dumped.</p>
+        </div>
+        <div class="catalog-tag">Quiet, steady, never misses a mark</div>
+      </div>
+
+      <div class="catalog-row">
+        <div class="catalog-idx">II.</div>
+        <div class="catalog-head">
+          <h3><em>Maggie</em> Pollitt &mdash; The Researcher</h3>
+          <div class="role">Reads Every Lead Like a Page</div>
+          <p>Takes every owner Brick surfaces and writes the one-line pitch. Breed mix, purchase history (Chewy Autoship? Etsy regular? BarkBox subscriber?), Instagram engagement, estimated pet-spend budget. The research Big Daddy needs before he commits to an approach.</p>
+        </div>
+        <div class="catalog-tag">Watches everything; misses nothing</div>
+      </div>
+
+      <div class="catalog-row">
+        <div class="catalog-idx">III.</div>
+        <div class="catalog-head">
+          <h3><em>Big Daddy</em> Pollitt &mdash; The Strategist</h3>
+          <div class="role">Sets the Play &mdash; Every Time</div>
+          <p>Reads Maggie's brief, picks the angle. DTC owner &mdash; Instagram DM. Pet boutique &mdash; wholesale catalog. Vet office &mdash; clinic display program. Rescue org &mdash; cause-tied collab. Big Daddy never runs the same play twice in a row. Nothing ships without his sign-off.</p>
+        </div>
+        <div class="catalog-tag">The patriarch &mdash; final word on every move</div>
+      </div>
+
+      <div class="catalog-row">
+        <div class="catalog-idx">IV.</div>
+        <div class="catalog-head">
+          <h3><em>Mae</em> Flynn &mdash; The Copywriter</h3>
+          <div class="role">Writes Every Word</div>
+          <p>Drafts every outbound asset &mdash; product descriptions that mention the breed by name, Instagram Reels captions in your voice, wholesale decks for retail buyers, custom pitches for rescues. Mae learns your brand tone and enforces it. No "best value! #1 seller!" nonsense.</p>
+        </div>
+        <div class="catalog-tag">The one who makes it sound like you</div>
+      </div>
+
+      <div class="catalog-row">
+        <div class="catalog-idx">V.</div>
+        <div class="catalog-head">
+          <h3><em>Gooper</em> Pollitt &mdash; Quality Control</h3>
+          <div class="role">The Audit Before Shipment</div>
+          <p>Reviews every piece of copy, every agent decision, every asset before anything goes out. Gooper&rsquo;s rule: if this doesn&rsquo;t sound like a person who actually owns a dog wrote it, it doesn&rsquo;t ship. The reason the system doesn&rsquo;t sound like marketing.</p>
+        </div>
+        <div class="catalog-tag">The one nobody wants to hear from — until they need him</div>
+      </div>
+
+      <div class="catalog-row">
+        <div class="catalog-idx">VI.</div>
+        <div class="catalog-head">
+          <h3><em>Big Mama</em> Pollitt &mdash; Outreach &amp; Retention</h3>
+          <div class="role">Sends, Follows Up, Brings Them Back</div>
+          <p>Runs the sequences. 3-touch cadence, auto-paused on any reply. Then the part every small-brand misses: the post-purchase follow-up that turns a one-pair buyer into a referral source. New-puppy reminder six months later. Review-prompt the week after delivery. The loop that makes a niche business profitable.</p>
+        </div>
+        <div class="catalog-tag">Fills the house; won&rsquo;t let anyone leave hungry</div>
+      </div>
+    </div>
+
+    <div class="spec-sheet">
+      <div class="spec-sheet-head">
+        <div class="title">Spec Sheet &mdash; <em>Dog Suspenders, Co.</em></div>
+        <div class="sub">What the team produces each week, at steady state</div>
+      </div>
+      <div class="spec-row"><span class="k">Qualified Leads Surfaced</span><span class="v">40–60 / week</span></div>
+      <div class="spec-row"><span class="k">Warm Outreach Sent</span><span class="v">30–40 / week</span></div>
+      <div class="spec-row"><span class="k">Retail / Wholesale Pitches</span><span class="v">3–5 / week</span></div>
+      <div class="spec-row"><span class="k">Vet-Clinic Approaches</span><span class="v">2–4 / week</span></div>
+      <div class="spec-row"><span class="k">Post-Sale Follow-ups</span><span class="v">Every order, automated</span></div>
+      <div class="spec-row"><span class="k">Human Effort Required</span><span class="v">2–3 hrs/week reviewing</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- § 04 — The Tiers -->
+<section class="section" style="background: var(--magnolia);">
+  <div class="wrap">
+    <div class="rule-kicker">Part Four · Investment</div>
+    <h2 class="section-title">Three hangtags,<br><em>three ways to buy.</em></h2>
+    <p class="lede">Same six-agent team. Same Spec Sheet above. The difference is who builds it and who runs it.</p>
+
+    <div class="hangtags">
+      <div class="hangtag">
+        <div class="h-tag">Tag № 1</div>
+        <div class="h-name">The Pattern</div>
+        <div class="h-price">$2,500</div>
+        <div class="h-unit">One-time · $400/mo after</div>
+        <p class="h-desc">You pick the angle. I deliver the architecture. You build.</p>
+        <ul class="h-items">
+          <li>Six-agent system spec + tool list</li>
+          <li>ICP + channel strategy for your angle</li>
+          <li>Voice training corpus assembled</li>
+          <li>Site + shop wireframe</li>
+          <li>Monthly check-in</li>
+        </ul>
+      </div>
+      <div class="hangtag feat">
+        <div class="h-tag">Tag № 2</div>
+        <div class="h-name">Made-to-Order</div>
+        <div class="h-price">$4,500</div>
+        <div class="h-unit">One-time · $800/mo ongoing</div>
+        <p class="h-desc">Full team deployed. I run it. You do the work only Ram can do.</p>
+        <ul class="h-items">
+          <li>All six agents built + deployed</li>
+          <li>30–40 warm touches per week</li>
+          <li>Shopify store built + live</li>
+          <li>Telegram command channel</li>
+          <li>Weekly Gooper report (what worked, what shipped)</li>
+          <li>Bi-weekly strategy call</li>
+          <li>Domain warmup included</li>
+        </ul>
+      </div>
+      <div class="hangtag">
+        <div class="h-tag">Tag № 3</div>
+        <div class="h-name">On the Books</div>
+        <div class="h-price">$3,000</div>
+        <div class="h-unit">Setup · $400/mo · $50/wholesale · 2% DTC</div>
+        <p class="h-desc">Lower retainer. I take a slice of what the system sells. Aligned incentives.</p>
+        <ul class="h-items">
+          <li>Full six-agent team deployed</li>
+          <li>Commission: $50 per wholesale account Brick sources</li>
+          <li>Commission: 2% of DTC revenue the system closes</li>
+          <li>12-month post-term attribution</li>
+          <li>Requires Brick + Big Mama to do lead-gen (they will)</li>
+          <li>For founders who want the team eating what they kill</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- § 05 — CTA -->
+<section class="cta">
+  <div class="cta-flourish">✦ &middot; The Next Step &middot; ✦</div>
+  <h2 class="cta-title">Pick the angle. <em>I&rsquo;ll pick up the line.</em></h2>
+  <p class="cta-deck">Thirty-minute call. We pick diaper, boot, or novelty. Price locks after. You keep the proposal either way.</p>
+  <a href="mailto:aylablumberg06@gmail.com?subject=Dog Suspenders — let's pick the angle" class="cta-btn">Book the Call &nbsp;→</a>
+</section>
+
+<footer class="foot">
+  <b>Ayla Intelligence</b> · Dallas, TX · Prepared 21 April 2026 · Set in Playfair Display, Libre Baskerville, and Cutive Mono
+</footer>
+
+</body>
+</html>
