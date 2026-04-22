@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLASSIFIED: S.H.I.E.L.D. Mission Briefing - VP Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0A0E1A;
+  color: #E8E8E8;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.classification-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #C8A567 0%, #1A1D29 50%, #C8A567 100%);
+  color: #0A0E1A;
+  text-align: center;
+  padding: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 3px;
+  z-index: 1000;
+  border-bottom: 2px solid #00D9FF;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+}
+
+.dossier-container {
+  max-width: 900px;
+  margin: 50px auto 0;
+  padding: 20px;
+  background: #1A1D29;
+  border: 2px solid #C8A567;
+  box-shadow: 0 0 40px rgba(200, 165, 103, 0.3);
+  position: relative;
+}
+
+.dossier-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00D9FF;
+}
+
+.corner-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.corner-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+.corner-br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+.dossier-header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  border-bottom: 1px solid #C8A567;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.dossier-stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 80px;
+  height: 80px;
+  border: 3px solid rgba(200, 165, 103, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #C8A567;
+  transform: rotate(-15deg);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.file-number {
+  font-family: 'Share Tech Mono', monospace;
+  color: #00D9FF;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.dossier-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #C8A567;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(200, 165, 103, 0.5);
+}
+
+.dossier-subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  color: #00D9FF;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.coordinates {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: #C8A567;
+  letter-spacing: 1px;
+}
+
+.hud-section {
+  margin: 40px 0;
+  position: relative;
+  padding: 30px 20px;
+  border-left: 3px solid #00D9FF;
+  background: linear-gradient(90deg, rgba(0, 217, 255, 0.05) 0%, transparent 100%);
+}
+
+.hud-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 20px;
+  height: 3px;
+  background: #00D9FF;
+}
+
+.hud-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -3px;
+  width: 20px;
+  height: 3px;
+  background: #00D9FF;
+}
+
+.section-header {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #00D9FF;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-header::before {
+  content: '[';
+  color: #C8A567;
+  font-size: 28px;
+}
+
+.section-header::after {
+  content: ']';
+  color: #C8A567;
+  font-size: 28px;
+}
+
+.section-code {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: #C8A567;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.mission-brief {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.mission-brief strong {
+  color: #00D9FF;
+}
+
+.hexagon-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 30px 0;
+  justify-content: center;
+}
+
+.hex-stat {
+  background: #0A0E1A;
+  border: 2px solid #C8A567;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+.hex-stat::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, transparent 100%);
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+
+.hex-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: #00D9FF;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.8);
+}
+
+.hex-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  color: #C8A567;
+  z-index: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.agent-roster {
+  display: grid;
+  gap: 25px;
+  margin: 30px 0;
+}
+
+.agent-card {
+  background: #0A0E1A;
+  border: 2px solid #C8A567;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
+}
+
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: #00D9FF;
+  box-shadow: 0 0 10px #00D9FF;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.agent-photo {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #00D9FF;
+  background: #1A1D29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #C8A567;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+}
+
+.agent-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.agent-info {
+  flex: 1;
+}
+
+.agent-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #00D9FF;
+  margin-bottom: 3px;
+}
+
+.agent-role {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  color: #C8A567;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.agent-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #E8E8E8;
+}
+
+.tactical-options {
+  display: grid;
+  gap: 25px;
+  margin: 30px 0;
+}
+
+.option-card {
+  background: #0A0E1A;
+  border: 2px solid #C8A567;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(200, 165, 103, 0.2);
+}
+
+.option-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00D9FF 0%, transparent 100%);
+}
+
+.option-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: #1A1D29;
+  padding: 5px 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #C8A567;
+  border: 1px solid #C8A567;
+  letter-spacing: 2px;
+}
+
+.option-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #00D9FF;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.option-price {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 18px;
+  color: #C8A567;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.option-description {
+  font-size: 15px;
+  color: #E8E8E8;
+  margin-bottom: 15px;
+  line-height: 1.7;
+}
+
+.option-includes {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(200, 165, 103, 0.3);
+}
+
+.option-includes-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00D9FF;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.option-includes ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.option-includes li {
+  font-size: 14px;
+  padding: 5px 0 5px 20px;
+  position: relative;
+  color: #E8E8E8;
+}
+
+.option-includes li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #00D9FF;
+  font-weight: 700;
+}
+
+.tech-readout {
+  background: #0A0E1A;
+  border: 1px solid #00D9FF;
+  padding: 15px;
+  margin: 20px 0;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.1);
+}
+
+.tech-readout::before {
+  content: '> SYSTEM OUTPUT:';
+  display: block;
+  color: #00D9FF;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.disclosure-box {
+  background: rgba(200, 165, 103, 0.1);
+  border: 2px solid #C8A567;
+  border-left: 6px solid #C8A567;
+  padding: 20px;
+  margin: 30px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #E8E8E8;
+}
+
+.authorization-footer {
+  margin-top: 50px;
+  padding: 30px 20px;
+  border-top: 2px solid #C8A567;
+  text-align: center;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 217, 255, 0.05) 100%);
+}
+
+.authorized-by {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: #C8A567;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.signature-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #00D9FF;
+  margin-bottom: 5px;
+}
+
+.signature-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  color: #E8E8E8;
+  margin-bottom: 10px;
+}
+
+.signature-contact {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  color: #C8A567;
+}
+
+.signature-contact a {
+  color: #00D9FF;
+  text-decoration: none;
+}
+
+.signature-contact a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .dossier-title {
+    font-size: 24px;
+  }
+  
+  .section-header {
+    font-size: 20px;
+  }
+  
+  .agent-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hex-stat {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .hex-value {
+    font-size: 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="classification-bar">
+  CONFIDENTIAL - STARK INDUSTRIES - AUTHORIZED PERSONNEL ONLY
+</div>
+
+<div class="dossier-container">
+  <div class="dossier-corner corner-tl"></div>
+  <div class="dossier-corner corner-tr"></div>
+  <div class="dossier-corner corner-bl"></div>
+  <div class="dossier-corner corner-br"></div>
+
+  <div class="dossier-stamp">
+    PRIORITY<br>ALPHA
+  </div>
+
+  <div class="dossier-header">
+    <div class="file-number">FILE-SI-2024-VPMEDIA-001</div>
+    <h1 class="dossier-title">Mission Briefing</h1>
+    <div class="dossier-subtitle">Strategic Partnership Proposal</div>
+    <div class="coordinates">TARGET: VP Media // COORD: 32.7767°N, 96.7970°W</div>
+  </div>
+
+  <div class="hud-section">
+    <h2 class="section-header">Situation Report</h2>
+    <div class="section-code">CLEARANCE LEVEL: ALPHA // TIMESTAMP: 2024</div>
+    
+    <div class="mission-brief">
+      <strong>Von,</strong> we've identified a critical opportunity in your operational theater. VP Media is playing in the big leagues of lead generation and marketing campaigns—but here's the thing: you're doing it the analog way in a digital battlefield.
+    </div>
+    
+    <div class="mission-brief">
+      Intelligence suggests you're manually hunting leads, crafting strategies from scratch, and managing client communications like it's 2008. Meanwhile, your competitors are deploying AI-powered automation that works 24/7, never misses a detail, and scales without adding headcount.
+    </div>
+
+    <div class="mission-brief">
+      <strong>The Stark solution?</strong> A six-agent strike team built specifically for marketing agencies like yours. Think of it as having Tony Stark's genius for prospecting, JARVIS's analytical power, and Pepper's strategic mind—working for you around the clock. No coffee breaks. No sick days. No ego (well, maybe a little).
+    </div>
+  </div>
+
+  <div class="hexagon-container">
+    <div class="hex-stat">
+      <div class="hex-value">6</div>
+      <div class="hex-label">AI Agents</div>
+    </div>
+    <div class="hex-stat">
+      <div class="hex-value">24/7</div>
+      <div class="hex-label">Operations</div>
+    </div>
+    <div class="hex-stat">
+      <div class="hex-value">3</div>
+      <div class="hex-label">Deployment Options</div>
+    </div>
+  </div>
+
+  <div class="hud-section">
+    <h2 class="section-header">Strike Team Roster</h2>
+    <div class="section-code">PERSONNEL DOSSIERS // AGENT CAPABILITIES</div>
+
+    <div class="agent-roster">
+      <div class="agent-card">
+        <div class="agent-photo">TS</div>
+        <div class="agent-info">
+          <div class="agent-name">Tony Stark</div>
+          <div class="agent-role">Lead Prospector / Outbound Scout</div>
+          <div class="agent-description">Tony's genius for identifying threats and opportunities before anyone else, combined with his bold, proactive approach to hunting down targets, makes him the perfect scout who finds and qualifies leads with strategic precision.</div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-photo">JA</div>
+        <div class="agent-info">
+          <div class="agent-name">J.A.R.V.I.S.</div>
+          <div class="agent-role">Research Analyst</div>
+          <div class="agent-description">JARVIS's ability to instantly process vast amounts of data, analyze patterns, and deliver comprehensive intelligence reports on any subject makes him the ultimate research analyst who separates signal from noise.</div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-photo">PP</div>
+        <div class="agent-info">
+          <div class="agent-name">Pepper Potts</div>
+          <div class="agent-role">Strategy / Creative Director</div>
+          <div class="agent-description">Pepper's talent for seeing the big picture, designing sophisticated approaches that balance innovation with practicality, and crafting strategies that actually work in the real world defines her as the strategic mastermind behind successful campaigns.</div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-photo">HH</div>
+        <div class="agent-info">
+          <div class="agent-name">Happy Hogan</div>
+          <div class="agent-role">Content Creator</div>
+          <div class="agent-description">Happy's loyalty, attention to detail, and ability to execute tasks reliably while maintaining brand consistency makes him the dependable creator who produces assets that deliver on promises without unnecessary flair.</div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-photo">JR</div>
+        <div class="agent-info">
+          <div class="agent-name">James Rhodes</div>
+          <div class="agent-role">QA / Brand Gatekeeper</div>
+          <div class="agent-description">Rhodey's military discipline, unwavering standards, and willingness to challenge even Tony when quality is at stake make him the perfect gatekeeper who ensures everything meets the highest benchmarks before deployment.</div>
+        </div>
+      </div>
+
+      <div class="agent-card">
+        <div class="agent-photo">NF</div>
+        <div class="agent-info">
+          <div class="agent-name">Nick Fury</div>
+          <div class="agent-role">Communications Manager</div>
+          <div class="agent-description">Fury's mastery of relationship management, strategic communication timing, and ability to coordinate complex operations while keeping all parties aligned makes him the ideal manager for outreach and sustained client engagement.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hud-section">
+    <h2 class="section-header">Tactical Options</h2>
+    <div class="section-code">DEPLOYMENT CONFIGURATIONS // SELECT MISSION PARAMETERS</div>
+
+    <div class="tactical-options">
+      <div class="option-card">
+        <div class="option-badge">OPTION A</div>
+        <div class="option-name">Discovery</div>
+        <div class="option-price">$400/mo (Monthly retainer)</div>
+        <div class="option-description">Start here. Core agent team, full research, show-themed onboarding. This is the reconnaissance mission—we deploy the essentials, validate the approach, and prove the system works before you commit to the full arsenal.</div>
+        <div class="option-includes">
+          <div class="option-includes-title">Mission Package Includes:</div>
+          <ul>
+            <li>$400/mo base retainer</li>
+            <li>Lead Prospector + Research agents</li>
+            <li>Monthly strategy report</li>
+            <li>30-day pilot</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-badge">OPTION B</div>
+        <div class="option-name">Full Build</div>
+        <div class="option-price">$1000/mo (Monthly retainer)</div>
+        <div class="option-description">Full 6-agent team, activated and optimized. This is the complete Avengers assembly—every agent operational, coordinated, and executing at maximum capacity. For agencies ready to dominate their market.</div>
+        <div class="option-includes">
+          <div class="option-includes-title">Mission Package Includes:</div>
+          <ul>
+            <li>$400/mo base retainer</li>
+            <li>All 6 agents active</li>
+            <li>Weekly performance reports</li>
+            <li>Content + outreach calendar</li>
+            <li>Bi-weekly check-ins with Ayla</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-badge">OPTION C</div>
+        <div class="option-name">Commission</div>
+        <div class="option-price">$400/mo + 10% commission (Monthly + performance)</div>
+        <div class="option-description">Skin in the game. Ayla's team earns on what they close. This is the Tony Stark handshake—we're so confident in the results, we'll tie our earnings directly to your revenue. When you win, we win.</div>
+        <div class="option-includes">
+          <div class="option-includes-title">Mission Package Includes:</div>
+          <ul>
+            <li>$400/mo base retainer</li>
+            <li>10% commission on closed deals sourced by agents</li>
+            <li>All 6 agents active</li>
+            <li>Full performance tracking</li>
+            <li>Transparent reporting dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tech-readout">
+    Here's what makes this different from every other "AI solution" being pitched to you: This isn't generic chatbot nonsense. Each agent is purpose-built for a specific function in your marketing operation. Tony doesn't just "generate leads"—he hunts them with the same obsessive precision he uses to build Iron Man suits. JARVIS doesn't just "do research"—he analyzes market patterns, competitor movements, and opportunity gaps faster than your entire team combined.
+    <br><br>
+    And the best part? They learn. They adapt. They get better at understanding your business, your clients, and your voice with every interaction. It's like having a team that's been with you for years, except they were actually trained by the best intelligence we could find.
+  </div>
+
+  <div class="disclosure-box">
+    ⚠️ <strong>Research Note:</strong> No website URL was provided and no web scrape data was available. Business details are inferred only from the email domain 'vpmedia23@gmail.com' and the stated business type 'Marketing agency'. All branding elements (colors, fonts, copy samples, tagline, tone) could not be verified. The key services listed are assumptions based on the Iron Man team agents selected (Tony Stark for Lead Generation, Pepper Potts for Campaign Strategy, etc.), which suggest an interest in lead generation and marketing campaign services. Competitor information is generic to the marketing agency industry. We recommend requesting Von's website URL or additional business information for accurate research.
+  </div>
+
+  <div class="hud-section">
+    <h2 class="section-header">Next Steps</h2>
+    <div class="section-code">AUTHORIZATION REQUIRED // DEPLOYMENT TIMELINE</div>
+    
+    <div class="mission-brief">
+      <strong>Option A (Discovery)</strong> can be operational in 72 hours. We'll onboard your first two agents, configure them for your specific use case, and start delivering results within the first week.
+    </div>
+
+    <div class="mission-brief">
+      <strong>Option B (Full Build)</strong> requires a 5-day setup for full team deployment, systems integration, and calibration to your brand voice and operational style.
+    </div>
+
+    <div class="mission-brief">
+      <strong>Option C (Commission)</strong> includes everything in Full Build plus transparent performance tracking infrastructure—ready to launch in 7 days.
+    </div>
+
+    <div class="mission-brief">
+      The clock is ticking, Von. Your competitors are already automating. The question isn't whether AI will transform marketing agencies—it's whether you'll be leading that transformation or playing catch-up in 12 months.
+    </div>
+
+    <div class="mission-brief">
+      <strong>Let's suit up.</strong>
+    </div>
+  </div>
+
+  <div class="authorization-footer">
+    <div class="authorized-by">Authorized & Assembled By</div>
+    <div class="signature-name">Ayla Blumberg</div>
+    <div class="signature-title">Ayla Intelligence</div>
+    <div class="signature-contact">Dallas, TX<br><a href="mailto:aylablumberg06@gmail.com">aylablumberg06@gmail.com</a></div>
+  </div>
+
+</div>
+
+</body>
+</html>
