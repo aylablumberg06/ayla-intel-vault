@@ -286,9 +286,18 @@ h2.section-title em { font-style: italic; color: var(--terra); }
   margin: 40px 0;
   border-top: 1px solid var(--ink);
 }
+.agent-portrait {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: sepia(.2) saturate(.85);
+  border: 2px solid var(--terracotta, #b8664a);
+  margin-top: 10px;
+  display: block;
+}
 .agent-row {
   display: grid;
-  grid-template-columns: 60px 1fr 180px;
+  grid-template-columns: 90px 1fr 180px;
   gap: 28px;
   padding: 36px 0;
   border-bottom: 1px solid var(--rule);
@@ -567,7 +576,7 @@ h1.cover-title { animation-delay: 0.15s; }
 
     <div class="agent-list">
       <div class="agent-row">
-        <div class="agent-n">01</div>
+        <div class="agent-n">01<img class="agent-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Rob_Lowe_2012_Shankbone_2.JPG/500px-Rob_Lowe_2012_Shankbone_2.JPG" alt="Billy Hicks"></div>
         <div class="agent-head">
           <h3>Billy &mdash; <em>the dallas homeowner finder</em></h3>
           <div class="role">Lead Research</div>
@@ -577,7 +586,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="agent-row">
-        <div class="agent-n">02</div>
+        <div class="agent-n">02<img class="agent-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Demi_Moore_at_WWD_Style_Awards_2026.jpg/500px-Demi_Moore_at_WWD_Style_Awards_2026.jpg" alt="Jules"></div>
         <div class="agent-head">
           <h3>Jules &mdash; <em>the intake interpreter</em></h3>
           <div class="role">Client Research</div>
@@ -587,7 +596,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="agent-row">
-        <div class="agent-n">03</div>
+        <div class="agent-n">03<img class="agent-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/MareWinningham-byPhilipRomano.jpg/500px-MareWinningham-byPhilipRomano.jpg" alt="Wendy"></div>
         <div class="agent-head">
           <h3>Wendy &mdash; <em>the matchmaker</em></h3>
           <div class="role">Designer Match</div>
@@ -597,7 +606,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="agent-row">
-        <div class="agent-n">04</div>
+        <div class="agent-n">04<img class="agent-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Andrew_McCarthy_by_Shankbone.jpg/500px-Andrew_McCarthy_by_Shankbone.jpg" alt="Kevin"></div>
         <div class="agent-head">
           <h3>Kevin &mdash; <em>the presenter</em></h3>
           <div class="role">Introduction Writing</div>
@@ -607,7 +616,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="agent-row">
-        <div class="agent-n">05</div>
+        <div class="agent-n">05<img class="agent-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Judd_Nelson_%28crop_2%29.jpg/500px-Judd_Nelson_%28crop_2%29.jpg" alt="Alec"></div>
         <div class="agent-head">
           <h3>Alec &mdash; <em>the quality gate</em></h3>
           <div class="role">Editorial Review</div>
@@ -617,7 +626,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="agent-row">
-        <div class="agent-n">06</div>
+        <div class="agent-n">06<img class="agent-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Emilio_Estevez_and_Martin_Sheen_%28cropped_to_Emilio%29.jpg/500px-Emilio_Estevez_and_Martin_Sheen_%28cropped_to_Emilio%29.jpg" alt="Kirby"></div>
         <div class="agent-head">
           <h3>Kirby &mdash; <em>the connector</em></h3>
           <div class="role">Warm Introductions</div>

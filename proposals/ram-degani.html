@@ -335,9 +335,17 @@ p.body em { color: var(--oxblood); font-style: italic; }
   border-bottom: 3px double var(--ink);
   margin: 40px 0;
 }
+.catalog-portrait {
+  width: 72px; height: 96px;
+  object-fit: cover;
+  filter: sepia(.45) contrast(.95);
+  border: 1px solid var(--oxblood);
+  margin-top: 8px;
+  display: block;
+}
 .catalog-row {
   display: grid;
-  grid-template-columns: 80px 1fr 180px;
+  grid-template-columns: 90px 1fr 180px;
   gap: 32px;
   padding: 28px 0;
   border-bottom: 1px solid var(--rule);
@@ -669,7 +677,7 @@ h1.cover-title { animation-delay: 0.15s; }
 
     <div class="catalog">
       <div class="catalog-row">
-        <div class="catalog-idx">I.</div>
+        <div class="catalog-idx">I.<img class="catalog-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Paul_Newman_-_1958.jpg/500px-Paul_Newman_-_1958.jpg" alt="Brick Pollitt"></div>
         <div class="catalog-head">
           <h3><em>Brick</em> Pollitt &mdash; Lead Finder</h3>
           <div class="role">Finds Dog Owners Who Need You</div>
@@ -679,7 +687,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="catalog-row">
-        <div class="catalog-idx">II.</div>
+        <div class="catalog-idx">II.<img class="catalog-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Taylor%2C_Elizabeth_posed.jpg/500px-Taylor%2C_Elizabeth_posed.jpg" alt="Maggie Pollitt"></div>
         <div class="catalog-head">
           <h3><em>Maggie</em> Pollitt &mdash; The Researcher</h3>
           <div class="role">Reads Every Lead Like a Page</div>
@@ -689,7 +697,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="catalog-row">
-        <div class="catalog-idx">III.</div>
+        <div class="catalog-idx">III.<img class="catalog-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Burl_Ives_-_Cat_on_a_Hot_Tin_Roof_%281958_press_photo%29_%28cropped%29.png/500px-Burl_Ives_-_Cat_on_a_Hot_Tin_Roof_%281958_press_photo%29_%28cropped%29.png" alt="Big Daddy Pollitt"></div>
         <div class="catalog-head">
           <h3><em>Big Daddy</em> Pollitt &mdash; The Strategist</h3>
           <div class="role">Sets the Play &mdash; Every Time</div>
@@ -699,7 +707,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="catalog-row">
-        <div class="catalog-idx">IV.</div>
+        <div class="catalog-idx">IV.<img class="catalog-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Madeleine_Sherwood_%28cropped%29.jpg/500px-Madeleine_Sherwood_%28cropped%29.jpg" alt="Mae Pollitt"></div>
         <div class="catalog-head">
           <h3><em>Mae</em> Flynn &mdash; The Copywriter</h3>
           <div class="role">Writes Every Word</div>
@@ -709,7 +717,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="catalog-row">
-        <div class="catalog-idx">V.</div>
+        <div class="catalog-idx">V.<img class="catalog-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Jack_Carson_becomes_a_US_citizen_%28cropped%29.jpg/500px-Jack_Carson_becomes_a_US_citizen_%28cropped%29.jpg" alt="Gooper Pollitt"></div>
         <div class="catalog-head">
           <h3><em>Gooper</em> Pollitt &mdash; Quality Control</h3>
           <div class="role">The Audit Before Shipment</div>
@@ -719,7 +727,7 @@ h1.cover-title { animation-delay: 0.15s; }
       </div>
 
       <div class="catalog-row">
-        <div class="catalog-idx">VI.</div>
+        <div class="catalog-idx">VI.<img class="catalog-portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Judith_Anderson.jpg/500px-Judith_Anderson.jpg" alt="Big Mama Pollitt"></div>
         <div class="catalog-head">
           <h3><em>Big Mama</em> Pollitt &mdash; Outreach &amp; Retention</h3>
           <div class="role">Sends, Follows Up, Brings Them Back</div>
