@@ -1230,7 +1230,6 @@ function renderProposals() {
     <div id="proposal-list" class="list-grid">
       ${list.length === 0 ? `<div class="card empty"><p class="empty-text">No proposals yet.</p></div>`
       : list.map(p => {
-        const total = (p.tiers||[]).reduce((s,t)=>s+(+t.price||0),0);
         return `
         <div class="card" style="padding: 22px;">
           <div class="item-row">
@@ -1240,7 +1239,7 @@ function renderProposals() {
                 <span class="pill pill-${p.status}">${p.status}</span>
               </div>
               <p style="font-size: 13px; color: var(--olive); margin-bottom: 10px;">
-                ${(p.tiers||[]).length} tier${(p.tiers||[]).length > 1 ? 's' : ''} · Total ${fmt$(total)}
+                ${(p.tiers||[]).length} tier${(p.tiers||[]).length > 1 ? 's' : ''} to choose from
                 ${p.sent_date ? ` · Sent ${esc(p.sent_date)}` : ''}
                 ${p.expiry ? ` · Expires ${esc(p.expiry)}` : ''}
               </p>
