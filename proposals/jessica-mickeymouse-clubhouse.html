@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mickey's Clubhouse Activity Planner | Beyond Dreams Travel Co Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600&family=Chewy&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #FFF9E6;
+  color: #2C2C2C;
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Clubhouse Header Banner */
+.clubhouse-header {
+  background: linear-gradient(135deg, #E4002B 0%, #FFC72C 100%);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-bottom: 8px solid #2C2C2C;
+  position: relative;
+  overflow: hidden;
+}
+
+.clubhouse-header::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+.clubhouse-header::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+.clubhouse-header h1 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FFF9E6;
+  text-shadow: 3px 3px 0 #2C2C2C;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.clubhouse-header .subtitle {
+  font-family: 'Chewy', cursive;
+  font-size: 1.3rem;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 0 #2C2C2C;
+  position: relative;
+  z-index: 1;
+}
+
+.clubhouse-header .tagline {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  color: #FFF9E6;
+  margin-top: 1rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mickey Ear Divider */
+.mickey-ears-divider {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.mickey-ears {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 60px;
+}
+
+.mickey-ears .ear-left,
+.mickey-ears .ear-right,
+.mickey-ears .head {
+  background: #2C2C2C;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.mickey-ears .ear-left {
+  width: 40px;
+  height: 40px;
+  top: 0;
+  left: 0;
+}
+
+.mickey-ears .ear-right {
+  width: 40px;
+  height: 40px;
+  top: 0;
+  right: 0;
+}
+
+.mickey-ears .head {
+  width: 50px;
+  height: 50px;
+  bottom: 0;
+  left: 15px;
+}
+
+/* Bow-tie Divider */
+.bowtie-divider {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.bowtie {
+  display: inline-block;
+  width: 60px;
+  height: 40px;
+  background: #E4002B;
+  position: relative;
+  clip-path: polygon(0 50%, 40% 0, 40% 40%, 60% 40%, 60% 0, 100% 50%, 60% 100%, 60% 60%, 40% 60%, 40% 100%);
+}
+
+/* Activity Card Sections */
+.activity-card {
+  background: #FFFFFF;
+  border-radius: 30px;
+  padding: 2rem 1.5rem;
+  margin: 1.5rem 1rem;
+  box-shadow: 0 8px 0 #2C2C2C, 0 12px 20px rgba(0,0,0,0.15);
+  border: 4px solid #2C2C2C;
+  position: relative;
+}
+
+.activity-card h2 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #E4002B;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.activity-card h3 {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #00A4E4;
+  margin: 1.5rem 0 1rem 0;
+}
+
+.activity-card p {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.activity-card ul {
+  list-style: none;
+  margin: 1rem 0;
+  padding-left: 0;
+}
+
+.activity-card ul li {
+  padding-left: 2rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  font-size: 1.05rem;
+}
+
+.activity-card ul li::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  color: #FFC72C;
+  font-size: 1.3rem;
+}
+
+/* Mousketool Callout Boxes */
+.mousketool-box {
+  background: linear-gradient(135deg, #00A4E4 0%, #0088CC 100%);
+  border: 4px solid #2C2C2C;
+  border-radius: 25px;
+  padding: 1.5rem;
+  margin: 2rem 1rem;
+  box-shadow: 0 6px 0 #2C2C2C;
+  position: relative;
+}
+
+.mousketool-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.mousketool-icon {
+  width: 60px;
+  height: 60px;
+  background: #FFC72C;
+  border-radius: 50%;
+  border: 4px solid #2C2C2C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.mousketool-header h3 {
+  font-family: 'Chewy', cursive;
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 2px 2px 0 #2C2C2C;
+}
+
+.mousketool-box p {
+  color: #FFFFFF;
+  font-size: 1.05rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Oh Toodles Note Box */
+.toodles-note {
+  background: #FFC72C;
+  border: 4px dashed #E4002B;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 2rem 1rem;
+  position: relative;
+}
+
+.toodles-note::before {
+  content: 'Oh Toodles!';
+  font-family: 'Chewy', cursive;
+  font-size: 1.3rem;
+  color: #E4002B;
+  position: absolute;
+  top: -1rem;
+  left: 1.5rem;
+  background: #FFF9E6;
+  padding: 0.25rem 1rem;
+  border: 3px solid #E4002B;
+  border-radius: 15px;
+}
+
+.toodles-note p {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+  color: #2C2C2C;
+  font-weight: 600;
+}
+
+/* Character Cards Container */
+.clubhouse-friends {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 1rem;
+}
+
+@media (min-width: 600px) {
+  .clubhouse-friends {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.friend-card {
+  background: #FFFFFF;
+  border: 4px solid #2C2C2C;
+  border-radius: 25px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 6px 0 #2C2C2C;
+  transition: transform 0.2s;
+}
+
+.friend-card:hover {
+  transform: translateY(-5px);
+}
+
+.friend-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid #E4002B;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFC72C;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 0 #2C2C2C;
+}
+
+.friend-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.friend-name {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #E4002B;
+  margin-bottom: 0.5rem;
+}
+
+.friend-role {
+  font-family: 'Chewy', cursive;
+  font-size: 1.1rem;
+  color: #00A4E4;
+  margin-bottom: 0.75rem;
+}
+
+.friend-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #2C2C2C;
+}
+
+/* Hot Dog Dance Celebration Banner */
+.hotdog-banner {
+  background: linear-gradient(135deg, #E4002B 0%, #FFC72C 50%, #00A4E4 100%);
+  border: 6px solid #2C2C2C;
+  border-radius: 30px;
+  padding: 2rem 1.5rem;
+  margin: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 8px 0 #2C2C2C, 0 12px 20px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.hotdog-banner::before {
+  content: '🎉';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 2rem;
+  animation: bounce 1s infinite;
+}
+
+.hotdog-banner::after {
+  content: '🎉';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  animation: bounce 1s infinite 0.5s;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hotdog-banner h2 {
+  font-family: 'Chewy', cursive;
+  font-size: 2.2rem;
+  color: #FFFFFF;
+  text-shadow: 3px 3px 0 #2C2C2C;
+  margin-bottom: 1rem;
+}
+
+.hotdog-banner p {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  font-weight: 600;
+  text-shadow: 2px 2px 0 #2C2C2C;
+}
+
+/* Pricing Activity Cards */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 1rem;
+}
+
+@media (min-width: 700px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pricing-option {
+  background: #FFFFFF;
+  border: 5px solid #2C2C2C;
+  border-radius: 25px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 8px 0 #2C2C2C;
+  position: relative;
+}
+
+.pricing-option.featured {
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFFFFF 100%);
+  border-color: #E4002B;
+  transform: scale(1.02);
+}
+
+.pricing-label {
+  font-family: 'Chewy', cursive;
+  font-size: 1.8rem;
+  color: #E4002B;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-subtitle {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  color: #00A4E4;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.pricing-amount {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2C2C2C;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-period {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.pricing-features li {
+  padding-left: 1.75rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.pricing-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #E4002B;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Disclosure Box */
+.disclosure-box {
+  background: #FFC72C;
+  border: 3px solid #E4002B;
+  border-radius: 15px;
+  padding: 1.25rem;
+  margin: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #2C2C2C;
+  line-height: 1.6;
+}
+
+/* Sign-off Section */
+.signoff-section {
+  background: #FFFFFF;
+  border-radius: 25px;
+  border: 4px solid #2C2C2C;
+  padding: 2rem 1.5rem;
+  margin: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 6px 0 #2C2C2C;
+}
+
+.signoff-section p {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.1rem;
+  color: #2C2C2C;
+  margin-bottom: 0.5rem;
+}
+
+.signoff-section .company {
+  font-weight: 700;
+  color: #E4002B;
+}
+
+.signoff-section .email {
+  color: #00A4E4;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signoff-section .email:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.clubhouse-footer {
+  background: #2C2C2C;
+  color: #FFF9E6;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.clubhouse-footer p {
+  font-family: 'Chewy', cursive;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Clubhouse Header -->
+  <div class="clubhouse-header">
+    <h1>🏰 Mickey's Clubhouse Activity Planner 🏰</h1>
+    <div class="subtitle">for Beyond Dreams Travel Co</div>
+    <div class="tagline">Where Magical Vacations Begin</div>
+  </div>
+
+  <!-- Opening Activity Card -->
+  <div class="activity-card">
+    <h2>Hot Dog! Let's Start Our Adventure!</h2>
+    <p>Hi there, Jessica! It's Mickey here, and boy oh boy, do we have an exciting activity planned for Beyond Dreams Travel Co today! We've been watching how you turn vacation wishes into reality for over 9 years, helping families go from overwhelming to effortless – and that's just swell!</p>
+    <p>Today in the clubhouse, we're going to solve a super-special puzzle together: How can we help MORE families discover the magical, stress-free vacation planning you offer? With our Mousketools and a whole lot of teamwork, we're going to make something really special happen!</p>
+    <p>Are you ready to see our activity plan? Say it with me: "Meeska, Mooska, Mickey Mouse!" Let's get started!</p>
+  </div>
+
+  <div class="mickey-ears-divider">
+    <div class="mickey-ears">
+      <div class="ear-left"></div>
+      <div class="ear-right"></div>
+      <div class="head"></div>
+    </div>
+  </div>
+
+  <!-- The Challenge Card -->
+  <div class="activity-card">
+    <h2>Today's Clubhouse Challenge</h2>
+    <p>Every great adventure starts with understanding what we're trying to solve! Here's what we've noticed about families who need your magical touch:</p>
+    
+    <h3>The Problem We're Solving Together:</h3>
+    <ul>
+      <li>Families dream of Disney destinations, Universal Studios, cruises, and tropical all-inclusive resorts – but they feel overwhelmed by all the planning</li>
+      <li>They spend hours doing endless research when they could be getting excited about their trip</li>
+      <li>They don't know that expert planning services can be completely complimentary</li>
+      <li>They're missing out on Adventures by Disney and personalized itinerary creation that takes away all the stress</li>
+    </ul>
+
+    <h3>What We Know About Your Magic:</h3>
+    <ul>
+      <li>You've been turning vacation wishes into reality for over 9 years</li>
+      <li>You offer complimentary personalized itinerary creation – that's your promise!</li>
+      <li>You specialize in Disney Destinations, Universal Studios vacations, ocean and river cruises, and tropical all-inclusive resorts</li>
+      <li>You weave travel planning magic so families can focus on creating priceless memories with loved ones</li>
+      <li>You help families go "from overwhelming to effortless"</li>
+    </ul>
+  </div>
+
+  <!-- Mousketool Box - The Solution -->
+  <div class="mousketool-box">
+    <div class="mousketool-header">
+      <div class="mousketool-icon">🛠️</div>
+      <h3>Our Special Mousketool for This Challenge!</h3>
+    </div>
+    <p>We're going to use our Clubhouse Helper Team – six special friends who each have unique talents – to find families who need your vacation planning magic, learn what they're dreaming about, create personalized outreach, and help them discover that stress-free, magical vacations really do begin with Beyond Dreams Travel Co!</p>
+  </div>
+
+  <div class="bowtie-divider">
+    <div class="bowtie"></div>
+  </div>
+
+  <!-- Meet the Clubhouse Friends -->
+  <div class="activity-card">
+    <h2>Meet Your Clubhouse Helper Team!</h2>
+    <p>Gosh, we have the BEST team assembled in the clubhouse today! Each friend has a special job to help us complete our activity. Let's meet everyone who'll be working together to help Beyond Dreams Travel Co reach more families!</p>
+  </div>
+
+  <div class="clubhouse-friends">
+    
+    <div class="friend-card">
+      <div class="friend-photo">
+        <div>MM</div>
+      </div>
+      <div class="friend-name">Mickey Mouse</div>
+      <div class="friend-role">Lead Prospector / Outbound Scout</div>
+      <div class="friend-description">Mickey's natural leadership, optimism, and ability to spot fun opportunities in every situation makes him the perfect scout to identify families ready for magical vacation experiences.</div>
+    </div>
+
+    <div class="friend-card">
+      <div class="friend-photo">
+        <div>LV</div>
+      </div>
+      <div class="friend-name">Professor Ludwig Von Drake</div>
+      <div class="friend-role">Research Analyst</div>
+      <div class="friend-description">Von Drake's encyclopedic knowledge, scientific approach, and passion for studying everything in exhaustive detail makes him ideal for deep-diving into prospect travel preferences and family dynamics.</div>
+    </div>
+
+    <div class="friend-card">
+      <div class="friend-photo">
+        <div>MM</div>
+      </div>
+      <div class="friend-name">Minnie Mouse</div>
+      <div class="friend-role">Strategy / Creative Director</div>
+      <div class="friend-description">Minnie's creative problem-solving, elegant planning style, and knack for personalizing every celebration to match individual tastes perfectly suits designing bespoke vacation strategies.</div>
+    </div>
+
+    <div class="friend-card">
+      <div class="friend-photo">
+        <div>G</div>
+      </div>
+      <div class="friend-name">Goofy</div>
+      <div class="friend-role">Content Creator</div>
+      <div class="friend-description">Goofy's imaginative storytelling, enthusiasm for sharing helpful tips (even unconventional ones), and ability to make complex tasks feel fun translates perfectly to crafting engaging itineraries and vacation proposals.</div>
+    </div>
+
+    <div class="friend-card">
+      <div class="friend-photo">
+        <div>DD</div>
+      </div>
+      <div class="friend-name">Daisy Duck</div>
+      <div class="friend-role">QA / Brand Gatekeeper</div>
+      <div class="friend-description">Daisy's high standards, attention to detail, and refusal to accept anything less than perfection makes her the natural quality guardian who ensures every plan meets premium service expectations.</div>
+    </div>
+
+    <div class="friend-card">
+      <div class="friend-photo">
+        <div>DD</div>
+      </div>
+      <div class="friend-name">Donald Duck</div>
+      <div class="friend-role">Communications Manager</div>
+      <div class="friend-description">Despite his temper, Donald's loyalty and persistence in following through with his friends, plus his eventual warmth once he connects, mirrors the patient nurturing required for ongoing client relationship management.</div>
+    </div>
+
+  </div>
+
+  <div class="mickey-ears-divider">
+    <div class="mickey-ears">
+      <div class="ear-left"></div>
+      <div class="ear-right"></div>
+      <div class="head"></div>
+    </div>
+  </div>
+
+  <!-- How Our Team Works Together -->
+  <div class="activity-card">
+    <h2>Our Clubhouse Activity Plan</h2>
+    <p>Now that we've met everyone, let's see how our helper team works together – just like when we solve problems in the clubhouse! Each friend has a special part to play:</p>
+    
+    <h3>Step 1: Scouting for Adventure Seekers</h3>
+    <p><strong>Mickey</strong> leads the way, using his keen eye to spot families who are dreaming about magical vacations. He looks for folks planning Disney trips, considering cruises, or thinking about tropical getaways – people who don't yet know about your complimentary personalized planning services!</p>
+
+    <h3>Step 2: Learning All About Them</h3>
+    <p><strong>Professor Von Drake</strong> puts on his thinking cap and dives deep into research. He studies what each family loves, what kind of adventures they're dreaming about, and what would make their vacation truly magical. The more we know, the better we can help!</p>
+
+    <h3>Step 3: Creating the Perfect Plan</h3>
+    <p><strong>Minnie</strong> takes all that research and designs a beautiful, personalized strategy. She thinks about what would speak to each family's heart – whether it's stress-free Disney planning, Adventures by Disney, or a relaxing cruise – and crafts the perfect approach.</p>
+
+    <h3>Step 4: Sharing the Magic</h3>
+    <p><strong>Goofy</strong> brings the fun by creating engaging messages and content that help families see just how effortless vacation planning can be. He tells your story in a way that makes families excited to learn more about turning their vacation wishes into reality!</p>
+
+    <h3>Step 5: Making Sure Everything's Perfect</h3>
+    <p><strong>Daisy</strong> checks every detail with her expert eye. She makes sure every message matches your warm, magical, and reassuring brand tone, and that we're living up to the premium service families expect from Beyond Dreams Travel Co.</p>
+
+    <h3>Step 6: Building Lasting Friendships</h3>
+    <p><strong>Donald</strong> stays connected with families, answering questions, sharing helpful information, and nurturing those relationships until they're ready to let you weave your travel planning magic for them!</p>
+  </div>
+
+  <!-- Mousketool Box - Results -->
+  <div class="mousketool-box">
+    <div class="mousketool-header">
+      <div class="mousketool-icon">✨</div>
+      <h3>The Magic We'll Create Together!</h3>
+    </div>
+    <p>With our whole clubhouse team working together, we'll help you reach families who need your expertise, show them that magical, stress-free vacations really do begin with Beyond Dreams Travel Co, and help more people discover that your expert planning services are completely complimentary. We'll turn "overwhelming" into "effortless" – one family at a time!</p>
+  </div>
+
+  <div class="bowtie-divider">
+    <div class="bowtie"></div>
+  </div>
+
+  <!-- Hot Dog Dance - Pricing Intro -->
+  <div class="hotdog-banner">
+    <h2>Hot Dog, Hot Dog, Hot Diggity Dog!</h2>
+    <p>Now it's time to pick YOUR clubhouse adventure level!</p>
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="activity-card">
+    <h2>Choose Your Clubhouse Activity Level</h2>
+    <p>We've created three different ways to work together in the clubhouse – each one designed to fit right where you are on your adventure! Pick the one that feels just right for Beyond Dreams Travel Co:</p>
+  </div>
+
+  <div class="pricing-grid">
+    
+    <div class="pricing-option">
+      <div class="pricing-label">Discovery</div>
+      <div class="pricing-subtitle">Start here</div>
+      <div class="pricing-amount">$400</div>
+      <div class="pricing-period">per month</div>
+      <p style="font-size: 0.95rem; margin-bottom: 1.5rem; color: #666;">Core agent team, full research, show-themed onboarding</p>
+      <ul class="pricing-features">
+        <li>$400/mo base retainer</li>
+        <li>Lead Prospector + Research agents</li>
+        <li>Monthly strategy report</li>
+        <li>30-day pilot</li>
+      </ul>
+    </div>
+
+    <div class="pricing-option featured">
+      <div class="pricing-label">Full Build</div>
+      <div class="pricing-subtitle">Full 6-agent team</div>
+      <div class="pricing-amount">$1,000</div>
+      <div class="pricing-period">per month</div>
+      <p style="font-size: 0.95rem; margin-bottom: 1.5rem; color: #666;">Full 6-agent team, activated and optimized</p>
+      <ul class="pricing-features">
+        <li>$400/mo base retainer</li>
+        <li>All 6 agents active</li>
+        <li>Weekly performance reports</li>
+        <li>Content + outreach calendar</li>
+        <li>Bi-weekly check-ins with Ayla</li>
+      </ul>
+    </div>
+
+    <div class="pricing-option">
+      <div class="pricing-label">Commission</div>
+      <div class="pricing-subtitle">Skin in the game</div>
+      <div class="pricing-amount">$400</div>
+      <div class="pricing-period">+ 10% commission</div>
+      <p style="font-size: 0.95rem; margin-bottom: 1.5rem; color: #666;">Ayla's team earns on what they close</p>
+      <ul class="pricing-features">
+        <li>$400/mo base retainer</li>
+        <li>10% commission on closed deals sourced by agents</li>
+        <li>All 6 agents active</li>
+        <li>Full performance tracking</li>
+        <li>Transparent reporting dashboard</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="toodles-note">
+    <p>Every option includes our complete clubhouse team spirit – warm, supportive, and focused on helping more families discover your magical vacation planning services. We're in this together, and we'll celebrate every success along the way!</p>
+  </div>
+
+  <div class="mickey-ears-divider">
+    <div class="mickey-ears">
+      <div class="ear-left"></div>
+      <div class="ear-right"></div>
+      <div class="head"></div>
+    </div>
+  </div>
+
+  <!-- What Happens Next Card -->
+  <div class="activity-card">
+    <h2>What Happens Next in Our Clubhouse?</h2>
+    <p>Gosh, we're so excited to get started! Here's what our next adventure steps look like:</p>
+    
+    <ul>
+      <li><strong>You pick your activity level</strong> – Discovery, Full Build, or Commission – whichever feels right for Beyond Dreams Travel Co</li>
+      <li><strong>We gather 'round the clubhouse table</strong> for a fun kick-off meeting where we learn even more
