@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[CLASSIFIED] Operation BELLA CIAO — Strategic Intelligence Dossier</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:500;700&family=Archivo+Narrow:400;600&family=Roboto+Mono:400&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Archivo Narrow', sans-serif;
+  background-color: #F5F1E8;
+  color: #2B2B2B;
+  line-height: 1.6;
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(196, 30, 58, 0.03) 19px, rgba(196, 30, 58, 0.03) 20px),
+    repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(196, 30, 58, 0.03) 19px, rgba(196, 30, 58, 0.03) 20px);
+  background-size: 20px 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Security Header Stamp */
+.security-header {
+  background: #1A1A1A;
+  color: #F5F1E8;
+  padding: 15px 20px;
+  border-left: 5px solid #C41E3A;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.security-header::before {
+  content: 'CLASSIFIED';
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%) rotate(-15deg);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: rgba(196, 30, 58, 0.2);
+  letter-spacing: 4px;
+}
+
+.security-stamp {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #D4AF37;
+}
+
+.operation-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #C41E3A;
+  margin-top: 5px;
+  letter-spacing: 1px;
+}
+
+.clearance-level {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  margin-top: 8px;
+  color: #D4AF37;
+}
+
+/* Stamp Accent */
+.stamp-box {
+  display: inline-block;
+  border: 3px solid #C41E3A;
+  padding: 8px 16px;
+  transform: rotate(-2deg);
+  margin: 20px 0;
+  background: rgba(196, 30, 58, 0.05);
+}
+
+.stamp-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #C41E3A;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Disclosure Box */
+.disclosure-box {
+  background: #1A1A1A;
+  color: #F5F1E8;
+  padding: 20px;
+  margin: 30px 0;
+  border: 2px dashed #C41E3A;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Phase Sections */
+.phase-section {
+  background: white;
+  margin: 30px 0;
+  padding: 25px;
+  border: 2px solid #1A1A1A;
+  box-shadow: 4px 4px 0 rgba(26, 26, 26, 0.2);
+  position: relative;
+}
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #C41E3A;
+}
+
+.phase-number {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #C41E3A;
+  line-height: 1;
+  min-width: 60px;
+}
+
+.phase-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A1A1A;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.phase-codename {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  color: #D4AF37;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.phase-content {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.phase-content p {
+  margin-bottom: 15px;
+}
+
+/* Mission Parameters Box */
+.mission-parameter {
+  background: #F5F1E8;
+  border-left: 4px solid #D4AF37;
+  padding: 15px 20px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.parameter-label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C41E3A;
+  margin-bottom: 8px;
+}
+
+.parameter-value {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+/* Agent Dossier Cards */
+.agent-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin: 25px 0;
+}
+
+@media (min-width: 600px) {
+  .agent-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.agent-card {
+  background: white;
+  border: 2px solid #1A1A1A;
+  padding: 20px;
+  position: relative;
+  box-shadow: 3px 3px 0 rgba(26, 26, 26, 0.15);
+}
+
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(196, 30, 58, 0.1) 2px, rgba(196, 30, 58, 0.1) 4px);
+}
+
+.agent-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.agent-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid #C41E3A;
+  background: #1A1A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.agent-initials {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #D4AF37;
+}
+
+.agent-info {
+  flex: 1;
+}
+
+.agent-codename {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #C41E3A;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.agent-role {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1A1A1A;
+  margin-bottom: 10px;
+}
+
+.agent-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2B2B2B;
+}
+
+/* Pricing Tiers - Blueprint Style */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  margin: 30px 0;
+}
+
+@media (min-width: 600px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pricing-tier {
+  background: white;
+  border: 3px solid #1A1A1A;
+  padding: 0;
+  position: relative;
+  box-shadow: 5px 5px 0 rgba(196, 30, 58, 0.2);
+}
+
+.tier-header {
+  background: #1A1A1A;
+  color: #F5F1E8;
+  padding: 20px;
+  border-bottom: 3px solid #C41E3A;
+}
+
+.tier-option {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #D4AF37;
+}
+
+.tier-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #C41E3A;
+  margin: 8px 0;
+}
+
+.tier-price {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #F5F1E8;
+  margin-top: 10px;
+}
+
+.tier-model {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  color: #D4AF37;
+  margin-top: 5px;
+}
+
+.tier-body {
+  padding: 25px;
+}
+
+.tier-description {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1A1A1A;
+}
+
+.tier-includes {
+  margin-top: 15px;
+}
+
+.includes-label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C41E3A;
+  margin-bottom: 10px;
+}
+
+.tier-includes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tier-includes li {
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.tier-includes li:last-child {
+  border-bottom: none;
+}
+
+.tier-includes li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #C41E3A;
+  font-weight: bold;
+}
+
+/* Timeline Markers */
+.timeline-marker {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 25px 0;
+  padding: 15px 0;
+}
+
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  background: #C41E3A;
+  border-radius: 50%;
+  border: 3px solid #1A1A1A;
+  flex-shrink: 0;
+}
+
+.timeline-content {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.timeline-timestamp {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  color: #D4AF37;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Schematic Dividers */
+.schematic-divider {
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #1A1A1A, #1A1A1A 10px, transparent 10px, transparent 20px);
+  margin: 30px 0;
+  position: relative;
+}
+
+.schematic-divider::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #F5F1E8;
+  padding: 5px 15px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C41E3A;
+}
+
+/* Sign-off Section */
+.sign-off {
+  background: #1A1A1A;
+  color: #F5F1E8;
+  padding: 30px;
+  margin-top: 40px;
+  border: 2px solid #C41E3A;
+  text-align: center;
+}
+
+.sign-off-label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #D4AF37;
+  margin-bottom: 15px;
+}
+
+.sign-off-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #C41E3A;
+  margin-bottom: 8px;
+}
+
+.sign-off-title {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 16px;
+  color: #F5F1E8;
+  margin-bottom: 5px;
+}
+
+.sign-off-location {
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 14px;
+  color: #D4AF37;
+  margin-bottom: 10px;
+}
+
+.sign-off-contact {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  color: #F5F1E8;
+}
+
+.sign-off-contact a {
+  color: #D4AF37;
+  text-decoration: none;
+}
+
+.sign-off-contact a:hover {
+  text-decoration: underline;
+}
+
+/* Strategic Highlight */
+.strategic-highlight {
+  background: rgba(196, 30, 58, 0.05);
+  border-left: 5px solid #C41E3A;
+  padding: 20px;
+  margin: 20px 0;
+  font-weight: 600;
+  font-size: 17px;
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .operation-title {
+    font-size: 24px;
+  }
+  
+  .phase-number {
+    font-size: 36px;
+    min-width: 50px;
+  }
+  
+  .phase-title {
+    font-size: 22px;
+  }
+  
+  .tier-name {
+    font-size: 26px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Security Classification Header -->
+  <div class="security-header">
+    <div class="security-stamp">Security Clearance: Level 5 — Eyes Only</div>
+    <div class="operation-title">OPERATION BELLA CIAO</div>
+    <div class="clearance-level">Target: Alejandra's Clothing Brand / Classification: Pre-Launch Market Entry / Date: 2025</div>
+  </div>
+
+  <!-- Strategic Introduction -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <div class="phase-number">01</div>
+      <div>
+        <div class="phase-title">Mission Brief</div>
+        <div class="phase-codename">Strategic Assessment / Target Analysis</div>
+      </div>
+    </div>
+    <div class="phase-content">
+      <p>Every successful heist begins with precision intelligence. Every revolutionary brand begins the same way.</p>
+      
+      <p>Alejandra, you're standing at the threshold of something ambitious—a clothing brand in its formation stage, ready to break into a market that rewards those who plan meticulously and execute boldly. The fashion industry doesn't forgive improvisation, but it celebrates calculated risk.</p>
+      
+      <div class="strategic-highlight">
+        "The perfect plan is one where every detail has been anticipated, every variable accounted for, and every move serves the larger objective." — The Professor
+      </div>
+      
+      <p>This dossier outlines a strategic operation designed specifically for pre-launch brands: a six-agent intelligence team that will research your market, architect your positioning, craft your narrative, and execute precision outreach—all before you ever open your doors.</p>
+    </div>
+  </div>
+
+  <!-- Research Disclosure -->
+  <div class="disclosure-box">
+    ⚠️ <strong>Research Note:</strong> No website or online presence was available for research. This business is currently in the development phase with no public-facing brand materials. All insights are based solely on the prospect indicating they are building a clothing brand. We recommend direct consultation with Alejandra to gather accurate brand details, target market information, style direction, and business objectives before proceeding with strategic recommendations.
+  </div>
+
+  <!-- The Target / Mission Parameters -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <div class="phase-number">02</div>
+      <div>
+        <div class="phase-title">Target Profile</div>
+        <div class="phase-codename">Subject Intelligence / Market Position</div>
+      </div>
+    </div>
+    <div class="phase-content">
+      
+      <div class="mission-parameter">
+        <div class="parameter-label">Target Entity</div>
+        <div class="parameter-value">Alejandra's Clothing Brand</div>
+      </div>
+      
+      <div class="mission-parameter">
+        <div class="parameter-label">Industry Sector</div>
+        <div class="parameter-value">Fashion & Apparel (Pre-Launch)</div>
+      </div>
+      
+      <div class="mission-parameter">
+        <div class="parameter-label">Core Operations</div>
+        <div class="parameter-value">Clothing design and retail</div>
+      </div>
+      
+      <div class="mission-parameter">
+        <div class="parameter-label">Current Market Status</div>
+        <div class="parameter-value">Development Phase — No public-facing presence</div>
+      </div>
+      
+      <p style="margin-top: 25px;">The absence of an existing brand footprint isn't a weakness—it's an opportunity. With no legacy messaging to untangle, no misaligned positioning to correct, and no confused audience to retrain, you have the rarest advantage in marketing: a blank canvas combined with strategic foresight.</p>
+      
+      <p>The question isn't whether you can build a brand. The question is whether you'll build it strategically from the first customer interaction, or reactively after costly missteps.</p>
+    </div>
+  </div>
+
+  <div class="schematic-divider" data-label="Team Deployment"></div>
+
+  <!-- The Crew / Agent Profiles -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <div class="phase-number">03</div>
+      <div>
+        <div class="phase-title">The Crew</div>
+        <div class="phase-codename">Agent Roster / Tactical Assignments</div>
+      </div>
+    </div>
+    <div class="phase-content">
+      <p>Every operation requires specialists. Each agent in this crew brings a unique skill set, carefully matched to the demands of launching a clothing brand in a saturated market. These aren't generalists—they're operatives trained for specific phases of your market entry.</p>
+      
+      <div class="stamp-box">
+        <div class="stamp-text">Six Agents / Full Deployment</div>
+      </div>
+      
+      <div class="agent-grid">
+        
+        <!-- Agent 1: Tokyo -->
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-photo">
+              <div class="agent-initials">T</div>
+            </div>
+            <div class="agent-info">
+              <div class="agent-codename">Tokyo</div>
+              <div class="agent-role">Lead Prospector / Outbound Scout</div>
+            </div>
+          </div>
+          <div class="agent-description">
+            Tokyo's impulsive, high-energy nature and talent for reconnaissance makes her perfect for hunting down leads and diving into new territory without hesitation.
+          </div>
+        </div>
+        
+        <!-- Agent 2: Berlin -->
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-photo">
+              <div class="agent-initials">B</div>
+            </div>
+            <div class="agent-info">
+              <div class="agent-codename">Berlin</div>
+              <div class="agent-role">Research Analyst</div>
+            </div>
+          </div>
+          <div class="agent-description">
+            Berlin's meticulous attention to detail, refined taste, and ability to read people and situations makes him the ideal analyst for deep prospect research.
+          </div>
+        </div>
+        
+        <!-- Agent 3: Professor -->
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-photo">
+              <div class="agent-initials">P</div>
+            </div>
+            <div class="agent-info">
+              <div class="agent-codename">Professor</div>
+              <div class="agent-role">Strategy / Creative Director</div>
+            </div>
+          </div>
+          <div class="agent-description">
+            The Professor's genius for designing elaborate, multi-layered plans and anticipating every variable makes him the natural mastermind behind messaging strategy.
+          </div>
+        </div>
+        
+        <!-- Agent 4: Nairobi -->
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-photo">
+              <div class="agent-initials">N</div>
+            </div>
+            <div class="agent-info">
+              <div class="agent-codename">Nairobi</div>
+              <div class="agent-role">Content Creator</div>
+            </div>
+          </div>
+          <div class="agent-description">
+            Nairobi's creative problem-solving, passionate energy, and ability to craft something beautiful under pressure makes her the perfect hands-on content producer.
+          </div>
+        </div>
+        
+        <!-- Agent 5: Helsinki -->
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-photo">
+              <div class="agent-initials">H</div>
+            </div>
+            <div class="agent-info">
+              <div class="agent-codename">Helsinki</div>
+              <div class="agent-role">QA / Brand Gatekeeper</div>
+            </div>
+          </div>
+          <div class="agent-description">
+            Helsinki's steady reliability, protective instincts, and unwavering commitment to the team's integrity makes him the trusted guardian of quality standards.
+          </div>
+        </div>
+        
+        <!-- Agent 6: Lisbon -->
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-photo">
+              <div class="agent-initials">L</div>
+            </div>
+            <div class="agent-info">
+              <div class="agent-codename">Lisbon</div>
+              <div class="agent-role">Communications Manager</div>
+            </div>
+          </div>
+          <div class="agent-description">
+            Lisbon's exceptional negotiation skills, emotional intelligence, and experience managing high-stakes conversations makes her the perfect frontline communicator.
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="schematic-divider" data-label="Operational Timeline"></div>
+
+  <!-- The Plan / What Happens -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <div class="phase-number">04</div>
+      <div>
+        <div class="phase-title">Execution Strategy</div>
+        <div class="phase-codename">Phase Deployment / Operational Timeline</div>
+      </div>
+    </div>
+    <div class="phase-content">
+      <p>Every heist has phases. So does every brand launch. Here's how the crew deploys once the operation goes live:</p>
+      
+      <div class="timeline-marker">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-timestamp">Phase 1: Reconnaissance (Days 1-7)</div>
+          <strong>Tokyo</strong> and <strong>Berlin</strong> begin deep market intelligence—competitor analysis, audience psychographics, positioning gaps in the apparel space. They map the landscape so you know exactly where to strike.
+        </div>
+      </div>
+      
+      <div class="timeline-marker">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-timestamp">Phase 2: Strategic Architecture (Days 8-14)</div>
+          <strong>The Professor</strong> takes intelligence reports and architects your brand narrative, messaging pillars, and audience segmentation strategy. This is where your positioning crystallizes.
+        </div>
+      </div>
+      
+      <div class="timeline-marker">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-timestamp">Phase 3: Content Production (Days 15-21)</div>
+          <strong>Nairobi</strong> translates strategy into tangible assets—social content frameworks, email sequences, brand voice documentation, visual identity guidelines. Everything you need to communicate consistently.
+        </div>
+      </div>
+      
+      <div class="timeline-marker">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-timestamp">Phase 4: Quality Assurance (Days 22-25)</div>
+          <strong>Helsinki</strong> stress-tests every asset, every message, every customer touchpoint. Nothing leaves the operation until it meets brand integrity standards.
+        </div>
+      </div>
+      
+      <div class="timeline-marker">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-timestamp">Phase 5: Market Engagement (Days 26-30+)</div>
+          <strong>Lisbon</strong> initiates outreach—partnership conversations, influencer engagement, retail discussions, customer acquisition sequences. She's the voice that turns strategy into relationships.
+        </div>
+      </div>
+      
+      <div class="strategic-highlight" style="margin-top: 30px;">
+        This isn't a one-time project. It's an ongoing intelligence operation that adapts as your brand evolves, your market shifts, and new opportunities emerge.
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="schematic-divider" data-label="Investment Structure"></div>
+
+  <!-- Pricing Tiers -->
+  <div class="phase-section">
+    <div class="phase-header">
+      <div class="phase-number">05</div>
+      <div>
+        <div class="phase-title">Investment Options</div>
+        <div class="phase-codename">Engagement Models / Resource Allocation</div>
+      </div>
+    </div>
+    <div class="phase-content">
+      <p>Three operational tiers. Each designed for a different level of commitment, speed, and strategic depth. Choose the model that matches your timeline and risk tolerance.</p>
+      
+      <div class="pricing-grid">
+        
+        <!-- Option A -->
+        <div class="pricing-tier">
+          <div class="tier-header">
+            <div class="tier-option">Option A</div>
+            <div class="tier-name">Discovery</div>
+            <div class="tier-price">$400/mo</div>
+            <div class="tier-model">Monthly retainer</div>
+          </div>
+          <div class="tier-body">
+            <div class="tier-description">Start here. Core agent team, full research, show-themed onboarding.</div>
+            <div class="tier-includes">
+              <div class="includes-label">Deployment Package Includes:</div>
+              <ul>
+                <li>$400/mo base retainer</li>
+                <li>Lead Prospector + Research agents</li>
+                <li>Monthly strategy report</li>
+                <li>30-day pilot</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Option B -->
+        <div class="pricing-tier">
+          <div class="tier-header">
+            <div class="tier-option">Option B</div>
+            <div class="tier-name">Full Build</div>
+            <div class="tier-price">$1000/mo</div>
+            <div class="tier-model">Monthly retainer</div>
+          </div>
+          <div class="tier-body">
+            <div class="tier-description">Full 6-agent team, activated and optimized.</div>
+            <div class="tier-includes">
+              <div class="includes-label">Deployment Package Includes:</div>
+              <ul>
+                <li>$400/mo base retainer</li>
+                <li>All 6 agents active</li>
+                <li>Weekly performance reports</li>
+                <li>Content + outreach calendar</li>
+                <li>Bi-weekly check-ins with Ayla</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Option C -->
+        <div class="pricing-tier">
+          <div class="tier-header">
+            <div class="tier-option">Option C</div>
+            <div class="tier-name">Commission</div>
+            <div class="tier-price">$400/mo + 10% commission</div>
+            <div class="tier-model">Monthly + performance</div>
+          </div>
+          <div class="tier-body">
+            <div class="tier-description">Skin in the game. Ayla's team earns on what they close.</div>
+            <div class="tier-includes">
+              <div class="includes-label">Deployment Package Includes:</div>
+              <ul>
+                <li>$400/mo base retainer</li>
+                <li>10% commission on closed deals sourced by agents</li>
+                <li>All 6 agents active</li>
+                <li>Full performance tracking</li>
